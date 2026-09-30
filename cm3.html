@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>cm3 – ALTN72 Développement Full Stack avec Java</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ALTN72 Développement Full Stack avec Java</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM1 - Histoire des méthodologies de développement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM2 - Clean Code &amp; Architecture</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TPs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tp1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP1 - Extreme Programming</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#cm3---applications-distribuées" id="toc-cm3---applications-distribuées" class="nav-link active" data-scroll-target="#cm3---applications-distribuées"><span class="header-section-number">1</span> CM3 - Applications distribuées</a>
+  <ul class="collapse">
+  <li><a href="#références" id="toc-références" class="nav-link" data-scroll-target="#références"><span class="header-section-number">1.1</span> Références</a></li>
+  <li><a href="#application-monolithique" id="toc-application-monolithique" class="nav-link" data-scroll-target="#application-monolithique"><span class="header-section-number">1.2</span> Application monolithique</a></li>
+  <li><a href="#application-distribuée" id="toc-application-distribuée" class="nav-link" data-scroll-target="#application-distribuée"><span class="header-section-number">1.3</span> Application distribuée</a></li>
+  <li><a href="#application-distribuée---difficultés" id="toc-application-distribuée---difficultés" class="nav-link" data-scroll-target="#application-distribuée---difficultés"><span class="header-section-number">1.4</span> Application distribuée - difficultés</a></li>
+  <li><a href="#les-frameworks-dentreprise" id="toc-les-frameworks-dentreprise" class="nav-link" data-scroll-target="#les-frameworks-dentreprise"><span class="header-section-number">1.5</span> Les frameworks d’entreprise</a></li>
+  <li><a href="#communication-synchrone-asynchrone" id="toc-communication-synchrone-asynchrone" class="nav-link" data-scroll-target="#communication-synchrone-asynchrone"><span class="header-section-number">1.6</span> Communication Synchrone &amp; Asynchrone</a></li>
+  <li><a href="#synchrone" id="toc-synchrone" class="nav-link" data-scroll-target="#synchrone"><span class="header-section-number">1.7</span> Synchrone</a></li>
+  <li><a href="#asynchrone" id="toc-asynchrone" class="nav-link" data-scroll-target="#asynchrone"><span class="header-section-number">1.8</span> Asynchrone</a></li>
+  <li><a href="#communication-asyncsync---technologies" id="toc-communication-asyncsync---technologies" class="nav-link" data-scroll-target="#communication-asyncsync---technologies"><span class="header-section-number">1.9</span> Communication Async/Sync - Technologies</a></li>
+  <li><a href="#rest---principes" id="toc-rest---principes" class="nav-link" data-scroll-target="#rest---principes"><span class="header-section-number">1.10</span> REST - principes</a></li>
+  <li><a href="#rest---verbes" id="toc-rest---verbes" class="nav-link" data-scroll-target="#rest---verbes"><span class="header-section-number">1.11</span> REST - Verbes</a></li>
+  <li><a href="#rest---données" id="toc-rest---données" class="nav-link" data-scroll-target="#rest---données"><span class="header-section-number">1.12</span> REST - Données</a></li>
+  <li><a href="#rest---bonnes-pratiques" id="toc-rest---bonnes-pratiques" class="nav-link" data-scroll-target="#rest---bonnes-pratiques"><span class="header-section-number">1.13</span> REST - bonnes pratiques</a></li>
+  <li><a href="#rest---antipatterns" id="toc-rest---antipatterns" class="nav-link" data-scroll-target="#rest---antipatterns"><span class="header-section-number">1.14</span> REST - antipatterns</a></li>
+  <li><a href="#anti-patterns-courants" id="toc-anti-patterns-courants" class="nav-link" data-scroll-target="#anti-patterns-courants"><span class="header-section-number">1.15</span> ❌ Anti-patterns courants</a></li>
+  <li><a href="#jakarta-ee" id="toc-jakarta-ee" class="nav-link" data-scroll-target="#jakarta-ee"><span class="header-section-number">1.16</span> Jakarta EE</a></li>
+  <li><a href="#jakarta-ee---points-forts" id="toc-jakarta-ee---points-forts" class="nav-link" data-scroll-target="#jakarta-ee---points-forts"><span class="header-section-number">1.17</span> Jakarta EE - Points forts</a></li>
+  <li><a href="#jakarta-ee---une-galaxie-dapi" id="toc-jakarta-ee---une-galaxie-dapi" class="nav-link" data-scroll-target="#jakarta-ee---une-galaxie-dapi"><span class="header-section-number">1.18</span> Jakarta EE - une galaxie d’API</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="cm3---applications-distribuées" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> CM3 - Applications distribuées</h1>
+<!-- TODO upgrade quarto, try scrolling slides in presenter view
+if it doesn't work, try with  OBS Studio -->
+<section id="références" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="références"><span class="header-section-number">1.1</span> Références</h2>
+<ul>
+<li><a href="https://status-code.medium.com/rest-api-principles-3859e7699fd4">REST API Principles</a></li>
+<li><a href="https://jakarta.ee/learn/docs/jakartaee-tutorial/current/index.html">Jakarta EE Tutorial</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Jakarta_EE">Jakarta EE - Wikipedia</a></li>
+<li><a href="https://docs.github.com/en/rest/pulls/comments?apiVersion=2022-11-28#about-pull-request-review-comments">GitHub API PR Comments - exemple d’API RESTful</a></li>
+<li><a href="https://martinfowler.com/articles/richardsonMaturityModel.html">REST Richardson Maturity Model</a></li>
+</ul>
+</section>
+<section id="application-monolithique" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="application-monolithique"><span class="header-section-number">1.2</span> Application monolithique</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    Customer1[Customer]
+    Admin1[Administrator]
+    Manager1[Manager]
+
+    Customer1 --&gt; Browser1[Web Browser]
+    Admin1 --&gt; Browser2[Web Browser]
+    Manager1 --&gt; Browser3[Web Browser]
+
+    subgraph WebServer1["Web Server"]
+        UI1[Presentation Layer&lt;br/&gt;Web Pages]
+    end
+
+    subgraph Server1["Application Server"]
+        BL1[Business Logic&lt;br/&gt;Order Processing, Inventory]
+        DAL1[Data Access&lt;br/&gt;Database Queries]
+    end
+
+    DB1[(Database)]
+
+    Browser1 --&gt;|HTTP Request| UI1
+    Browser2 --&gt;|HTTP Request| UI1
+    Browser3 --&gt;|HTTP Request| UI1
+    UI1 --&gt;|Internal Call| BL1
+    BL1 --&gt; DAL1
+    DAL1 --&gt;|SQL| DB1
+
+    style Customer1 fill:#e1f5ff
+    style Admin1 fill:#e1f5ff
+    style Manager1 fill:#e1f5ff
+    style Browser1 fill:#e1f5ff
+    style Browser2 fill:#e1f5ff
+    style Browser3 fill:#e1f5ff
+    style UI1 fill:#fff4e1
+    style BL1 fill:#ffe1e1
+    style DAL1 fill:#e1ffe1
+    style DB1 fill:#f0e1ff
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="notes">
+<ul>
+<li>Cas simple : l’application server sert toutes les requêtes avec une seule JVM
+<ul>
+<li>mais pour la scalabilité et la fiabilité, on pourrait déployer plusieurs instances derrière un load-balancer</li>
+</ul></li>
+<li>Le code est organisé en couches : présentation, logique, accès aux données
+<ul>
+<li>Chaque couche peut être matérialisée sous forme de package ou de module maven</li>
+<li>Pour limiter le couplage, le code peut être géré dans plusieurs repository git (order, inventory, …)</li>
+</ul></li>
+<li>Suffisant pour des applications peu complexes avec peu d’utilisateurs</li>
+<li>En général maintenu par une seule équipe de développement</li>
+</ul>
+<p>Inconvénients :</p>
+<ul>
+<li>granularité élevée si on utilise plusieurs instances</li>
+<li>couplage fort</li>
+<li>violation du SRP :
+<ul>
+<li>changement dans la logique d’inventaire</li>
+<li>=&gt; redéploiement qui impacte tous les utilisateurs</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="application-distribuée" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="application-distribuée"><span class="header-section-number">1.3</span> Application distribuée</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    Customer2[Customer]
+    Admin2[Employee]
+    Manager2[Manager]
+
+    Customer2 --&gt; Browser4[Web Browser]
+    Admin2 --&gt; Browser5[Web Browser]
+    Manager2 --&gt; Browser6[Web Browser]
+
+    subgraph Server2["Web Server - Customer Portal"]
+        UI2[Presentation Layer&lt;br/&gt;Shopping Cart UI]
+    end
+
+    subgraph Server6["Web Server - Employee Portal"]
+        UI3[Presentation Layer&lt;br/&gt;Employee Dashboard]
+    end
+
+    subgraph Server7["Web Server - Manager Portal"]
+        UI4[Presentation Layer&lt;br/&gt;Reports &amp; Analytics]
+    end
+
+    subgraph Server3["Application Server 1"]
+        BL2[Business Logic&lt;br/&gt;Order Processing]
+    end
+
+    subgraph Server4["Application Server 2"]
+        BL3[Business Logic&lt;br/&gt;Inventory Management]
+    end
+
+    subgraph Server5["Integration Server"]
+        INT[Payment Gateway&lt;br/&gt;Shipping API]
+    end
+
+    DB2[(Orders DB)]
+    DB3[(Inventory DB)]
+    EXT[External&lt;br/&gt;Payment Provider]
+
+    Browser4 --&gt;|HTTP| UI2
+    Browser5 --&gt;|HTTP| UI3
+    Browser6 --&gt;|HTTP| UI4
+    UI2 --&gt;|Network Call| BL2
+    UI3 --&gt;|Network Call| BL3
+    UI4 --&gt;|Network Call| BL2
+    BL2 --&gt;|Network Call| BL3
+    BL2 --&gt;|Network Call| INT
+    BL2 --&gt;|SQL| DB2
+    BL3 --&gt;|SQL| DB3
+    INT --&gt;|API Call| EXT
+
+    style Customer2 fill:#e1f5ff
+    style Admin2 fill:#e1f5ff
+    style Manager2 fill:#e1f5ff
+    style Browser4 fill:#e1f5ff
+    style Browser5 fill:#e1f5ff
+    style Browser6 fill:#e1f5ff
+    style UI2 fill:#fff4e1
+    style UI3 fill:#fff4e1
+    style UI4 fill:#fff4e1
+    style BL2 fill:#ffe1e1
+    style BL3 fill:#ffe1e1
+    style INT fill:#e1ffe1
+    style DB2 fill:#f0e1ff
+    style DB3 fill:#f0e1ff
+    style EXT fill:#e1e1e1
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="notes">
+<ul>
+<li>application d’entreprise :
+<ul>
+<li>plusieurs services utilisent l’application</li>
+<li>applications interconnectées</li>
+</ul></li>
+<li>les applications peuvent avoir des cycles de vie différents</li>
+<li>granularité fine pour la redondance
+<ul>
+<li>si on a besoin de plus de ressources (CPU, mémoire) pour “Order Processing”, on peut ajouter des instances uniquement pour cette application</li>
+</ul></li>
+<li>équipes de dev différentes pour chaque fonctionnalité</li>
+</ul>
+</div>
+</section>
+<section id="application-distribuée---difficultés" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="application-distribuée---difficultés"><span class="header-section-number">1.4</span> Application distribuée - difficultés</h2>
+<ul>
+<li>Performances</li>
+<li>Qualité de Service (QoS)</li>
+<li>Protocoles</li>
+<li>Persistance et gestion des transactions</li>
+<li>Sécurité : Authentification &amp; Autorisations</li>
+<li>Gestion des objets “stateful”</li>
+<li>Coordination des déploiements</li>
+</ul>
+<div class="notes">
+<blockquote class="blockquote">
+<ul>
+<li>QoS : pannes, interruptions pour déploiements. Monitoring : comment alerter en cas de panne ?</li>
+<li>Exemple d’objet stateful : panier utilisateur. Lorsqu’on a une redondance d’un service :</li>
+<li>Les requêtes doivent être adressées à la JVM qui possède l’objet</li>
+<li>Autre solution : réplication des objets (cache distribué)</li>
+</ul>
+</blockquote>
+</div>
+</section>
+<section id="les-frameworks-dentreprise" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="les-frameworks-dentreprise"><span class="header-section-number">1.5</span> Les frameworks d’entreprise</h2>
+<ul>
+<li>topologie flexible
+<ul>
+<li>intérêt: commencer en monolithique, découper si besoin</li>
+</ul></li>
+<li>propose des solutions pour chacune des difficultés</li>
+<li>standardise les développements</li>
+<li>Historiquement, <strong>Java EE</strong> s’occupait de tout</li>
+<li>Aujourd’hui : frameworks applicatif + orchestration de containers
+<ul>
+<li><strong>Spring boot</strong> + <strong>Kubernetes</strong></li>
+<li>Quarkus (implémente une partie de Jakarta EE) + Kubernetes</li>
+</ul></li>
+<li>Demain, containers WebAssembly ?</li>
+</ul>
+<div class="notes">
+<blockquote class="blockquote">
+<p>Standardisation =&gt; recrutement et onboarding facilité. Un point crucial qui a fait le succès de Java.</p>
+<p>Exemples de topologie :</p>
+<ul>
+<li>1 serveur avec 1 JVM</li>
+<li>1 serveur avec plusieurs JVM</li>
+<li>plusieurs serveurs dans le même datacenter,</li>
+<li>plusieurs serveurs dans des régions différentes.</li>
+</ul>
+<p>Historiquement, Java EE gérait tous les aspects. Aujourd’hui, l’orchestration de containers (Kubernetes) peut gérer l’aspect infrastructure dans tous les langages. On va plutôt utiliser un Framework Java plus léger comme Spring Boot avec Kubernetes.</p>
+</blockquote>
+</div>
+</section>
+<section id="communication-synchrone-asynchrone" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="communication-synchrone-asynchrone"><span class="header-section-number">1.6</span> Communication Synchrone &amp; Asynchrone</h2>
+<ul>
+<li>synchrone = téléphone</li>
+<li>asynchrone = email</li>
+</ul>
+</section>
+<section id="synchrone" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="synchrone"><span class="header-section-number">1.7</span> Synchrone</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    UI1[Web UI&lt;br/&gt;Shopping Cart]
+    Order1[Order Service]
+    Inventory1[Inventory Service]
+    Payment1[Payment Service]
+    Email1[Email Service]
+    
+    UI1 --&gt;|1. Place Order&lt;br/&gt;WAIT| Order1
+    Order1 --&gt;|2. Check Stock&lt;br/&gt;WAIT| Inventory1
+    Inventory1 --&gt;|3. Stock OK| Order1
+    Order1 --&gt;|4. Process Payment&lt;br/&gt;WAIT| Payment1
+    Payment1 --&gt;|5. Payment OK| Order1
+    Order1 --&gt;|6. Send Confirmation&lt;br/&gt;WAIT| Email1
+    Email1 --&gt;|7. Email Sent| Order1
+    Order1 --&gt;|8. Order Complete| UI1
+    
+    Note1[User waits for&lt;br/&gt;entire chain&lt;br/&gt;to complete]
+    
+    style UI1 fill:#e1f5ff
+    style Order1 fill:#ffe1e1
+    style Inventory1 fill:#fff4e1
+    style Payment1 fill:#e1ffe1
+    style Email1 fill:#ffe1ff
+    style Note1 fill:#ffffcc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="notes">
+<ul>
+<li>L’utilisateur doit attendre que chaque service traite les requêtes</li>
+<li>Si un des services échoue, tout échoue</li>
+<li>Avantage : on peut coordonner les transactions pour faire un Rollback (two-phase commit)</li>
+</ul>
+</div>
+</section>
+<section id="asynchrone" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="asynchrone"><span class="header-section-number">1.8</span> Asynchrone</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    UI2[Web UI&lt;br/&gt;Shopping Cart]
+    Order2[Order Service]
+    Queue&gt;Message Queue&lt;br/&gt;Order Events]
+    Inventory2[Inventory Service]
+    Payment2[Payment Service]
+    Email2[Email Service]
+
+    UI2 --&gt;|1. Place Order| Order2
+    Order2 --&gt;|2. Order Accepted&lt;br/&gt;Immediate Response| UI2
+    Order2 --&gt;|3. Publish:&lt;br/&gt;Order Created| Queue
+    Queue -.-&gt;|Subscribe| Inventory2
+    Queue -.-&gt;|Subscribe| Payment2
+    Queue -.-&gt;|Subscribe| Email2
+    Inventory2 -.-&gt;|Process&lt;br/&gt;independently| Inventory2
+    Payment2 -.-&gt;|Process&lt;br/&gt;independently| Payment2
+    Email2 -.-&gt;|Process&lt;br/&gt;independently| Email2
+
+    Note2[L'utilisateur reçoit une réponse immédiate, &lt;br/&gt;les traitements continuent en tâche de fond.]
+
+    style UI2 fill:#e1f5ff
+    style Order2 fill:#ffe1e1
+    style Inventory2 fill:#fff4e1
+    style Payment2 fill:#e1ffe1
+    style Email2 fill:#ffe1ff
+    style Queue fill:#ffd4d4
+    style Note2 fill:#ffffcc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="notes">
+<ul>
+<li>On utilise un logiciel <strong>Middleware</strong> qui permet :
+<ul>
+<li>de garantir que les messages sont persistés</li>
+<li>de recevoir des événements</li>
+<li>2 modes : publish-subscribe, ou file FIFO</li>
+</ul></li>
+<li>Au cas où un message ne serait pas traité :
+<ul>
+<li>le middleware possède des mécanismes de “retry”,</li>
+<li>il peut envoyer des alertes aux opérateurs</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="communication-asyncsync---technologies" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="communication-asyncsync---technologies"><span class="header-section-number">1.9</span> Communication Async/Sync - Technologies</h2>
+<ul>
+<li>Navigateur &lt;-&gt; Serveur
+<ul>
+<li>Synchrone : HTTP REST, GraphQL</li>
+<li>Asynchrone : WebSocket, ou polling HTTP</li>
+<li>Format de données : JSON</li>
+</ul></li>
+<li>Serveur &lt;-&gt; Serveur
+<ul>
+<li>Synchrone : HTTP REST, gRPC, EJB, SOAP (ancien),</li>
+<li>Asynchrone : JMS, Apache Kafka, Rabbit MQ, Cloud-specific (AWS SQS, Azure Service Bus, Google Cloud Pub/Sub)</li>
+<li>Format de données : JSON, Avro, CSV, Parquet, Java serialization, Google Protobuf, XML, …</li>
+</ul></li>
+</ul>
+<div class="notes">
+<blockquote class="blockquote">
+<ul>
+<li>JMS : Java Messaging Service. Interface implémentée par plusieurs fournisseurs tels que ActiveMQ, IBM MQ, Rabbit MQ</li>
+<li>gRPC : protocole Google</li>
+<li>Parquet, CSV compressé : pour gros volumes de données</li>
+</ul>
+</blockquote>
+</div>
+</section>
+<section id="rest---principes" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="rest---principes"><span class="header-section-number">1.10</span> REST - principes</h2>
+<ul>
+<li><strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer</li>
+<li>style architectural pour faire communiquer des ordinateurs sur le Web.</li>
+</ul>
+<p>Principes :</p>
+<ol type="1">
+<li>Interface uniforme
+<ul>
+<li>utilisation d’URI pour identifier une <strong>ressource</strong></li>
+<li>manipulation des ressources avec une <strong>représentation</strong> (JSON, XML, …)</li>
+<li>HATEOS : les réponses contiennent des liens vers d’autres ressources</li>
+</ul></li>
+<li>Découplage client-serveur</li>
+<li>Stateless</li>
+<li>Peut être mis en cache</li>
+<li>Système en couches</li>
+<li>(code à la demande)</li>
+</ol>
+<div class="notes">
+<blockquote class="blockquote">
+<ul>
+<li>HATEOS : Hypermedia as the Engine of Application State</li>
+<li>découplage :
+<ul>
+<li>le client ne sait pas où le serveur stocke les données</li>
+<li>le serveur n’a pas à connaître l’interface utilisateur du client</li>
+<li>chacun doit pouvoir être développé et “scaled” indépendamment</li>
+</ul></li>
+<li>stateless :
+<ul>
+<li>pas d’état de session sur le serveur</li>
+<li>chaque requête est indépendante.</li>
+<li>les données d’authentification sont envoyées avec chaque requête</li>
+</ul></li>
+<li>Chacheable :
+<ul>
+<li>le serveur doit indiquer si une réponse peut être cachée par le client et pour combien de temps.</li>
+</ul></li>
+<li>Système en couche : load balancers, cache, security, gateways, …</li>
+<li>Code à la demande : le serveur peut envoyer du code exécutable au client. Rarement implémenté.</li>
+</ul>
+</blockquote>
+</div>
+</section>
+<section id="rest---verbes" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="rest---verbes"><span class="header-section-number">1.11</span> REST - Verbes</h2>
+<p>Sémantiquement, les ressources sont des noms. Pour pouvoir interagir avec ces ressources, nous avons besoin de <strong>verbes</strong>. L’architecture REST préconise d’utiliser les méthodes du protocole HTTP, de la manière suivante :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 37%">
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Verbe HTTP</th>
+<th>Description</th>
+<th><strong>Idempotent</strong></th>
+<th>Cacheable ?</th>
+<th>Utilisation typique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>GET</strong></td>
+<td>Récupère une ressource ou une collection de ressources</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Lire des données sans les modifier</td>
+</tr>
+<tr class="even">
+<td><strong>POST</strong></td>
+<td>Crée une nouvelle ressource</td>
+<td><strong>Non</strong></td>
+<td>Non</td>
+<td>Créer une nouvelle entrée, soumettre des données</td>
+</tr>
+<tr class="odd">
+<td><strong>PUT</strong></td>
+<td>Remplace complètement une ressource existante</td>
+<td>Oui</td>
+<td>Non</td>
+<td>Mettre à jour entièrement une ressource</td>
+</tr>
+<tr class="even">
+<td><strong>PATCH</strong></td>
+<td>Modifie partiellement une ressource existante</td>
+<td>Peut-être</td>
+<td>Non</td>
+<td>Mettre à jour certains champs d’une ressource</td>
+</tr>
+<tr class="odd">
+<td><strong>DELETE</strong></td>
+<td>Supprime une ressource</td>
+<td>Oui</td>
+<td>Non</td>
+<td>Supprimer une ressource</td>
+</tr>
+<tr class="even">
+<td><strong>HEAD</strong></td>
+<td>Identique à GET mais sans le corps de la réponse</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Vérifier l’existence ou les métadonnées</td>
+</tr>
+<tr class="odd">
+<td><strong>OPTIONS</strong></td>
+<td>Décrit les options de communication disponibles</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Découvrir les méthodes supportées (CORS)</td>
+</tr>
+</tbody>
+</table>
+<p>Idempotent : envoyer la requête plusieurs fois n’a pas d’effet.</p>
+</section>
+<section id="rest---données" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="rest---données"><span class="header-section-number">1.12</span> REST - Données</h2>
+<p>Les métadonnées sont envoyées ou reçues dans le <strong>header</strong> HTTP : format de données, compression, type de client, cookies, …</p>
+<p>La <strong>réception</strong> de données depuis le serveur se fait dans le corps (<strong>body</strong>) de la requête HTTP.</p>
+<ul>
+<li>Le client envoie un header <code>Accept</code> pour indiquer le format de données souhaité</li>
+<li>Le serveur renvoie un header <code>Content-Type</code> qui détermine le type <a href="https://stackoverflow.com/questions/3828352/what-is-a-mime-type">What is a MIME type</a> des données renvoyées.
+<ul>
+<li>typiquement <code>application/json</code></li>
+</ul></li>
+</ul>
+<p>L’<strong>envoi</strong> de données vers le serveur peut se faire :</p>
+<ul>
+<li>dans l’URL elle même : <code>GET /products/1</code>. Typiquement :
+<ul>
+<li>identifiants</li>
+<li>version de l’API</li>
+</ul></li>
+<li>dans les paramètres d’URL : <code>GET /products?category=electronics&amp;sort=price&amp;order=asc</code>. Typiquement pour des paramètres contrôlant :
+<ul>
+<li>la pagination</li>
+<li>le tri</li>
+<li>le filtrage</li>
+</ul></li>
+<li>ou dans le corps de la requête (uniquement pour POST, PUT et PATCH)</li>
+</ul>
+</section>
+<section id="rest---bonnes-pratiques" class="level2" data-number="1.13">
+<h2 data-number="1.13" class="anchored" data-anchor-id="rest---bonnes-pratiques"><span class="header-section-number">1.13</span> REST - bonnes pratiques</h2>
+<p>Une API est RESTful si elle respecte les conventions.</p>
+<p>Structure d’URL cohérente :</p>
+<pre><code>GET    /users              # Liste tous les utilisateurs
+GET    /users/123          # Récupère l'utilisateur 123
+POST   /users              # Crée un nouvel utilisateur
+PUT    /users/123          # Remplace l'utilisateur 123
+PATCH  /users/123          # Modifie partiellement l'utilisateur 123
+DELETE /users/123          # Supprime l'utilisateur 123
+
+GET    /users/123/orders   # Liste les commandes de l'utilisateur 123
+GET    /orders/456         # Récupère la commande 456</code></pre>
+<p>Utilisation des codes retour HTTP :</p>
+<pre><code>200 OK                 # Succès
+201 Created            # Ressource créée (POST)
+204 No Content         # Succès sans contenu (DELETE)
+400 Bad Request        # Erreur client
+401 Unauthorized       # Non authentifié
+403 Forbidden          # Authentifié mais pas autorisé
+404 Not Found          # Ressource introuvable
+409 Conflict           # Conflit (ex: email déjà utilisé)
+500 Internal Error     # Erreur serveur</code></pre>
+<p>Pagination et filtrage :</p>
+<pre><code>GET /users?page=2&amp;limit=20
+GET /products?category=electronics&amp;sort=price&amp;order=asc
+GET /articles?published=true&amp;author=123</code></pre>
+</section>
+<section id="rest---antipatterns" class="level2" data-number="1.14">
+<h2 data-number="1.14" class="anchored" data-anchor-id="rest---antipatterns"><span class="header-section-number">1.14</span> REST - antipatterns</h2>
+</section>
+<section id="anti-patterns-courants" class="level2" data-number="1.15">
+<h2 data-number="1.15" class="anchored" data-anchor-id="anti-patterns-courants"><span class="header-section-number">1.15</span> ❌ Anti-patterns courants</h2>
+<section id="verbes-dans-les-urls" class="level3" data-number="1.15.1">
+<h3 data-number="1.15.1" class="anchored" data-anchor-id="verbes-dans-les-urls"><span class="header-section-number">1.15.1</span> Verbes dans les URLs</h3>
+<p><strong>❌ Mauvais :</strong></p>
+<pre><code>POST /createUser
+GET  /getUser/123
+POST /deleteUser/123
+GET  /getAllUsers</code></pre>
+<p><strong>Bon :</strong></p>
+<pre><code>POST   /users
+GET    /users/123
+DELETE /users/123
+GET    /users</code></pre>
+</section>
+<section id="utiliser-get-pour-modifier-des-données" class="level3" data-number="1.15.2">
+<h3 data-number="1.15.2" class="anchored" data-anchor-id="utiliser-get-pour-modifier-des-données"><span class="header-section-number">1.15.2</span> Utiliser GET pour modifier des données</h3>
+<p><strong>❌ Mauvais :</strong></p>
+<pre><code>GET /users/123/delete
+GET /orders/456/cancel</code></pre>
+<p><strong>Bon :</strong></p>
+<pre><code>DELETE /users/123
+POST   /orders/456/cancel  # ou PATCH avec status</code></pre>
+</section>
+<section id="retourner-toujours-200-même-en-cas-derreur" class="level3" data-number="1.15.3">
+<h3 data-number="1.15.3" class="anchored" data-anchor-id="retourner-toujours-200-même-en-cas-derreur"><span class="header-section-number">1.15.3</span> Retourner toujours 200, même en cas d’erreur</h3>
+<p><strong>❌ Mauvais :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="er">HTTP/</span><span class="fl">1.1</span> <span class="dv">200</span> <span class="er">OK</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"status"</span><span class="fu">:</span> <span class="st">"error"</span><span class="fu">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"message"</span><span class="fu">:</span> <span class="st">"User not found"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Bon :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="er">HTTP/</span><span class="fl">1.1</span> <span class="dv">404</span> <span class="er">Not</span> <span class="er">Found</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"error"</span><span class="fu">:</span> <span class="st">"User not found"</span><span class="fu">,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"code"</span><span class="fu">:</span> <span class="st">"USER_NOT_FOUND"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="urls-non-cohérentes" class="level3" data-number="1.15.4">
+<h3 data-number="1.15.4" class="anchored" data-anchor-id="urls-non-cohérentes"><span class="header-section-number">1.15.4</span> URLs non cohérentes</h3>
+<p><strong>❌ Mauvais :</strong></p>
+<pre><code>GET /user/123           # Singulier
+GET /users/123/orders   # Pluriel
+GET /User/123           # Majuscule
+GET /api/v1/product     # Mélange</code></pre>
+<p><strong>Bon :</strong></p>
+<pre><code>GET /users/123
+GET /users/123/orders
+GET /products/456</code></pre>
+</section>
+<section id="ignorer-les-standards-de-nommage" class="level3" data-number="1.15.5">
+<h3 data-number="1.15.5" class="anchored" data-anchor-id="ignorer-les-standards-de-nommage"><span class="header-section-number">1.15.5</span> Ignorer les standards de nommage</h3>
+<p><strong>❌ Mauvais :</strong></p>
+<pre><code>GET /users/123/GetOrders
+GET /api/user-profile
+GET /products_list</code></pre>
+<p><strong>Bon :</strong></p>
+<pre><code>GET /users/123/orders        # kebab-case ou camelCase, mais cohérent
+GET /api/user-profiles
+GET /products</code></pre>
+</section>
+<section id="pas-de-versioning" class="level3" data-number="1.15.6">
+<h3 data-number="1.15.6" class="anchored" data-anchor-id="pas-de-versioning"><span class="header-section-number">1.15.6</span> ❌ Pas de versioning</h3>
+<p><strong>Mauvais :</strong></p>
+<pre><code>GET /users  # Impossible d'évoluer sans casser les clients</code></pre>
+<p><strong>Bon :</strong></p>
+<pre><code>GET /v1/users
+GET /v2/users
+# ou
+GET /users (avec header Accept: application/vnd.api.v1+json)</code></pre>
+</section>
+<section id="exposer-la-structure-interne" class="level3" data-number="1.15.7">
+<h3 data-number="1.15.7" class="anchored" data-anchor-id="exposer-la-structure-interne"><span class="header-section-number">1.15.7</span> ❌ Exposer la structure interne</h3>
+<p><strong>Mauvais :</strong></p>
+<pre><code>GET /database/users_table/record/123
+POST /execute_sql</code></pre>
+<p><strong>Bon :</strong></p>
+<pre><code>GET /users/123
+# L'implémentation interne reste cachée</code></pre>
+</section>
+<section id="réponses-incohérentes" class="level3" data-number="1.15.8">
+<h3 data-number="1.15.8" class="anchored" data-anchor-id="réponses-incohérentes"><span class="header-section-number">1.15.8</span> ❌ Réponses incohérentes</h3>
+<p><strong>Mauvais :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="er">GET</span> <span class="er">/users/</span><span class="dv">123</span>    <span class="er">→</span> <span class="fu">{</span> <span class="dt">"user"</span><span class="fu">:</span> <span class="fu">{</span><span class="er">...</span><span class="fu">}</span> <span class="fu">}</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="er">GET</span> <span class="er">/products/</span><span class="dv">456</span> <span class="er">→</span> <span class="fu">{</span> <span class="dt">"data"</span><span class="fu">:</span> <span class="fu">{</span><span class="er">...</span><span class="fu">}</span> <span class="fu">}</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="er">GET</span> <span class="er">/orders/</span><span class="dv">789</span>   <span class="er">→</span> <span class="fu">{</span> <span class="dt">"result"</span><span class="fu">:</span> <span class="fu">{</span><span class="er">...</span><span class="fu">}</span> <span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Bon :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="er">GET</span> <span class="er">/users/</span><span class="dv">123</span>    <span class="er">→</span> <span class="fu">{</span> <span class="dt">"id"</span><span class="fu">:</span> <span class="dv">123</span><span class="fu">,</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"..."</span> <span class="fu">}</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="er">GET</span> <span class="er">/products/</span><span class="dv">456</span> <span class="er">→</span> <span class="fu">{</span> <span class="dt">"id"</span><span class="fu">:</span> <span class="dv">456</span><span class="fu">,</span> <span class="dt">"title"</span><span class="fu">:</span> <span class="st">"..."</span> <span class="fu">}</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="er">#</span> <span class="er">Structure</span> <span class="er">cohérente</span> <span class="er">partout</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="jakarta-ee" class="level2" data-number="1.16">
+<h2 data-number="1.16" class="anchored" data-anchor-id="jakarta-ee"><span class="header-section-number">1.16</span> Jakarta EE</h2>
+<ul>
+<li>Ensemble de <strong>spécifications</strong> standard pour développer des applications d’entreprises.</li>
+<li>Différents projets open-source ou des éditeurs commerciaux implémentent tout ou partie des spécifications
+<ul>
+<li>Eclipse GlassFish, IBM WebSphere Liberty, RedHat Wildfly, RedHad JBoss, Apache TomEE</li>
+</ul></li>
+<li>Historiquement : nommé Java EE, puis en 2018 Oracle l’a cédé à la fondation Eclipse
+<ul>
+<li>=&gt; Java EE 8 est devenu Jakarta EE 8</li>
+</ul></li>
+</ul>
+</section>
+<section id="jakarta-ee---points-forts" class="level2" data-number="1.17">
+<h2 data-number="1.17" class="anchored" data-anchor-id="jakarta-ee---points-forts"><span class="header-section-number">1.17</span> Jakarta EE - Points forts</h2>
+<ul>
+<li><strong>Standardisation</strong> : Jakarta EE fournit une approche standardisée pour développer des applications d’entreprise.</li>
+<li><strong>Productivité</strong> : Grâce aux API, les développeurs peuvent se concentrer sur la logique métier.</li>
+<li><strong>Maturité</strong> : Jakarta EE est une solution mature, stable, éprouvée (depuis 1999)</li>
+<li><strong>Gestion des ressources</strong> : pools de connection, noeuds du cluster, monitoring</li>
+<li><strong>Principe fort</strong> : 1 besoin → 1 API</li>
+</ul>
+</section>
+<section id="jakarta-ee---une-galaxie-dapi" class="level2" data-number="1.18">
+<h2 data-number="1.18" class="anchored" data-anchor-id="jakarta-ee---une-galaxie-dapi"><span class="header-section-number">1.18</span> Jakarta EE - une galaxie d’API</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/JakartaEE.png" class="img-fluid figure-img"></p>
+<figcaption>Jakarta EE</figcaption>
+</figure>
+</div>
+<p>APIs principales :</p>
+<ul>
+<li>CDI Core Dependency Injection : permet d’injecter des dépendances dans les objets</li>
+<li>Json Binding : transforme des objets en Json</li>
+<li>Restful Web Services</li>
+<li>Persistence (anciennement JPA) : mapping objet / BDD relationnelle</li>
+</ul>
+<!--
+## Jakarta EE
+Exemples d'implémentations : Glassfish, Wildfly, OpenLiberty
+Manage connection pool, nodes, ...
+Why connection pools ? expensive connection time, cache (?)
+<!--
+# Container 
+
+
+- STUPID ?
+- MVC applique Single Responsibility
+- openclassroom: exo MVC + Quiz en pur Java
+- MVC good, what about business rules ? service layer ?
+    - So instead of just MVC, think of it as:
+    - Client: MVC (Model-View-Controller)
+    - Server: Layered architecture
+        - Controller Layer: JAX-RS resources (HTTP handling)
+        - Service Layer: Business logic and orchestration
+        - Repository Layer: Data access
+        - Entity Layer: Data structures
+
+-->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

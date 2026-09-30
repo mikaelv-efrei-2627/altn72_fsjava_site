@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TP4 - Jakarta Persistence – ALTN72 Développement Full Stack avec Java</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">TP4 - Jakarta Persistence</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ALTN72 Développement Full Stack avec Java</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM1 - Histoire des méthodologies de développement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM2 - Clean Code &amp; Architecture</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TPs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tp1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP1 - Extreme Programming</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#objectifs-du-tp" id="toc-objectifs-du-tp" class="nav-link" data-scroll-target="#objectifs-du-tp"><span class="header-section-number">1.1</span> Objectifs du TP</a></li>
+  <li><a href="#technologies-utilisées" id="toc-technologies-utilisées" class="nav-link" data-scroll-target="#technologies-utilisées"><span class="header-section-number">1.2</span> Technologies utilisées</a></li>
+  </ul></li>
+  <li><a href="#configuration-du-projet" id="toc-configuration-du-projet" class="nav-link" data-scroll-target="#configuration-du-projet"><span class="header-section-number">2</span> Configuration du projet</a></li>
+  <li><a href="#modélisation-des-entités" id="toc-modélisation-des-entités" class="nav-link" data-scroll-target="#modélisation-des-entités"><span class="header-section-number">3</span> Modélisation des entités</a>
+  <ul class="collapse">
+  <li><a href="#relations-entre-entités" id="toc-relations-entre-entités" class="nav-link" data-scroll-target="#relations-entre-entités"><span class="header-section-number">3.1</span> Relations entre entités</a></li>
+  <li><a href="#diagramme-de-classes" id="toc-diagramme-de-classes" class="nav-link" data-scroll-target="#diagramme-de-classes"><span class="header-section-number">3.2</span> Diagramme de classes</a></li>
+  <li><a href="#créer-lentité-artist" id="toc-créer-lentité-artist" class="nav-link" data-scroll-target="#créer-lentité-artist"><span class="header-section-number">3.3</span> Créer l’entité Artist</a></li>
+  <li><a href="#créer-lentité-concert" id="toc-créer-lentité-concert" class="nav-link" data-scroll-target="#créer-lentité-concert"><span class="header-section-number">3.4</span> Créer l’entité Concert</a></li>
+  <li><a href="#créer-lentité-customer" id="toc-créer-lentité-customer" class="nav-link" data-scroll-target="#créer-lentité-customer"><span class="header-section-number">3.5</span> Créer l’entité Customer</a></li>
+  <li><a href="#créer-lentité-ticket-et-lénumération-ticketcategory" id="toc-créer-lentité-ticket-et-lénumération-ticketcategory" class="nav-link" data-scroll-target="#créer-lentité-ticket-et-lénumération-ticketcategory"><span class="header-section-number">3.6</span> Créer l’entité Ticket et l’énumération TicketCategory</a></li>
+  </ul></li>
+  <li><a href="#peuplement-de-la-base-de-données" id="toc-peuplement-de-la-base-de-données" class="nav-link" data-scroll-target="#peuplement-de-la-base-de-données"><span class="header-section-number">4</span> Peuplement de la base de données</a>
+  <ul class="collapse">
+  <li><a href="#créer-des-données-de-test" id="toc-créer-des-données-de-test" class="nav-link" data-scroll-target="#créer-des-données-de-test"><span class="header-section-number">4.1</span> Créer des données de test</a></li>
+  </ul></li>
+  <li><a href="#base-de-données" id="toc-base-de-données" class="nav-link" data-scroll-target="#base-de-données"><span class="header-section-number">5</span> Base de données</a>
+  <ul class="collapse">
+  <li><a href="#logs" id="toc-logs" class="nav-link" data-scroll-target="#logs"><span class="header-section-number">5.1</span> Logs</a></li>
+  <li><a href="#outil-jdbc" id="toc-outil-jdbc" class="nav-link" data-scroll-target="#outil-jdbc"><span class="header-section-number">5.2</span> Outil JDBC</a></li>
+  </ul></li>
+  <li><a href="#requêtes-jpql" id="toc-requêtes-jpql" class="nav-link" data-scroll-target="#requêtes-jpql"><span class="header-section-number">6</span> Requêtes JPQL</a>
+  <ul class="collapse">
+  <li><a href="#requêtes-de-sélection-simples" id="toc-requêtes-de-sélection-simples" class="nav-link" data-scroll-target="#requêtes-de-sélection-simples"><span class="header-section-number">6.1</span> Requêtes de sélection simples</a></li>
+  <li><a href="#requêtes-avec-jointures" id="toc-requêtes-avec-jointures" class="nav-link" data-scroll-target="#requêtes-avec-jointures"><span class="header-section-number">6.2</span> Requêtes avec jointures</a></li>
+  <li><a href="#requêtes-avec-agrégations" id="toc-requêtes-avec-agrégations" class="nav-link" data-scroll-target="#requêtes-avec-agrégations"><span class="header-section-number">6.3</span> Requêtes avec agrégations</a></li>
+  <li><a href="#requêtes-avancées" id="toc-requêtes-avancées" class="nav-link" data-scroll-target="#requêtes-avancées"><span class="header-section-number">6.4</span> Requêtes avancées</a></li>
+  <li><a href="#requêtes-de-mise-à-jour-et-suppression" id="toc-requêtes-de-mise-à-jour-et-suppression" class="nav-link" data-scroll-target="#requêtes-de-mise-à-jour-et-suppression"><span class="header-section-number">6.5</span> Requêtes de mise à jour et suppression</a></li>
+  </ul></li>
+  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin"><span class="header-section-number">7</span> Pour aller plus loin</a>
+  <ul class="collapse">
+  <li><a href="#tests-unitaires" id="toc-tests-unitaires" class="nav-link" data-scroll-target="#tests-unitaires"><span class="header-section-number">7.1</span> Tests unitaires</a></li>
+  <li><a href="#plusieurs-tests" id="toc-plusieurs-tests" class="nav-link" data-scroll-target="#plusieurs-tests"><span class="header-section-number">7.2</span> Plusieurs tests</a></li>
+  <li><a href="#dry" id="toc-dry" class="nav-link" data-scroll-target="#dry"><span class="header-section-number">7.3</span> DRY</a></li>
+  <li><a href="#requêtes-natives-sql" id="toc-requêtes-natives-sql" class="nav-link" data-scroll-target="#requêtes-natives-sql"><span class="header-section-number">7.4</span> Requêtes natives SQL</a></li>
+  <li><a href="#named-queries" id="toc-named-queries" class="nav-link" data-scroll-target="#named-queries"><span class="header-section-number">7.5</span> Named Queries</a></li>
+  <li><a href="#criteria-api" id="toc-criteria-api" class="nav-link" data-scroll-target="#criteria-api"><span class="header-section-number">7.6</span> Criteria API</a></li>
+  <li><a href="#pagination" id="toc-pagination" class="nav-link" data-scroll-target="#pagination"><span class="header-section-number">7.7</span> Pagination</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TP4 - Jakarta Persistence</h1>
+<p class="subtitle lead">Gestion d’une billeterie de concerts</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="objectifs-du-tp" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="objectifs-du-tp"><span class="header-section-number">1.1</span> Objectifs du TP</h2>
+<p>Ce TP vous permettra de maîtriser les concepts fondamentaux de Jakarta Persistence (JPA) en construisant une application de gestion de billeterie de concerts. Vous allez :</p>
+<ul>
+<li>Modéliser des entités avec différents types de relations</li>
+<li>Configurer Jakarta Persistence avec une base de données H2</li>
+<li>Écrire et exécuter des requêtes JPQL complexes</li>
+<li>Manipuler des entités avec l’EntityManager</li>
+</ul>
+</section>
+<section id="technologies-utilisées" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="technologies-utilisées"><span class="header-section-number">1.2</span> Technologies utilisées</h2>
+<ul>
+<li>Jakarta Persistence API 3.2</li>
+<li>Hibernate 7.1 (implémentation)</li>
+<li>Base de données H2 (en mémoire)</li>
+<li>Maven</li>
+</ul>
+</section>
+</section>
+<section id="configuration-du-projet" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Configuration du projet</h1>
+<p>Utilisez le lien GitHub Classroom pour créer votre repository, puis clonez le et importez le dans IntelliJ. Le projet contient :</p>
+<ul>
+<li>dans <code>pom.xml</code>, les dépendances nécéssaires pour Hibernate et Jakarta persistence</li>
+<li>dans <code>persistence.xml</code>, la configuration de la <strong>persistence unit</strong> <code>concert-pu</code>.</li>
+</ul>
+</section>
+<section id="modélisation-des-entités" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Modélisation des entités</h1>
+<p>Vous allez créer 4 entités avec différents types de relations :</p>
+<ul>
+<li><strong>Artist</strong> (Artiste) : représente un artiste ou groupe musical</li>
+<li><strong>Concert</strong> : représente un événement de concert</li>
+<li><strong>Ticket</strong> : représente un billet pour un concert</li>
+<li><strong>Customer</strong> (Client) : représente un acheteur de billets</li>
+</ul>
+<section id="relations-entre-entités" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="relations-entre-entités"><span class="header-section-number">3.1</span> Relations entre entités</h2>
+<p>Le schéma des relations est le suivant :</p>
+<ul>
+<li><strong>Artist ↔︎ Concert</strong> : Un artiste peut donner plusieurs concerts (OneToMany / ManyToOne)</li>
+<li><strong>Concert ↔︎ Ticket</strong> : Un concert a plusieurs billets (OneToMany / ManyToOne)</li>
+<li><strong>Customer ↔︎ Ticket</strong> : Un client peut acheter plusieurs billets (OneToMany / ManyToOne)</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pensez à utiliser <code>@ManyToOne</code> côté “plusieurs” et <code>@OneToMany</code> côté “un”. La clé étrangère sera stockée dans la table du côté <code>@ManyToOne</code>.</p>
+</div>
+</div>
+</section>
+<section id="diagramme-de-classes" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="diagramme-de-classes"><span class="header-section-number">3.2</span> Diagramme de classes</h2>
+<p>Voici le diagramme de classes UML représentant les entités et leurs relations :</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Artist {
+        -Long id
+        -String name
+        -String genre
+        -String countryOfOrigin
+        -List[Concert] concerts
+        +Artist()
+        +Artist(name, genre, countryOfOrigin)
+        +addConcert(concert)
+    }
+    
+    class Concert {
+        -Long id
+        -String title
+        -LocalDateTime date
+        -String venue
+        -String city
+        -int maxCapacity
+        -Artist artist
+        -List[Ticket] tickets
+        +Concert()
+        +Concert(title, date, venue, city, maxCapacity)
+        +addTicket(ticket)
+    }
+    
+    class Ticket {
+        -Long id
+        -String ticketNumber
+        -TicketCategory category
+        -BigDecimal price
+        -LocalDateTime purchaseDate
+        -String seatNumber
+        -Concert concert
+        -Customer customer
+        +Ticket()
+        +Ticket(ticketNumber, category, price, seatNumber)
+    }
+    
+    class Customer {
+        -Long id
+        -String firstName
+        -String lastName
+        -String email
+        -String phoneNumber
+        -List~Ticket~ tickets
+        +Customer()
+        +Customer(firstName, lastName, email)
+        +addTicket(ticket)
+    }
+    
+    class TicketCategory {
+        &lt;&lt;enumeration&gt;&gt;
+        VIP
+        PREMIUM
+        STANDARD
+        STANDING
+    }
+    
+    Artist "1" &lt;--&gt; "*" Concert : organise
+    Concert "1" &lt;--&gt; "*" Ticket : propose
+    Customer "1" &lt;--&gt; "*" Ticket : achète
+    Ticket --&gt; "1" TicketCategory 
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="créer-lentité-artist" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="créer-lentité-artist"><span class="header-section-number">3.3</span> Créer l’entité Artist</h2>
+<p>Créez la classe <code>Artist.java</code> dans le package <code>concert.entity</code>.</p>
+<p><strong>Attributs à créer :</strong></p>
+<ul>
+<li><code>id</code> : Long, clé primaire avec génération automatique (IDENTITY)</li>
+<li><code>name</code> : String, obligatoire, longueur max 100</li>
+<li><code>genre</code> : String, longueur max 50</li>
+<li><code>countryOfOrigin</code> : String, nom de colonne “country_of_origin”, longueur max 50</li>
+<li><code>concerts</code> : List<concert>, relation OneToMany bidirectionnelle avec cascade ALL</concert></li>
+</ul>
+<p><strong>Annotations de persistance :</strong></p>
+<ul>
+<li>Annotation <code>@Entity</code> sur la classe</li>
+<li>Annotation <code>@Table(name = "artist")</code> pour le nom de la table</li>
+<li>Pour la relation OneToMany : <code>mappedBy = "artist"</code> (fait référence à l’attribut dans Concert)</li>
+</ul>
+<p><strong>Constructeurs à créer :</strong></p>
+<ul>
+<li>Un constructeur vide (requis par Jakarta persistence)</li>
+<li>Un constructeur avec paramètres : <code>name</code>, <code>genre</code>, <code>countryOfOrigin</code></li>
+<li>N’oubliez pas d’initialiser la liste <code>concerts</code> dans les constructeurs : <code>this.concerts = new ArrayList&lt;&gt;()</code></li>
+</ul>
+<p><strong>Méthode helper :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">addConcert</span><span class="op">(</span>Concert concert<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    concerts<span class="op">.</span><span class="fu">add</span><span class="op">(</span>concert<span class="op">);</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// il faut mettre à jour l'autre côté de la relation</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    concert<span class="op">.</span><span class="fu">setArtist</span><span class="op">(</span><span class="kw">this</span><span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pour chaque classe entité,</p>
+<ul>
+<li>Pensez à importer les classes nécessaires : <code>jakarta.persistence.*</code>, <code>java.util.ArrayList</code>, <code>java.util.List</code></li>
+<li>Utilisez IntelliJ (Code -&gt; Generate …) pour générer :
+<ul>
+<li>les constructeurs</li>
+<li>les getters</li>
+<li>les setters, SAUF pour les <code>id</code> et les <code>List</code>
+<ul>
+<li>les id ne doivent jamais changer et sont générés</li>
+<li>les List sont instanciées dans le constructeur. On doit pouvoir ajouter/supprimer des éléments, mais pas remplacer la liste complète.</li>
+<li>les setters sur des relations <code>@OneToMany</code> doivent être <code>protected</code>
+<ul>
+<li>ils doivent uniquement être appelé par les méthodes <code>addXXX</code> de l’autre côté de la relation</li>
+</ul></li>
+</ul></li>
+<li>une méthode <code>toString</code> (omettre les attributs de type <code>List</code> ou annotés <span class="citation" data-cites="Entity">@Entity</span>)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="créer-lentité-concert" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="créer-lentité-concert"><span class="header-section-number">3.4</span> Créer l’entité Concert</h2>
+<p>Créez la classe <code>Concert.java</code> dans le package <code>concert.entity</code>.</p>
+<p><strong>Attributs à créer :</strong></p>
+<ul>
+<li><code>id</code> : Long, clé primaire avec génération automatique (IDENTITY)</li>
+<li><code>title</code> : String, obligatoire, longueur max 200</li>
+<li><code>date</code> : LocalDateTime, obligatoire</li>
+<li><code>venue</code> : String, obligatoire, longueur max 150</li>
+<li><code>city</code> : String, longueur max 100</li>
+<li><code>maxCapacity</code> : int, nom de colonne “max_capacity”</li>
+<li><code>artist</code> : Artist, relation ManyToOne avec jointure sur “artist_id”</li>
+<li><code>tickets</code> : List<ticket>, relation OneToMany bidirectionnelle avec cascade ALL</ticket></li>
+</ul>
+<p><strong>Annotations</strong></p>
+<ul>
+<li>Annotation <code>@Entity</code> et <code>@Table(name = "concert")</code></li>
+<li>Pour ManyToOne : <code>@JoinColumn(name = "artist_id")</code> (crée la clé étrangère)</li>
+<li>Pour OneToMany : <code>mappedBy = "concert"</code> (fait référence à l’attribut dans Ticket)</li>
+</ul>
+<p><strong>Constructeurs à créer :</strong></p>
+<ul>
+<li>Un constructeur vide</li>
+<li>Un constructeur avec : <code>title</code>, <code>date</code>, <code>venue</code>, <code>city</code>, <code>maxCapacity</code></li>
+<li>Initialisez <code>tickets = new ArrayList&lt;&gt;()</code> dans les constructeurs</li>
+</ul>
+<p><strong>Méthode helper :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">addTicket</span><span class="op">(</span>Ticket ticket<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    tickets<span class="op">.</span><span class="fu">add</span><span class="op">(</span>ticket<span class="op">);</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    ticket<span class="op">.</span><span class="fu">setConcert</span><span class="op">(</span><span class="kw">this</span><span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="créer-lentité-customer" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="créer-lentité-customer"><span class="header-section-number">3.5</span> Créer l’entité Customer</h2>
+<p>Créez la classe <code>Customer.java</code> dans le package <code>concert.entity</code>.</p>
+<p><strong>Attributs à créer :</strong></p>
+<ul>
+<li><code>id</code> : Long, clé primaire avec génération automatique (IDENTITY)</li>
+<li><code>firstName</code> : String, obligatoire, longueur max 100</li>
+<li><code>lastName</code> : String, obligatoire, longueur max 100</li>
+<li><code>email</code> : String, obligatoire, unique, longueur max 150</li>
+<li><code>phoneNumber</code> : String, longueur max 20</li>
+<li><code>tickets</code> : List<ticket>, relation OneToMany bidirectionnelle avec cascade ALL</ticket></li>
+</ul>
+<p><strong>Annotations</strong></p>
+<ul>
+<li>Annotation <code>@Entity</code> et <code>@Table(name = "customer")</code></li>
+<li>Pour l’email : <code>@Column(nullable = false, unique = true, length = 150)</code></li>
+<li>Pour OneToMany : <code>mappedBy = "customer"</code></li>
+</ul>
+<p><strong>Constructeurs à créer :</strong></p>
+<ul>
+<li>Un constructeur vide</li>
+<li>Un constructeur avec : <code>firstName</code>, <code>lastName</code>, <code>email</code></li>
+<li>Initialisez <code>tickets = new ArrayList&lt;&gt;()</code> dans les constructeurs</li>
+</ul>
+<p><strong>Méthode helper :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">addTicket</span><span class="op">(</span>Ticket ticket<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    tickets<span class="op">.</span><span class="fu">add</span><span class="op">(</span>ticket<span class="op">);</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    ticket<span class="op">.</span><span class="fu">setCustomer</span><span class="op">(</span><span class="kw">this</span><span class="op">);</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="créer-lentité-ticket-et-lénumération-ticketcategory" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="créer-lentité-ticket-et-lénumération-ticketcategory"><span class="header-section-number">3.6</span> Créer l’entité Ticket et l’énumération TicketCategory</h2>
+<section id="énumération-ticketcategory" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="énumération-ticketcategory"><span class="header-section-number">3.6.1</span> Énumération TicketCategory</h3>
+<p>Créez d’abord l’énumération <code>TicketCategory.java</code> dans le package <code>concert.entity</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span><span class="im"> concert</span><span class="op">.</span><span class="im">entity</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">enum</span> TicketCategory <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    VIP<span class="op">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    PREMIUM<span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    STANDARD<span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    STANDING</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="entité-ticket" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="entité-ticket"><span class="header-section-number">3.6.2</span> Entité Ticket</h3>
+<p>Créez la classe <code>Ticket.java</code> dans le package <code>concert.entity</code>.</p>
+<p><strong>Attributs à créer :</strong></p>
+<ul>
+<li><code>id</code> : Long, clé primaire avec génération automatique (IDENTITY)</li>
+<li><code>ticketNumber</code> : String, obligatoire, unique, longueur max 50</li>
+<li><code>category</code> : TicketCategory (énumération), obligatoire, stocké en STRING</li>
+<li><code>price</code> : BigDecimal, obligatoire, précision 10, échelle 2</li>
+<li><code>purchaseDate</code> : LocalDateTime, nom de colonne “purchase_date”</li>
+<li><code>seatNumber</code> : String, longueur max 50 (peut être null pour les billets debout)</li>
+<li><code>concert</code> : Concert, relation ManyToOne avec jointure sur “concert_id”</li>
+<li><code>customer</code> : Customer, relation ManyToOne avec jointure sur “customer_id”</li>
+</ul>
+<p><strong>Annotations</strong></p>
+<ul>
+<li>Annotation <code>@Entity</code> et <code>@Table(name = "tickets")</code></li>
+<li>Pour l’énumération : <code>@Enumerated(EnumType.STRING)</code> (stocke le nom au lieu d’un nombre)</li>
+<li>Pour le prix : <code>@Column(nullable = false, precision = 10, scale = 2)</code></li>
+<li>Pour les ManyToOne : <code>@JoinColumn(name = "concert_id")</code> et <code>@JoinColumn(name = "customer_id")</code></li>
+</ul>
+<p><strong>Constructeurs à créer :</strong></p>
+<ul>
+<li>Un constructeur vide</li>
+<li>Un constructeur avec : <code>ticketNumber</code>, <code>category</code>, <code>price</code>, <code>seatNumber</code>
+<ul>
+<li>Dans ce constructeur, initialisez <code>purchaseDate</code> à <code>LocalDateTime.now()</code></li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="peuplement-de-la-base-de-données" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Peuplement de la base de données</h1>
+<section id="créer-des-données-de-test" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="créer-des-données-de-test"><span class="header-section-number">4.1</span> Créer des données de test</h2>
+<p>Dans la classe <code>Main.java</code>, décommentez le code de la méthode <code>populateDatabase</code>, puis lancez le <code>Main</code>. Si vous avez des erreurs à la compilation ou à l’exécution, vérifiez votre code.</p>
+<p>Si vous ne comprenez pas le problème, demandez à votre enseignant ou comparez votre code avec celui de vos camarades.</p>
+</section>
+</section>
+<section id="base-de-données" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Base de données</h1>
+<section id="logs" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="logs"><span class="header-section-number">5.1</span> Logs</h2>
+<p>Observez les logs de la classe Main. Vous devriez y trouver les instructions DDL “CREATE TABLE”. Répondez aux questions suivantes :</p>
+<ol type="1">
+<li>Combien de tables ont été créés ?</li>
+<li>Mapping de types</li>
+</ol>
+<ul>
+<li>Dans la bdd, quel type de colonne est utilisé pour un attribut Java de type <code>Long</code> ?</li>
+<li>Pour un type <code>String</code> ?</li>
+<li>Pour un type <code>LocalDateTime</code> ?</li>
+<li>Pour le type énuméré <code>TicketCategory</code> ?</li>
+</ul>
+<ol start="3" type="1">
+<li>Quelles contraintes ont été créées dans la table <code>CUSTOMER</code> ?</li>
+</ol>
+</section>
+<section id="outil-jdbc" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="outil-jdbc"><span class="header-section-number">5.2</span> Outil JDBC</h2>
+<p>Nous allons nous connecter à la base H2 avec l’outil intégré d’IntelliJ :</p>
+<ul>
+<li>cliquez sur le logo de base de données en haut à droite</li>
+<li>new -&gt; Datasource -&gt; H2</li>
+<li>user: <code>sa</code>, URL: <code>jdbc:h2:tcp://localhost:9092/mem:concertdb</code></li>
+<li>cliquez sur “Test connection”. Si cela fonctionne, cliquez sur “OK”</li>
+</ul>
+<p>Vous pouvez maintenant :</p>
+<ul>
+<li>exécuter des requêtes SQL sur votre bdd, et</li>
+<li>naviguer dans la structure de votre schéma.
+<ul>
+<li>vous pouvez double-cliquer sur une table pour voir son contenu</li>
+<li>ensuite, cliquez sur DDL pour voir sa définition</li>
+</ul></li>
+</ul>
+<p>A l’aide de cet outil, répondez aux questions suivantes :</p>
+<ol type="1">
+<li>Quels index ont été créés dans la table <code>TICKET</code> ? Pourquoi ?</li>
+<li>Quelle contrainte <code>CHECK</code> a été créé dans <code>TICKET</code> ? Pourquoi ?</li>
+</ol>
+</section>
+</section>
+<section id="requêtes-jpql" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Requêtes JPQL</h1>
+<p>JPQL (Java Persistence Query Language) est un langage de requête orienté objet pour interroger les entités Jakarta Persistence.</p>
+<section id="requêtes-de-sélection-simples" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="requêtes-de-sélection-simples"><span class="header-section-number">6.1</span> Requêtes de sélection simples</h2>
+<p>Complétez les méthodes dans <code>XXXRepository</code> et appelez-les depuis <code>main()</code> :</p>
+<section id="lister-tous-les-concerts" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="lister-tous-les-concerts"><span class="header-section-number">6.1.1</span> Lister tous les concerts</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ConcertRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-filename="ConcertRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ConcertRepository <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...) </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> <span class="fu">findAll</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> <span class="op">(</span>EntityManager em <span class="op">=</span> emf<span class="op">.</span><span class="fu">createEntityManager</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">String</span> jpql <span class="op">=</span> <span class="co">// </span><span class="al">TODO</span><span class="co"> </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            TypedQuery<span class="op">&lt;</span>Concert<span class="op">&gt;</span> query <span class="op">=</span> em<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span> jpql<span class="op">,</span> Concert<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> query<span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>            <span class="co">// (...)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            ConcertRepository concertRepository <span class="op">=</span> <span class="kw">new</span> <span class="fu">ConcertRepository</span><span class="op">(</span>emf<span class="op">);</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> concertList <span class="op">=</span> concertRepository<span class="op">.</span><span class="fu">findAll</span><span class="op">();</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"All concerts:"</span><span class="op">);</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span>Concert concert <span class="op">:</span> concertList<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                <span class="co">// Il faut que Concert.toString soit bien générée</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span><span class="st">"    </span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> concert<span class="op">);</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            <span class="co">// (...)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Question : Peut-on afficher l’attribut <code>artist</code> ? Que faudrait-il modifier pour pouvoir l’afficher ?</p>
+</section>
+<section id="trouver-les-concerts-à-paris" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="trouver-les-concerts-à-paris"><span class="header-section-number">6.1.2</span> Trouver les concerts à Paris</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ConcertRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-filename="ConcertRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ConcertRepository <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...) </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> <span class="fu">findConcertsIn</span><span class="op">(</span><span class="bu">String</span> city<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co">. Astuce: utiliser query.setParameter</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>            <span class="co">// (...)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>            <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> concertsParis <span class="op">=</span> concertRepository<span class="op">.</span><span class="fu">finConcertsIn</span><span class="op">(</span><span class="st">"Paris"</span><span class="op">);</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span>Concert concert <span class="op">:</span> concertParis<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                <span class="co">// Il faut que Concert.toString soit bien générée</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>concert<span class="op">);</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="co">// (...)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="trouver-les-artistes-dun-genre-spécifique" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="trouver-les-artistes-dun-genre-spécifique"><span class="header-section-number">6.1.3</span> Trouver les artistes d’un genre spécifique</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ArtistRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-filename="ArtistRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ArtistRepository <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Artist<span class="op">&gt;</span> <span class="fu">findArtistsByGenre</span><span class="op">(</span><span class="bu">String</span> genre<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="requêtes-avec-jointures" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="requêtes-avec-jointures"><span class="header-section-number">6.2</span> Requêtes avec jointures</h2>
+<section id="lister-les-billets-dun-client-avec-les-détails-du-concert" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="lister-les-billets-dun-client-avec-les-détails-du-concert"><span class="header-section-number">6.2.1</span> Lister les billets d’un client avec les détails du concert</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>TicketRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-filename="TicketRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> TicketRepository <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Ticket<span class="op">&gt;</span> <span class="fu">findTicketsForCustomer</span><span class="op">(</span><span class="bu">String</span> email<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      <span class="co">// </span><span class="al">TODO</span><span class="co">: Écrire une requête avec JOIN FETCH pour récupérer </span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="co">// les billets et leurs concerts associés</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>            TicketRepository ticketRepository <span class="op">=</span> <span class="kw">new</span> <span class="fu">TicketRepository</span><span class="op">(</span>emf<span class="op">);</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>            <span class="bu">List</span><span class="op">&lt;</span>Ticket<span class="op">&gt;</span> ticketsForCustomer <span class="op">=</span> ticketRepository<span class="op">.</span><span class="fu">findTicketsForCustomer</span><span class="op">(</span><span class="st">"jean.dupont@email.com"</span><span class="op">);</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Tickets for jean.dupont@email.com :"</span><span class="op">);</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span><span class="dt">var</span> ticket<span class="op">:</span> ticketsForCustomer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>ticket<span class="op">);</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"    concert: "</span> <span class="op">+</span> ticket<span class="op">.</span><span class="fu">getConcert</span><span class="op">());</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"    customer: "</span> <span class="op">+</span> ticket<span class="op">.</span><span class="fu">getCustomer</span><span class="op">());</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="lister-les-concerts-dun-artiste" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="lister-les-concerts-dun-artiste"><span class="header-section-number">6.2.2</span> Lister les concerts d’un artiste</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">findConcertsForArtist</span><span class="op">(</span><span class="bu">String</span> artistName<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// </span><span class="al">TODO</span><span class="co">: Utiliser une jointure pour récupérer les concerts d'un artiste</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="requêtes-avec-agrégations" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="requêtes-avec-agrégations"><span class="header-section-number">6.3</span> Requêtes avec agrégations</h2>
+<section id="compter-le-nombre-de-billets-vendus-par-concert" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="compter-le-nombre-de-billets-vendus-par-concert"><span class="header-section-number">6.3.1</span> Compter le nombre de billets vendus par concert</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ConcertRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13" data-filename="ConcertRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ConcertRepository <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span><span class="bu">Object</span><span class="op">[]&gt;</span> <span class="fu">countTicketsByConcert</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> <span class="op">(</span>EntityManager em <span class="op">=</span> emf<span class="op">.</span><span class="fu">createEntityManager</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>            <span class="co">// </span><span class="al">TODO</span><span class="co">: Utiliser COUNT() et GROUP BY pour compter les billets par concert</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">String</span> jpql <span class="op">=</span> <span class="co">// </span><span class="al">TODO</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">Query</span> query <span class="op">=</span> em<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span>jpql<span class="op">);</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> query<span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">=== Nombre de billets par concert ==="</span><span class="op">);</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">List</span><span class="op">&lt;</span><span class="bu">Object</span><span class="op">[]&gt;</span> ticketCounts <span class="op">=</span> concertRepository<span class="op">.</span><span class="fu">countTicketsByConcert</span><span class="op">();</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        ticketCounts<span class="op">.</span><span class="fu">forEach</span><span class="op">(</span>r <span class="op">-&gt;</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"- </span><span class="sc">%s</span><span class="st"> : </span><span class="sc">%d</span><span class="st"> billets</span><span class="sc">%n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            r<span class="op">[</span><span class="dv">0</span><span class="op">],</span> r<span class="op">[</span><span class="dv">1</span><span class="op">]</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">));</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="calculer-le-chiffre-daffaires-par-concert" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="calculer-le-chiffre-daffaires-par-concert"><span class="header-section-number">6.3.2</span> Calculer le chiffre d’affaires par concert</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ConcertRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15" data-filename="ConcertRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ConcertRepository <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span><span class="bu">Object</span><span class="op">[]&gt;</span> <span class="fu">calculateRevenuePerConcert</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co">: Utiliser SUM() et GROUP BY pour calculer le total des prix par concert</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Pensez à utiliser COALESCE pour gérer les concerts sans billets</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">=== Chiffre d'affaires par concert ==="</span><span class="op">);</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">List</span><span class="op">&lt;</span><span class="bu">Object</span><span class="op">[]&gt;</span> revenues <span class="op">=</span> concertRepository<span class="op">.</span><span class="fu">calculateRevenuePerConcert</span><span class="op">();</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        revenues<span class="op">.</span><span class="fu">forEach</span><span class="op">(</span>r <span class="op">-&gt;</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"- </span><span class="sc">%s</span><span class="st"> : </span><span class="sc">%.2f</span><span class="st"> €</span><span class="sc">%n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            r<span class="op">[</span><span class="dv">0</span><span class="op">],</span> r<span class="op">[</span><span class="dv">1</span><span class="op">]</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">));</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="trouver-le-prix-moyen-des-billets-par-catégorie" class="level3" data-number="6.3.3">
+<h3 data-number="6.3.3" class="anchored" data-anchor-id="trouver-le-prix-moyen-des-billets-par-catégorie"><span class="header-section-number">6.3.3</span> Trouver le prix moyen des billets par catégorie</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>TicketRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" data-filename="TicketRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> TicketRepository <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span><span class="bu">Object</span><span class="op">[]&gt;</span> <span class="fu">averagePriceByCategory</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co">: Utiliser AVG() et GROUP BY pour calculer le prix moyen par catégorie</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">=== Prix moyen par catégorie ==="</span><span class="op">);</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">List</span><span class="op">&lt;</span><span class="bu">Object</span><span class="op">[]&gt;</span> avgPrices <span class="op">=</span> ticketRepository<span class="op">.</span><span class="fu">averagePriceByCategory</span><span class="op">();</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        avgPrices<span class="op">.</span><span class="fu">forEach</span><span class="op">(</span>r <span class="op">-&gt;</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"- </span><span class="sc">%s</span><span class="st"> : </span><span class="sc">%.2f</span><span class="st"> €</span><span class="sc">%n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>            r<span class="op">[</span><span class="dv">0</span><span class="op">],</span> r<span class="op">[</span><span class="dv">1</span><span class="op">]</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">));</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="requêtes-avancées" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="requêtes-avancées"><span class="header-section-number">6.4</span> Requêtes avancées</h2>
+<section id="trouver-les-concerts-avec-des-places-disponibles" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="trouver-les-concerts-avec-des-places-disponibles"><span class="header-section-number">6.4.1</span> Trouver les concerts avec des places disponibles</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ConcertRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19" data-filename="ConcertRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ConcertRepository <span class="op">{</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> <span class="fu">findConcertsWithAvailableSeats</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co">: Trouver les concerts où le nombre de billets vendus</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// est inférieur à la capacité maximale</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Astuce: utiliser une sous-requête</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">=== Concerts avec places disponibles ==="</span><span class="op">);</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> availableSeats <span class="op">=</span> concertRepository<span class="op">.</span><span class="fu">findConcertsWithAvailableSeats</span><span class="op">();</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        availableSeats<span class="op">.</span><span class="fu">forEach</span><span class="op">(</span>c <span class="op">-&gt;</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"- </span><span class="sc">%s</span><span class="st"> : </span><span class="sc">%s%n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>            c<span class="op">.</span><span class="fu">getTitle</span><span class="op">(),</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>            c<span class="op">.</span><span class="fu">getVenue</span><span class="op">()</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">));</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="trouver-les-clients-ayant-acheté-des-billets-vip" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="trouver-les-clients-ayant-acheté-des-billets-vip"><span class="header-section-number">6.4.2</span> Trouver les clients ayant acheté des billets VIP</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>CustomerRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21" data-filename="CustomerRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> CustomerRepository <span class="op">{</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Customer<span class="op">&gt;</span> <span class="fu">findVipCustomers</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co">: Trouver les clients ayant acheté au moins un billet VIP</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Astuce: utiliser DISTINCT pour éviter les doublons</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        CustomerRepository customerRepository <span class="op">=</span> <span class="kw">new</span> <span class="fu">CustomerRepository</span><span class="op">(</span>emf<span class="op">);</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">=== Clients VIP ==="</span><span class="op">);</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">List</span><span class="op">&lt;</span>Customer<span class="op">&gt;</span> vipCustomers <span class="op">=</span> customerRepository<span class="op">.</span><span class="fu">findVipCustomers</span><span class="op">();</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        vipCustomers<span class="op">.</span><span class="fu">forEach</span><span class="op">(</span>c <span class="op">-&gt;</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"- </span><span class="sc">%s</span><span class="st"> </span><span class="sc">%s</span><span class="st"> (</span><span class="sc">%s</span><span class="st">)</span><span class="sc">%n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>            c<span class="op">.</span><span class="fu">getFirstName</span><span class="op">(),</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>            c<span class="op">.</span><span class="fu">getLastName</span><span class="op">(),</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>            c<span class="op">.</span><span class="fu">getEmail</span><span class="op">()</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">));</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="concerts-futurs-triés-par-date" class="level3" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="concerts-futurs-triés-par-date"><span class="header-section-number">6.4.3</span> Concerts futurs triés par date</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ConcertRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23" data-filename="ConcertRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ConcertRepository <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> <span class="fu">findUpcomingConcerts</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co">: Trouver les concerts dont la date est dans le futur,</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// triés par date croissante</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Astuce: utiliser CURRENT_TIMESTAMP et ORDER BY</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">=== Concerts à venir ==="</span><span class="op">);</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> upcomingConcerts <span class="op">=</span> concertRepository<span class="op">.</span><span class="fu">findUpcomingConcerts</span><span class="op">();</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        upcomingConcerts<span class="op">.</span><span class="fu">forEach</span><span class="op">(</span>c <span class="op">-&gt;</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"- </span><span class="sc">%s</span><span class="st"> : </span><span class="sc">%s</span><span class="st"> à </span><span class="sc">%s%n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>            c<span class="op">.</span><span class="fu">getDate</span><span class="op">().</span><span class="fu">toLocalDate</span><span class="op">(),</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>            c<span class="op">.</span><span class="fu">getTitle</span><span class="op">(),</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>            c<span class="op">.</span><span class="fu">getVenue</span><span class="op">()</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">));</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="top-3-des-artistes-avec-le-plus-de-concerts" class="level3" data-number="6.4.4">
+<h3 data-number="6.4.4" class="anchored" data-anchor-id="top-3-des-artistes-avec-le-plus-de-concerts"><span class="header-section-number">6.4.4</span> Top 3 des artistes avec le plus de concerts</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ArtistRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25" data-filename="ArtistRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ArtistRepository <span class="op">{</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span><span class="bu">Object</span><span class="op">[]&gt;</span> <span class="fu">topArtistsByConcertCount</span><span class="op">(</span><span class="dt">int</span> limit<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co">: Trouver les artistes ayant le plus de concerts</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Astuce: utiliser COUNT, GROUP BY, ORDER BY et setMaxResults()</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">=== Top 3 artistes (nombre de concerts) ==="</span><span class="op">);</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">List</span><span class="op">&lt;</span><span class="bu">Object</span><span class="op">[]&gt;</span> topArtists <span class="op">=</span> artistRepository<span class="op">.</span><span class="fu">topArtistsByConcertCount</span><span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        topArtists<span class="op">.</span><span class="fu">forEach</span><span class="op">(</span>r <span class="op">-&gt;</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"- </span><span class="sc">%s</span><span class="st"> : </span><span class="sc">%d</span><span class="st"> concerts</span><span class="sc">%n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>            r<span class="op">[</span><span class="dv">0</span><span class="op">],</span> r<span class="op">[</span><span class="dv">1</span><span class="op">]</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">));</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="requêtes-de-mise-à-jour-et-suppression" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="requêtes-de-mise-à-jour-et-suppression"><span class="header-section-number">6.5</span> Requêtes de mise à jour et suppression</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Attention
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Les requêtes UPDATE et DELETE en JPQL nécessitent une transaction !</p>
+</div>
+</div>
+<section id="augmenter-les-prix-des-billets-vip-de-10" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="augmenter-les-prix-des-billets-vip-de-10"><span class="header-section-number">6.5.1</span> Augmenter les prix des billets VIP de 10%</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>TicketRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27" data-filename="TicketRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> TicketRepository <span class="op">{</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">increasePricesForVipTickets</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> <span class="op">(</span>EntityManager em <span class="op">=</span> emf<span class="op">.</span><span class="fu">createEntityManager</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>            EntityTransaction tx <span class="op">=</span> em<span class="op">.</span><span class="fu">getTransaction</span><span class="op">();</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>                tx<span class="op">.</span><span class="fu">begin</span><span class="op">();</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>                <span class="co">// </span><span class="al">TODO</span><span class="co">: Écrire une requête UPDATE pour augmenter le prix</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>                <span class="co">// de tous les billets VIP de 10%</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>                <span class="bu">Query</span> query <span class="op">=</span> em<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span><span class="co">/* </span><span class="al">TODO</span><span class="co"> */</span><span class="op">);</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>                <span class="co">// </span><span class="al">TODO</span><span class="co">: définir les paramètres si nécessaire</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>                <span class="dt">int</span> updatedCount <span class="op">=</span> query<span class="op">.</span><span class="fu">executeUpdate</span><span class="op">();</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>                tx<span class="op">.</span><span class="fu">commit</span><span class="op">();</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> updatedCount<span class="op">;</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">Exception</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>tx<span class="op">.</span><span class="fu">isActive</span><span class="op">())</span> tx<span class="op">.</span><span class="fu">rollback</span><span class="op">();</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">throw</span> e<span class="op">;</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> updatedCount <span class="op">=</span> ticketRepository<span class="op">.</span><span class="fu">increasePricesForVipTickets</span><span class="op">();</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"✓ "</span> <span class="op">+</span> updatedCount <span class="op">+</span> <span class="st">" billets VIP mis à jour"</span><span class="op">);</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="supprimer-les-billets-non-vendus-dun-concert-annulé" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="supprimer-les-billets-non-vendus-dun-concert-annulé"><span class="header-section-number">6.5.2</span> Supprimer les billets non vendus d’un concert annulé</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>TicketRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29" data-filename="TicketRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> TicketRepository <span class="op">{</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">deleteUnsoldTicketsForConcert</span><span class="op">(</span><span class="bu">Long</span> concertId<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> <span class="op">(</span>EntityManager em <span class="op">=</span> emf<span class="op">.</span><span class="fu">createEntityManager</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>            EntityTransaction tx <span class="op">=</span> em<span class="op">.</span><span class="fu">getTransaction</span><span class="op">();</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                tx<span class="op">.</span><span class="fu">begin</span><span class="op">();</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>                <span class="co">// </span><span class="al">TODO</span><span class="co">: Écrire une requête DELETE pour supprimer les billets</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>                <span class="co">// sans client (customer IS NULL) pour un concert donné</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>                tx<span class="op">.</span><span class="fu">commit</span><span class="op">();</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>                <span class="co">// </span><span class="al">TODO</span><span class="co">: retourner le nombre de billets supprimés</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">Exception</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>tx<span class="op">.</span><span class="fu">isActive</span><span class="op">())</span> tx<span class="op">.</span><span class="fu">rollback</span><span class="op">();</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>                <span class="cf">throw</span> e<span class="op">;</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Main.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30" data-filename="Main.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> deletedCount <span class="op">=</span> ticketRepository<span class="op">.</span><span class="fu">deleteUnsoldTicketsForConcert</span><span class="op">(</span><span class="dv">1L</span><span class="op">);</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"✓ "</span> <span class="op">+</span> deletedCount <span class="op">+</span> <span class="st">" billets supprimés"</span><span class="op">);</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (...)</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="pour-aller-plus-loin" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Pour aller plus loin</h1>
+<section id="tests-unitaires" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="tests-unitaires"><span class="header-section-number">7.1</span> Tests unitaires</h2>
+<p>Ecrire un test unitaire pour <code>ConcertRepository</code>. Utilisez ce pattern pour initialiser la base et l’<code>EntityManager</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">jakarta</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">EntityManager</span><span class="op">;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">jakarta</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">EntityManagerFactory</span><span class="op">;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">jakarta</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">Persistence</span><span class="op">;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.*;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="at">@TestInstance</span><span class="op">(</span>TestInstance<span class="op">.</span><span class="fu">Lifecycle</span><span class="op">.</span><span class="fu">PER_CLASS</span><span class="op">)</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PersistenceTest <span class="op">{</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">static</span> EntityManagerFactory emf<span class="op">;</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> EntityManager em<span class="op">;</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">@BeforeAll</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">setUpAll</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Initialize the persistence unit once for all tests</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>        emf <span class="op">=</span> Persistence<span class="op">.</span><span class="fu">createEntityManagerFactory</span><span class="op">(</span><span class="st">"concert-pu"</span><span class="op">);</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">@BeforeEach</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">setUp</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Create a new EntityManager for each test</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>        em <span class="op">=</span> emf<span class="op">.</span><span class="fu">createEntityManager</span><span class="op">();</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">@AfterEach</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">tearDown</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Clean up after each test</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>em <span class="op">!=</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> em<span class="op">.</span><span class="fu">isOpen</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>em<span class="op">.</span><span class="fu">getTransaction</span><span class="op">().</span><span class="fu">isActive</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>                em<span class="op">.</span><span class="fu">getTransaction</span><span class="op">().</span><span class="fu">rollback</span><span class="op">();</span></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>            em<span class="op">.</span><span class="fu">close</span><span class="op">();</span></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">@AfterAll</span></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">tearDownAll</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Close the factory after all tests</span></span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>emf <span class="op">!=</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> emf<span class="op">.</span><span class="fu">isOpen</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>            emf<span class="op">.</span><span class="fu">close</span><span class="op">();</span></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="plusieurs-tests" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="plusieurs-tests"><span class="header-section-number">7.2</span> Plusieurs tests</h2>
+<p>La technique ci-dessus fonctionne bien si on a une seule classe de test. Mais si on a plusieurs classes, l’<code>EntityManagerFactory</code> sera initialisé plusieurs fois. Recherchez sur internet comment résoudre ce problème, puis créer un test pour <code>ArtistRepository</code>.</p>
+</section>
+<section id="dry" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="dry"><span class="header-section-number">7.3</span> DRY</h2>
+<p>Dans les classes <code>Repository</code>, le même pattern de création de l’<code>EntityManager</code> est répété.</p>
+<ul>
+<li>refactorisez le code pour éviter la duplication. Vous pourrez utiliser une méthode helper :</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">protected</span> <span class="op">&lt;</span>T<span class="op">&gt;</span> T <span class="fu">executeQuery</span><span class="op">(</span>Function<span class="op">&lt;</span>EntityManager<span class="op">,</span> T<span class="op">&gt;</span> query<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// </span><span class="al">TODO</span><span class="co"> </span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>refactoriser le code pour les méthodes qui utilisent une transaction. Vous pourrez utiliser une méthode helper :</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">protected</span> <span class="op">&lt;</span>T<span class="op">&gt;</span> T <span class="fu">executeInTransaction</span><span class="op">(</span>Function<span class="op">&lt;</span>EntityManager<span class="op">,</span> T<span class="op">&gt;</span> operation<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// </span><span class="al">TODO</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="requêtes-natives-sql" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="requêtes-natives-sql"><span class="header-section-number">7.4</span> Requêtes natives SQL</h2>
+<p>JPA permet également d’exécuter des requêtes SQL natives :</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ConcertRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34" data-filename="ConcertRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ConcertRepository <span class="op">{</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> <span class="fu">nativeQueryExample</span><span class="op">(</span><span class="bu">String</span> city<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> <span class="op">(</span>EntityManager em <span class="op">=</span> emf<span class="op">.</span><span class="fu">createEntityManager</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>            <span class="bu">Query</span> query <span class="op">=</span> em<span class="op">.</span><span class="fu">createNativeQuery</span><span class="op">(</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"SELECT * FROM concert WHERE city = ?"</span><span class="op">,</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                Concert<span class="op">.</span><span class="fu">class</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>            <span class="op">);</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>            query<span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> city<span class="op">);</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> query<span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="named-queries" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="named-queries"><span class="header-section-number">7.5</span> Named Queries</h2>
+<p>Vous pouvez définir des requêtes nommées directement dans les entités :</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Concert.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35" data-filename="Concert.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Entity</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="at">@Table</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"concert"</span><span class="op">)</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="at">@NamedQuery</span><span class="op">(</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> <span class="st">"Concert.findByCity"</span><span class="op">,</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    query <span class="op">=</span> <span class="st">"SELECT c FROM Concert c WHERE c.city = :city"</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Concert <span class="op">{</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ConcertRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36" data-filename="ConcertRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ConcertRepository <span class="op">{</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> <span class="fu">findByCityNamedQuery</span><span class="op">(</span><span class="bu">String</span> city<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> <span class="op">(</span>EntityManager em <span class="op">=</span> emf<span class="op">.</span><span class="fu">createEntityManager</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>            TypedQuery<span class="op">&lt;</span>Concert<span class="op">&gt;</span> query <span class="op">=</span> em<span class="op">.</span><span class="fu">createNamedQuery</span><span class="op">(</span><span class="st">"Concert.findByCity"</span><span class="op">,</span> Concert<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>            query<span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="st">"city"</span><span class="op">,</span> city<span class="op">);</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> query<span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="criteria-api" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="criteria-api"><span class="header-section-number">7.6</span> Criteria API</h2>
+<p>Alternative typée et programmatique à JPQL :</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ConcertRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37" data-filename="ConcertRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ConcertRepository <span class="op">{</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> <span class="fu">criteriaApiExample</span><span class="op">(</span><span class="bu">String</span> city<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> <span class="op">(</span>EntityManager em <span class="op">=</span> emf<span class="op">.</span><span class="fu">createEntityManager</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>            CriteriaBuilder cb <span class="op">=</span> em<span class="op">.</span><span class="fu">getCriteriaBuilder</span><span class="op">();</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>            CriteriaQuery<span class="op">&lt;</span>Concert<span class="op">&gt;</span> cq <span class="op">=</span> cb<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span>Concert<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>            Root<span class="op">&lt;</span>Concert<span class="op">&gt;</span> concert <span class="op">=</span> cq<span class="op">.</span><span class="fu">from</span><span class="op">(</span>Concert<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>            cq<span class="op">.</span><span class="fu">select</span><span class="op">(</span>concert<span class="op">)</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>              <span class="op">.</span><span class="fu">where</span><span class="op">(</span>cb<span class="op">.</span><span class="fu">equal</span><span class="op">(</span>concert<span class="op">.</span><span class="fu">get</span><span class="op">(</span><span class="st">"city"</span><span class="op">),</span> city<span class="op">));</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> em<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span>cq<span class="op">).</span><span class="fu">getResultList</span><span class="op">();</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="pagination" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="pagination"><span class="header-section-number">7.7</span> Pagination</h2>
+<p>Gérer la pagination avec <code>setFirstResult()</code> et <code>setMaxResults()</code> :</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ConcertRepository.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38" data-filename="ConcertRepository.java"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ConcertRepository <span class="op">{</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (...)</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Concert<span class="op">&gt;</span> <span class="fu">findAllPaginated</span><span class="op">(</span><span class="dt">int</span> page<span class="op">,</span> <span class="dt">int</span> pageSize<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> <span class="op">(</span>EntityManager em <span class="op">=</span> emf<span class="op">.</span><span class="fu">createEntityManager</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>            TypedQuery<span class="op">&lt;</span>Concert<span class="op">&gt;</span> query <span class="op">=</span> em<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"SELECT c FROM Concert c ORDER BY c.date"</span><span class="op">,</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>                Concert<span class="op">.</span><span class="fu">class</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>            <span class="op">);</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>            query<span class="op">.</span><span class="fu">setFirstResult</span><span class="op">(</span>page <span class="op">*</span> pageSize<span class="op">);</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>            query<span class="op">.</span><span class="fu">setMaxResults</span><span class="op">(</span>pageSize<span class="op">);</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> query<span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

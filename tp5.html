@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TP5 - API REST avec Spring Boot – ALTN72 Développement Full Stack avec Java</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">TP5 - API REST avec Spring Boot</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ALTN72 Développement Full Stack avec Java</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM1 - Histoire des méthodologies de développement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM2 - Clean Code &amp; Architecture</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TPs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tp1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP1 - Extreme Programming</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#objectifs-du-tp" id="toc-objectifs-du-tp" class="nav-link" data-scroll-target="#objectifs-du-tp"><span class="header-section-number">1.1</span> Objectifs du TP</a></li>
+  <li><a href="#technologies-utilisées" id="toc-technologies-utilisées" class="nav-link" data-scroll-target="#technologies-utilisées"><span class="header-section-number">1.2</span> Technologies utilisées</a></li>
+  </ul></li>
+  <li><a href="#architecture-de-lapplication" id="toc-architecture-de-lapplication" class="nav-link" data-scroll-target="#architecture-de-lapplication"><span class="header-section-number">2</span> Architecture de l’application</a></li>
+  <li><a href="#partie-1-découverte-du-projet" id="toc-partie-1-découverte-du-projet" class="nav-link" data-scroll-target="#partie-1-découverte-du-projet"><span class="header-section-number">3</span> Partie 1 : Découverte du projet</a>
+  <ul class="collapse">
+  <li><a href="#structure-fournie" id="toc-structure-fournie" class="nav-link" data-scroll-target="#structure-fournie"><span class="header-section-number">3.1</span> Structure fournie</a></li>
+  <li><a href="#démarrer-lapplication" id="toc-démarrer-lapplication" class="nav-link" data-scroll-target="#démarrer-lapplication"><span class="header-section-number">3.2</span> Démarrer l’application</a></li>
+  <li><a href="#explorer-le-code-fourni" id="toc-explorer-le-code-fourni" class="nav-link" data-scroll-target="#explorer-le-code-fourni"><span class="header-section-number">3.3</span> Explorer le code fourni</a></li>
+  </ul></li>
+  <li><a href="#partie-2-créer-ticketrepository" id="toc-partie-2-créer-ticketrepository" class="nav-link" data-scroll-target="#partie-2-créer-ticketrepository"><span class="header-section-number">4</span> Partie 2 : Créer TicketRepository</a>
+  <ul class="collapse">
+  <li><a href="#examiner-lentité-ticket" id="toc-examiner-lentité-ticket" class="nav-link" data-scroll-target="#examiner-lentité-ticket"><span class="header-section-number">4.1</span> Examiner l’entité Ticket</a></li>
+  <li><a href="#créer-linterface-ticketrepository" id="toc-créer-linterface-ticketrepository" class="nav-link" data-scroll-target="#créer-linterface-ticketrepository"><span class="header-section-number">4.2</span> Créer l’interface TicketRepository</a></li>
+  </ul></li>
+  <li><a href="#partie-3-créer-ticketservice" id="toc-partie-3-créer-ticketservice" class="nav-link" data-scroll-target="#partie-3-créer-ticketservice"><span class="header-section-number">5</span> Partie 3 : Créer TicketService</a>
+  <ul class="collapse">
+  <li><a href="#squelette-du-service" id="toc-squelette-du-service" class="nav-link" data-scroll-target="#squelette-du-service"><span class="header-section-number">5.1</span> Squelette du service</a></li>
+  </ul></li>
+  <li><a href="#partie-4-créer-les-dtos" id="toc-partie-4-créer-les-dtos" class="nav-link" data-scroll-target="#partie-4-créer-les-dtos"><span class="header-section-number">6</span> Partie 4 : Créer les DTOs</a>
+  <ul class="collapse">
+  <li><a href="#ticketdto.java" id="toc-ticketdto.java" class="nav-link" data-scroll-target="#ticketdto.java"><span class="header-section-number">6.1</span> TicketDTO.java</a></li>
+  <li><a href="#ticketpurchaserequest.java" id="toc-ticketpurchaserequest.java" class="nav-link" data-scroll-target="#ticketpurchaserequest.java"><span class="header-section-number">6.2</span> TicketPurchaseRequest.java</a></li>
+  <li><a href="#concertstatsdto.java" id="toc-concertstatsdto.java" class="nav-link" data-scroll-target="#concertstatsdto.java"><span class="header-section-number">6.3</span> ConcertStatsDTO.java</a></li>
+  </ul></li>
+  <li><a href="#partie-5-créer-ticketcontroller" id="toc-partie-5-créer-ticketcontroller" class="nav-link" data-scroll-target="#partie-5-créer-ticketcontroller"><span class="header-section-number">7</span> Partie 5 : Créer TicketController</a>
+  <ul class="collapse">
+  <li><a href="#tester-avec-curl" id="toc-tester-avec-curl" class="nav-link" data-scroll-target="#tester-avec-curl"><span class="header-section-number">7.1</span> Tester avec curl</a></li>
+  </ul></li>
+  <li><a href="#partie-6-écrire-les-tests" id="toc-partie-6-écrire-les-tests" class="nav-link" data-scroll-target="#partie-6-écrire-les-tests"><span class="header-section-number">8</span> Partie 6 : Écrire les tests</a></li>
+  <li><a href="#partie-7-tests-unitaires-du-service" id="toc-partie-7-tests-unitaires-du-service" class="nav-link" data-scroll-target="#partie-7-tests-unitaires-du-service"><span class="header-section-number">9</span> Partie 7 : Tests unitaires du Service</a>
+  <ul class="collapse">
+  <li><a href="#approche-cohérente-avec-spring-boot-test" id="toc-approche-cohérente-avec-spring-boot-test" class="nav-link" data-scroll-target="#approche-cohérente-avec-spring-boot-test"><span class="header-section-number">9.1</span> Approche cohérente avec Spring Boot Test</a></li>
+  <li><a href="#examiner-artistservicetest" id="toc-examiner-artistservicetest" class="nav-link" data-scroll-target="#examiner-artistservicetest"><span class="header-section-number">9.2</span> Examiner ArtistServiceTest</a></li>
+  <li><a href="#créer-ticketservicetest" id="toc-créer-ticketservicetest" class="nav-link" data-scroll-target="#créer-ticketservicetest"><span class="header-section-number">9.3</span> Créer TicketServiceTest</a></li>
+  </ul></li>
+  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin"><span class="header-section-number">10</span> Pour aller plus loin</a>
+  <ul class="collapse">
+  <li><a href="#gestion-des-erreurs" id="toc-gestion-des-erreurs" class="nav-link" data-scroll-target="#gestion-des-erreurs"><span class="header-section-number">10.1</span> Gestion des erreurs</a></li>
+  <li><a href="#validation-avec-bean-validation" id="toc-validation-avec-bean-validation" class="nav-link" data-scroll-target="#validation-avec-bean-validation"><span class="header-section-number">10.2</span> Validation avec Bean Validation</a></li>
+  <li><a href="#tests-dintégration" id="toc-tests-dintégration" class="nav-link" data-scroll-target="#tests-dintégration"><span class="header-section-number">10.3</span> Tests d’intégration</a></li>
+  <li><a href="#documentation-swaggeropenapi" id="toc-documentation-swaggeropenapi" class="nav-link" data-scroll-target="#documentation-swaggeropenapi"><span class="header-section-number">10.4</span> Documentation Swagger/OpenAPI</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TP5 - API REST avec Spring Boot</h1>
+<p class="subtitle lead">Gestion d’une billetterie de concerts</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="objectifs-du-tp" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="objectifs-du-tp"><span class="header-section-number">1.1</span> Objectifs du TP</h2>
+<p>Ce TP vous permettra d’implémenter <strong>une fonctionnalité complète</strong> dans une application Spring Boot : la gestion des billets de concert. Vous allez parcourir toutes les couches de l’architecture :</p>
+<ul>
+<li>Créer un <strong>Repository</strong> Spring Data JPA avec des query methods</li>
+<li>Implémenter un <strong>Service</strong> avec logique métier et validation</li>
+<li>Créer des <strong>DTOs</strong> pour l’API REST</li>
+<li>Développer un <strong>Contrôleur REST</strong> avec plusieurs endpoints</li>
+<li>Écrire des <strong>tests JUnit</strong> pour valider votre implémentation</li>
+</ul>
+</section>
+<section id="technologies-utilisées" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="technologies-utilisées"><span class="header-section-number">1.2</span> Technologies utilisées</h2>
+<ul>
+<li>Spring Boot 3.5.8</li>
+<li>Spring Data JPA</li>
+<li>Spring Web</li>
+<li>Base de données H2 (en mémoire)</li>
+<li>JUnit 5 + Spring Boot Test + MockMvc</li>
+<li>Mockito</li>
+<li>Maven</li>
+</ul>
+</section>
+</section>
+<section id="architecture-de-lapplication" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Architecture de l’application</h1>
+<p>L’application suit une architecture en couches :</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    A[Client HTTP] --&gt; B[TicketController]
+    B --&gt; C[TicketService]
+    C --&gt; D[TicketRepository]
+    D --&gt; E[Base de données H2]
+
+    style B fill:#ffebee
+    style C fill:#ffebee
+    style D fill:#ffebee
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="partie-1-découverte-du-projet" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Partie 1 : Découverte du projet</h1>
+<section id="structure-fournie" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="structure-fournie"><span class="header-section-number">3.1</span> Structure fournie</h2>
+<p>Le projet contient déjà 3 fonctionnalités complètes qui serviront d’<strong>exemples de référence</strong> :</p>
+<section id="artistes-artist" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="artistes-artist"><span class="header-section-number">3.1.1</span> Artistes (Artist)</h3>
+<ul>
+<li>✅ <code>Artist.java</code> - Entité JPA</li>
+<li>✅ <code>ArtistRepository.java</code> - Repository avec query methods</li>
+<li>✅ <code>ArtistService.java</code> - Service avec logique CRUD</li>
+<li>✅ <code>ArtistDTO.java</code> - DTO pour l’API</li>
+<li>✅ <code>ArtistController.java</code> - Contrôleur REST</li>
+<li>✅ <code>ArtistControllerTest.java</code> - Tests du contrôleur</li>
+<li>✅ <code>ArtistServiceTest.java</code> - Tests du service</li>
+</ul>
+</section>
+<section id="concerts-et-clients" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="concerts-et-clients"><span class="header-section-number">3.1.2</span> Concerts et Clients</h3>
+<ul>
+<li>✅ <code>Concert.java</code> + Repository + Service + DTO + Controller + Tests (contrôleur)</li>
+<li>✅ <code>Customer.java</code> + Repository + Service + DTO + Controller + Tests (contrôleur)</li>
+</ul>
+</section>
+<section id="tickets-à-implémenter" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="tickets-à-implémenter"><span class="header-section-number">3.1.3</span> Tickets (à implémenter)</h3>
+<ul>
+<li>✅ <code>Ticket.java</code> - Entité fournie</li>
+<li>✅ <code>TicketCategory.java</code> - Énumération fournie</li>
+<li>❌ <code>TicketRepository.java</code> - <strong>À créer</strong></li>
+<li>❌ <code>TicketService.java</code> - <strong>À créer</strong></li>
+<li>❌ <code>TicketDTO.java</code> + autres DTOs - <strong>À créer</strong></li>
+<li>❌ <code>TicketController.java</code> - <strong>À créer</strong></li>
+<li>❌ <code>TicketControllerTest.java</code> - <strong>À créer</strong></li>
+<li>❌ <code>TicketServiceTest.java</code> - <strong>À créer</strong></li>
+</ul>
+</section>
+</section>
+<section id="démarrer-lapplication" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="démarrer-lapplication"><span class="header-section-number">3.2</span> Démarrer l’application</h2>
+<p>Ouvrez la classe <code>TicketingApplication</code> et lancez le <code>main</code>, ou utilisez maven :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spring-boot:run</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>L’application démarre sur <code>http://localhost:8080</code></p>
+<p>Testez les endpoints existants :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lister les artistes</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/artists</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtenir un artiste par ID</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/artists/1</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Lister les concerts</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/concerts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="explorer-le-code-fourni" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="explorer-le-code-fourni"><span class="header-section-number">3.3</span> Explorer le code fourni</h2>
+<p>Prenez 10-15 minutes pour examiner :</p>
+<ol type="1">
+<li><strong>ArtistRepository.java</strong> - Observez les query methods <code>findByGenre()</code> et <code>findByName()</code></li>
+<li><strong>ArtistService.java</strong> - Notez comment le service :
+<ul>
+<li>Injecte le repository</li>
+<li>Transforme les entités en DTOs</li>
+<li>Gère les Optional</li>
+</ul></li>
+<li><strong>ArtistController.java</strong> - Étudiez :
+<ul>
+<li>Les annotations <code>@RestController</code>, <code>@RequestMapping</code></li>
+<li>L’utilisation de <code>ResponseEntity</code></li>
+<li>La gestion des codes HTTP (200, 201, 204, 404)</li>
+</ul></li>
+<li><strong>ArtistControllerTest.java</strong> - Comprenez comment tester avec MockMvc :
+<ul>
+<li><code>@WebMvcTest</code> pour tester le contrôleur</li>
+<li><code>@MockitoBean</code> pour mocker le service</li>
+</ul></li>
+<li><strong>ArtistServiceTest.java</strong> - Comprenez comment tester le service :
+<ul>
+<li><code>@SpringBootTest</code> pour tester le service</li>
+<li><code>@MockitoBean</code> pour mocker le repository</li>
+</ul></li>
+</ol>
+<p><strong>Questions de compréhension :</strong></p>
+<ol type="1">
+<li>Pourquoi utilise-t-on des DTOs au lieu de retourner directement les entités ?</li>
+<li>Comment Spring Data JPA génère-t-il l’implémentation des repositories ?</li>
+<li>Quelle est la différence entre <code>@WebMvcTest</code> et <code>@SpringBootTest</code> ?</li>
+<li>Pourquoi utilise-t-on <code>@MockitoBean</code> dans les deux types de tests ?</li>
+</ol>
+</section>
+</section>
+<section id="partie-2-créer-ticketrepository" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Partie 2 : Créer TicketRepository</h1>
+<section id="examiner-lentité-ticket" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="examiner-lentité-ticket"><span class="header-section-number">4.1</span> Examiner l’entité Ticket</h2>
+<p>L’entité <code>Ticket</code> est déjà fournie. Examinez-la pour comprendre :</p>
+<ul>
+<li>Les annotations JPA (<code>@Entity</code>, <code>@ManyToOne</code>, <code>@Enumerated</code>)</li>
+<li>Les relations avec <code>Concert</code> et <code>Customer</code></li>
+<li>L’énumération <code>TicketCategory</code></li>
+</ul>
+</section>
+<section id="créer-linterface-ticketrepository" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="créer-linterface-ticketrepository"><span class="header-section-number">4.2</span> Créer l’interface TicketRepository</h2>
+<p>Créez <code>TicketRepository.java</code> dans le package <code>org.efrei.altn72.tp5.repository</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span><span class="im"> org</span><span class="op">.</span><span class="im">efrei</span><span class="op">.</span><span class="im">altn72</span><span class="op">.</span><span class="im">tp5</span><span class="op">.</span><span class="im">repository</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">efrei</span><span class="op">.</span><span class="im">altn72</span><span class="op">.</span><span class="im">tp5</span><span class="op">.</span><span class="im">entity</span><span class="op">.</span><span class="im">Ticket</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">efrei</span><span class="op">.</span><span class="im">altn72</span><span class="op">.</span><span class="im">tp5</span><span class="op">.</span><span class="im">entity</span><span class="op">.</span><span class="im">TicketCategory</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">data</span><span class="op">.</span><span class="im">jpa</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">JpaRepository</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">data</span><span class="op">.</span><span class="im">jpa</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">Query</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">data</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">query</span><span class="op">.</span><span class="im">Param</span><span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">stereotype</span><span class="op">.</span><span class="im">Repository</span><span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">math</span><span class="op">.</span><span class="im">BigDecimal</span><span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">List</span><span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">@Repository</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> TicketRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>Ticket<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// </span><span class="al">TODO</span><span class="co"> 1: Méthode pour trouver tous les billets d'un client</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Retour: List&lt;Ticket&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// </span><span class="al">TODO</span><span class="co"> 2: Méthode pour trouver tous les billets d'un concert</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Retour: List&lt;Ticket&gt;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// </span><span class="al">TODO</span><span class="co"> 3: Méthode pour trouver les billets par catégorie</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Retour: List&lt;Ticket&gt;</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// </span><span class="al">TODO</span><span class="co"> 4: Méthode pour compter le nombre de billets vendus pour un concert</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Retour: long</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">// </span><span class="al">TODO</span><span class="co"> 5: Requête JPQL pour calculer le chiffre d'affaires d'un concert</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Retour: BigDecimal</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="partie-3-créer-ticketservice" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Partie 3 : Créer TicketService</h1>
+<p>Le service contient la logique métier. Créez <code>TicketService.java</code> dans le package <code>org.efrei.altn72.tp5.service</code> :</p>
+<section id="squelette-du-service" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="squelette-du-service"><span class="header-section-number">5.1</span> Squelette du service</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Service</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">@Transactional</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> TicketService <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> TicketRepository ticketRepository<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> ConcertRepository concertRepository<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> CustomerRepository customerRepository<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">TicketService</span><span class="op">(</span>TicketRepository ticketRepository<span class="op">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                         ConcertRepository concertRepository<span class="op">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                         CustomerRepository customerRepository<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">ticketRepository</span> <span class="op">=</span> ticketRepository<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">concertRepository</span> <span class="op">=</span> concertRepository<span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">customerRepository</span> <span class="op">=</span> customerRepository<span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Méthodes à implémenter ci-dessous</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> TicketDTO <span class="fu">purchaseTicket</span><span class="op">(</span>TicketPurchaseRequest request<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> 1: Récupérer le concert par son ID</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Lancer IllegalArgumentException si le concert n'existe pas</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> 2: Récupérer le client par son ID</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Lancer IllegalArgumentException si le client n'existe pas</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> 3: Vérifier qu'il reste des places disponibles</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Lancer IllegalStateException si le concert est complet</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> 4: Générer un numéro de billet unique</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Utiliser la méthode generateTicketNumber() (fournie ci-dessous)</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> 5: Convertir la catégorie String en TicketCategory enum</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> 6: Créer le billet</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> 7: Sauvegarder et retourner le DTO</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">String</span> <span class="fu">generateTicketNumber</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"TKT-"</span> <span class="op">+</span> <span class="bu">UUID</span><span class="op">.</span><span class="fu">randomUUID</span><span class="op">().</span><span class="fu">toString</span><span class="op">().</span><span class="fu">substring</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">8</span><span class="op">).</span><span class="fu">toUpperCase</span><span class="op">();</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>TicketDTO<span class="op">&gt;</span> <span class="fu">getTicketsByCustomer</span><span class="op">(</span><span class="bu">Long</span> customerId<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co">: Utiliser ticketRepository.findByCustomerId()</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Transformer la liste de Ticket en liste de TicketDTO avec mapToDTO()</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Astuce: .stream().map(this::mapToDTO).toList()</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>TicketDTO<span class="op">&gt;</span> <span class="fu">getTicketsByConcert</span><span class="op">(</span><span class="bu">Long</span> concertId<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co">: Similaire à getTicketsByCustomer</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> Optional<span class="op">&lt;</span>ConcertStatsDTO<span class="op">&gt;</span> <span class="fu">getConcertStats</span><span class="op">(</span><span class="bu">Long</span> concertId<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> concertRepository<span class="op">.</span><span class="fu">findById</span><span class="op">(</span>concertId<span class="op">)</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>                <span class="op">.</span><span class="fu">map</span><span class="op">(</span>concert <span class="op">-&gt;</span> <span class="op">{</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>                    <span class="co">// </span><span class="al">TODO</span><span class="co"> 1: Compter les billets vendus</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>                    <span class="co">// </span><span class="al">TODO</span><span class="co"> 2: Calculer le chiffre d'affaires</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                    <span class="co">// </span><span class="al">TODO</span><span class="co"> 3: Calculer les places disponibles</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                    <span class="co">// </span><span class="al">TODO</span><span class="co"> 4: Créer et retourner le DTO</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>                <span class="op">});</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> TicketDTO <span class="fu">mapToDTO</span><span class="op">(</span>Ticket ticket<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>        <span class="co">// </span><span class="al">TODO</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="partie-4-créer-les-dtos" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Partie 4 : Créer les DTOs</h1>
+<p>Créez les 3 DTOs dans le package <code>org.efrei.altn72.tp5.dto</code> :</p>
+<section id="ticketdto.java" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="ticketdto.java"><span class="header-section-number">6.1</span> TicketDTO.java</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span><span class="im"> org</span><span class="op">.</span><span class="im">efrei</span><span class="op">.</span><span class="im">altn72</span><span class="op">.</span><span class="im">tp5</span><span class="op">.</span><span class="im">dto</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">math</span><span class="op">.</span><span class="im">BigDecimal</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">time</span><span class="op">.</span><span class="im">LocalDateTime</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">record</span> <span class="fu">TicketDTO</span><span class="op">(</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Long</span> id<span class="op">,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">String</span> ticketNumber<span class="op">,</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">String</span> category<span class="op">,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">BigDecimal</span> price<span class="op">,</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        LocalDateTime purchaseDate<span class="op">,</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">String</span> seatNumber<span class="op">,</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Long</span> concertId<span class="op">,</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">String</span> concertTitle<span class="op">,</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Long</span> customerId<span class="op">,</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">String</span> customerName</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ticketpurchaserequest.java" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="ticketpurchaserequest.java"><span class="header-section-number">6.2</span> TicketPurchaseRequest.java</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span><span class="im"> org</span><span class="op">.</span><span class="im">efrei</span><span class="op">.</span><span class="im">altn72</span><span class="op">.</span><span class="im">tp5</span><span class="op">.</span><span class="im">dto</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">math</span><span class="op">.</span><span class="im">BigDecimal</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">record</span> <span class="fu">TicketPurchaseRequest</span><span class="op">(</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Long</span> concertId<span class="op">,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Long</span> customerId<span class="op">,</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">String</span> category<span class="op">,</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">BigDecimal</span> price<span class="op">,</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">String</span> seatNumber</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="concertstatsdto.java" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="concertstatsdto.java"><span class="header-section-number">6.3</span> ConcertStatsDTO.java</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span><span class="im"> org</span><span class="op">.</span><span class="im">efrei</span><span class="op">.</span><span class="im">altn72</span><span class="op">.</span><span class="im">tp5</span><span class="op">.</span><span class="im">dto</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">math</span><span class="op">.</span><span class="im">BigDecimal</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">record</span> <span class="fu">ConcertStatsDTO</span><span class="op">(</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Long</span> concertId<span class="op">,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">String</span> concertTitle<span class="op">,</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> totalTicketsSold<span class="op">,</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> availableSeats<span class="op">,</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">BigDecimal</span> totalRevenue</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="partie-5-créer-ticketcontroller" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Partie 5 : Créer TicketController</h1>
+<p>Le contrôleur doit implémenter les endpoints suivants :</p>
+<ul>
+<li>POST /api/tickets/purchase
+<ul>
+<li>Acheter un billet</li>
+<li>Retour: <code>TicketDTO</code></li>
+<li>Code HTTP: 201 CREATED</li>
+</ul></li>
+<li>GET /api/tickets/customer/{customerId}
+<ul>
+<li>Obtenir tous les billets d’un client</li>
+<li>Retour: <code>List&lt;TicketDTO&gt;</code></li>
+<li>Code HTTP: 200 OK</li>
+</ul></li>
+<li>GET /api/tickets/concert/{concertId}
+<ul>
+<li>Obtenir tous les billets d’un concert</li>
+<li>Retour: <code>List&lt;TicketDTO&gt;</code></li>
+<li>Code HTTP: 200 OK</li>
+</ul></li>
+<li>GET /api/tickets/concert/{concertId}/stats
+<ul>
+<li>Retour: <code>ConcertStatsDTO</code></li>
+<li>Si trouvé: 200 OK, sinon: 404 NOT FOUND</li>
+</ul></li>
+</ul>
+<section id="tester-avec-curl" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="tester-avec-curl"><span class="header-section-number">7.1</span> Tester avec curl</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Acheter un billet</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://localhost:8080/api/tickets/purchase <span class="dt">\</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">    "concertId": 1,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">    "customerId": 1,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">    "category": "VIP",</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">    "price": 150.00,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">    "seatNumber": "A15"</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">  }'</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Billets d'un client</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/tickets/customer/1</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Billets d'un concert</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/tickets/concert/1</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistiques d'un concert</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/tickets/concert/1/stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="partie-6-écrire-les-tests" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Partie 6 : Écrire les tests</h1>
+<p>Créez <code>TicketControllerTest.java</code> dans <code>src/test/java/org/efrei/altn72/tp5/controller/</code> :</p>
+<p>Utilisez <code>ArtistControllerTest.java</code> comme modèle. Voici les tests à implémenter :</p>
+<ol type="1">
+<li><code>shouldPurchaseTicket</code> - POST / api/tickets/purchase</li>
+<li><code>shouldReturnTicketsForCustomer()</code> - GET /api/tickets/customer/{id}</li>
+<li><code>shouldReturnTicketsForConcert()</code> - GET /api/tickets/concert/{id}</li>
+<li><code>shouldReturnConcertStats()</code> - GET /api/tickets/concert/{id}/stats</li>
+<li><code>shouldReturn404WhenConcertStatsNotFound()</code> - 404 si concert inexistant</li>
+</ol>
+</section>
+<section id="partie-7-tests-unitaires-du-service" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Partie 7 : Tests unitaires du Service</h1>
+<section id="approche-cohérente-avec-spring-boot-test" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="approche-cohérente-avec-spring-boot-test"><span class="header-section-number">9.1</span> Approche cohérente avec Spring Boot Test</h2>
+<p>Vous avez écrit des tests de contrôleur avec <code>@WebMvcTest</code> + <code>@MockitoBean</code>. Pour les tests de service, nous utilisons <strong>la même approche Spring Boot</strong> avec <code>@SpringBootTest</code> + <code>@MockitoBean</code>.</p>
+<p><strong>Tests de contrôleur (<code>@WebMvcTest</code>)</strong> :</p>
+<ul>
+<li>Testent les endpoints REST avec MockMvc</li>
+<li>Vérifient la sérialisation JSON et les codes HTTP</li>
+<li>Mockent la couche service avec <code>@MockitoBean</code></li>
+</ul>
+<p><strong>Tests de service (<code>@SpringBootTest</code>)</strong> :</p>
+<ul>
+<li>Testent la logique métier du service</li>
+<li>Vérifient les validations et transformations</li>
+<li>Mockent la couche repository avec <code>@MockitoBean</code></li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Approche uniforme
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Dans les deux cas</strong>, on utilise Spring Boot Test (<code>@WebMvcTest</code> ou <code>@SpringBootTest</code>) avec <code>@MockitoBean</code> pour mocker la couche en dessous. On aurait pu utiliser Mockito directement pour les services, mais c’est plus uniforme comme cela.</p>
+</div>
+</div>
+</section>
+<section id="examiner-artistservicetest" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="examiner-artistservicetest"><span class="header-section-number">9.2</span> Examiner ArtistServiceTest</h2>
+<p>Un exemple complet est fourni dans <code>ArtistServiceTest.java</code>. Examinez ce fichier pour comprendre :</p>
+<ul>
+<li><code>@SpringBootTest</code> - Charge le contexte Spring pour tester le service</li>
+<li><code>@MockitoBean</code> - Crée un mock du repository (remplace le vrai bean dans le contexte)</li>
+<li><code>@Autowired</code> - Injecte le vrai service (qui utilisera les mocks)</li>
+<li><code>when().thenReturn()</code> - Définit le comportement des mocks (comme dans les tests de contrôleur)</li>
+<li><code>verify()</code> - Vérifie que les méthodes ont été appelées</li>
+<li>AssertJ (<code>assertThat()</code>) - Assertions fluides</li>
+</ul>
+<p><strong>Structure d’un test de service :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="at">@SpringBootTest</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ArtistServiceTest <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">@MockitoBean</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> ArtistRepository artistRepository<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Autowired</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> ArtistService artistService<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Test</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">shouldReturnAllArtists</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Given - Préparer les données et configurer les mocks</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        Artist artist <span class="op">=</span> <span class="kw">new</span> <span class="fu">Artist</span><span class="op">(</span><span class="st">"The Rolling Stones"</span><span class="op">,</span> <span class="st">"Rock"</span><span class="op">,</span> <span class="st">"UK"</span><span class="op">);</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">when</span><span class="op">(</span>artistRepository<span class="op">.</span><span class="fu">findAll</span><span class="op">()).</span><span class="fu">thenReturn</span><span class="op">(</span><span class="bu">List</span><span class="op">.</span><span class="fu">of</span><span class="op">(</span>artist<span class="op">));</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// When - Appeler la méthode à tester</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">List</span><span class="op">&lt;</span>ArtistDTO<span class="op">&gt;</span> result <span class="op">=</span> artistService<span class="op">.</span><span class="fu">getAllArtists</span><span class="op">();</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Then - Vérifier les résultats</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">assertThat</span><span class="op">(</span>result<span class="op">).</span><span class="fu">hasSize</span><span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">assertThat</span><span class="op">(</span>result<span class="op">.</span><span class="fu">get</span><span class="op">(</span><span class="dv">0</span><span class="op">).</span><span class="fu">name</span><span class="op">()).</span><span class="fu">isEqualTo</span><span class="op">(</span><span class="st">"The Rolling Stones"</span><span class="op">);</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">verify</span><span class="op">(</span>artistRepository<span class="op">,</span> <span class="fu">times</span><span class="op">(</span><span class="dv">1</span><span class="op">)).</span><span class="fu">findAll</span><span class="op">();</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="créer-ticketservicetest" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="créer-ticketservicetest"><span class="header-section-number">9.3</span> Créer TicketServiceTest</h2>
+<p>Créez <code>TicketServiceTest.java</code> dans <code>src/test/java/org/efrei/altn72/tp5/service/</code>.</p>
+<p>Implémentez les tests suivants :</p>
+<ul>
+<li>Achat réussi d’un billet</li>
+<li>Achat échoue si concert inexistant</li>
+<li>Achat échoue si client inexistant</li>
+<li>Achat échoue si concert complet</li>
+<li>Récupérer les billets d’un client</li>
+<li>Récupérer les billets d’un concert</li>
+<li>Calculer les statistiques d’un concert</li>
+<li>Statistiques retourne vide si concert inexistant</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Conseils pour les tests de service
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Utilisez Spring Boot Test</strong> : Avec <code>@SpringBootTest</code> + <code>@MockitoBean</code>, c’est cohérent avec les tests de contrôleur</li>
+<li><strong>Isolez avec les mocks</strong> : <code>@MockitoBean</code> remplace les vrais repositories par des mocks</li>
+<li><strong>Testez tous les cas</strong> : Succès, erreurs, cas limites (concert complet, entités inexistantes)</li>
+<li><strong>Vérifiez les appels</strong> : Utilisez <code>verify()</code> pour confirmer que les repositories sont appelés correctement</li>
+<li><strong>Pensez aux exceptions</strong> : Utilisez <code>assertThatThrownBy()</code> pour tester les cas d’erreur</li>
+<li><strong>Même syntaxe que les tests de contrôleur</strong> : <code>when().thenReturn()</code> et <code>verify()</code> fonctionnent exactement pareil !</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="pour-aller-plus-loin" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Pour aller plus loin</h1>
+<section id="gestion-des-erreurs" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="gestion-des-erreurs"><span class="header-section-number">10.1</span> Gestion des erreurs</h2>
+<p>Améliorez la gestion d’erreurs :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="at">@RestControllerAdvice</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> GlobalExceptionHandler <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">@ExceptionHandler</span><span class="op">(</span><span class="bu">IllegalArgumentException</span><span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span><span class="bu">Map</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;&gt;</span> <span class="fu">handleIllegalArgument</span><span class="op">(</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>            <span class="bu">IllegalArgumentException</span> ex<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Map</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> error <span class="op">=</span> <span class="bu">Map</span><span class="op">.</span><span class="fu">of</span><span class="op">(</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"error"</span><span class="op">,</span> <span class="st">"Bad Request"</span><span class="op">,</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"message"</span><span class="op">,</span> ex<span class="op">.</span><span class="fu">getMessage</span><span class="op">()</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">);</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">badRequest</span><span class="op">().</span><span class="fu">body</span><span class="op">(</span>error<span class="op">);</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">@ExceptionHandler</span><span class="op">(</span><span class="bu">IllegalStateException</span><span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span><span class="bu">Map</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;&gt;</span> <span class="fu">handleIllegalState</span><span class="op">(</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">IllegalStateException</span> ex<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Map</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> error <span class="op">=</span> <span class="bu">Map</span><span class="op">.</span><span class="fu">of</span><span class="op">(</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"error"</span><span class="op">,</span> <span class="st">"Conflict"</span><span class="op">,</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"message"</span><span class="op">,</span> ex<span class="op">.</span><span class="fu">getMessage</span><span class="op">()</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">);</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">status</span><span class="op">(</span>HttpStatus<span class="op">.</span><span class="fu">CONFLICT</span><span class="op">).</span><span class="fu">body</span><span class="op">(</span>error<span class="op">);</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="validation-avec-bean-validation" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="validation-avec-bean-validation"><span class="header-section-number">10.2</span> Validation avec Bean Validation</h2>
+<p>Ajoutez des validations sur les DTOs :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">record</span> <span class="fu">TicketPurchaseRequest</span><span class="op">(</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">@NotNull</span><span class="op">(</span>message <span class="op">=</span> <span class="st">"Concert ID is required"</span><span class="op">)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Long</span> concertId<span class="op">,</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">@NotNull</span><span class="op">(</span>message <span class="op">=</span> <span class="st">"Customer ID is required"</span><span class="op">)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Long</span> customerId<span class="op">,</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">@NotBlank</span><span class="op">(</span>message <span class="op">=</span> <span class="st">"Category is required"</span><span class="op">)</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">String</span> category<span class="op">,</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">@NotNull</span><span class="op">(</span>message <span class="op">=</span> <span class="st">"Price is required"</span><span class="op">)</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Positive</span><span class="op">(</span>message <span class="op">=</span> <span class="st">"Price must be positive"</span><span class="op">)</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">BigDecimal</span> price<span class="op">,</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">String</span> seatNumber</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> <span class="op">{}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Dans le contrôleur, ajoutez <code>@Valid</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="at">@PostMapping</span><span class="op">(</span><span class="st">"/purchase"</span><span class="op">)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> ResponseEntity<span class="op">&lt;</span>TicketDTO<span class="op">&gt;</span> <span class="fu">purchaseTicket</span><span class="op">(</span><span class="at">@Valid</span> <span class="at">@RequestBody</span> TicketPurchaseRequest request<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tests-dintégration" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="tests-dintégration"><span class="header-section-number">10.3</span> Tests d’intégration</h2>
+<p>Créez des tests d’intégration avec <code>@SpringBootTest</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="at">@SpringBootTest</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="at">@AutoConfigureMockMvc</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TicketIntegrationTest <span class="op">{</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Autowired</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> MockMvc mockMvc<span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Test</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">shouldPurchaseTicketEndToEnd</span><span class="op">()</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        mockMvc<span class="op">.</span><span class="fu">perform</span><span class="op">(</span><span class="fu">post</span><span class="op">(</span><span class="st">"/api/tickets/purchase"</span><span class="op">)</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                <span class="op">.</span><span class="fu">contentType</span><span class="op">(</span>MediaType<span class="op">.</span><span class="fu">APPLICATION_JSON</span><span class="op">)</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                <span class="op">.</span><span class="fu">content</span><span class="op">(</span><span class="st">"{ ... }"</span><span class="op">))</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">andExpect</span><span class="op">(</span><span class="fu">status</span><span class="op">().</span><span class="fu">isCreated</span><span class="op">());</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="documentation-swaggeropenapi" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="documentation-swaggeropenapi"><span class="header-section-number">10.4</span> Documentation Swagger/OpenAPI</h2>
+<p>Ajoutez dans <code>pom.xml</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">groupId</span>&gt;org.springdoc&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">artifactId</span>&gt;springdoc-openapi-starter-webmvc-ui&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">version</span>&gt;2.3.0&lt;/<span class="kw">version</span>&gt;</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">dependency</span>&gt;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Documentation disponible sur : <code>http://localhost:8080/swagger-ui.html</code></p>
+<hr>
+<!--
+TODO: ticket price in payload for purchase !!!
+client can set their own price...
+-->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

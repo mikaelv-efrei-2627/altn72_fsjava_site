@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>CM5 - Le Framework Spring Boot – ALTN72 Développement Full Stack avec Java</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CM5 - Le Framework Spring Boot</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ALTN72 Développement Full Stack avec Java</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM1 - Histoire des méthodologies de développement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM2 - Clean Code &amp; Architecture</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TPs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tp1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP1 - Extreme Programming</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#références" id="toc-références" class="nav-link active" data-scroll-target="#références"><span class="header-section-number">1</span> Références</a></li>
+  <li><a href="#inversion-of-control" id="toc-inversion-of-control" class="nav-link" data-scroll-target="#inversion-of-control"><span class="header-section-number">2</span> Inversion Of Control</a>
+  <ul class="collapse">
+  <li><a href="#quest-ce-que-lioc" id="toc-quest-ce-que-lioc" class="nav-link" data-scroll-target="#quest-ce-que-lioc"><span class="header-section-number">2.1</span> Qu’est-ce que l’IoC ?</a></li>
+  <li><a href="#système-ne-respectant-pas-le-dip" id="toc-système-ne-respectant-pas-le-dip" class="nav-link" data-scroll-target="#système-ne-respectant-pas-le-dip"><span class="header-section-number">2.2</span> Système ne respectant pas le DIP</a></li>
+  <li><a href="#système-utilisant-ioc" id="toc-système-utilisant-ioc" class="nav-link" data-scroll-target="#système-utilisant-ioc"><span class="header-section-number">2.3</span> Système utilisant IoC</a></li>
+  </ul></li>
+  <li><a href="#introduction-à-spring" id="toc-introduction-à-spring" class="nav-link" data-scroll-target="#introduction-à-spring"><span class="header-section-number">3</span> Introduction à Spring</a>
+  <ul class="collapse">
+  <li><a href="#avantages-de-spring" id="toc-avantages-de-spring" class="nav-link" data-scroll-target="#avantages-de-spring"><span class="header-section-number">3.1</span> Avantages de Spring</a></li>
+  <li><a href="#exemple-dutilisation-de-spring-ioc" id="toc-exemple-dutilisation-de-spring-ioc" class="nav-link" data-scroll-target="#exemple-dutilisation-de-spring-ioc"><span class="header-section-number">3.2</span> Exemple d’utilisation de Spring IoC</a></li>
+  <li><a href="#classe-principale" id="toc-classe-principale" class="nav-link" data-scroll-target="#classe-principale"><span class="header-section-number">3.3</span> Classe principale</a></li>
+  </ul></li>
+  <li><a href="#spring-aop" id="toc-spring-aop" class="nav-link" data-scroll-target="#spring-aop"><span class="header-section-number">4</span> Spring AOP</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">4.1</span> Introduction</a></li>
+  <li><a href="#terminologie" id="toc-terminologie" class="nav-link" data-scroll-target="#terminologie"><span class="header-section-number">4.2</span> Terminologie</a></li>
+  <li><a href="#exemple" id="toc-exemple" class="nav-link" data-scroll-target="#exemple"><span class="header-section-number">4.3</span> Exemple</a></li>
+  <li><a href="#utilisation" id="toc-utilisation" class="nav-link" data-scroll-target="#utilisation"><span class="header-section-number">4.4</span> Utilisation</a></li>
+  </ul></li>
+  <li><a href="#spring-boot" id="toc-spring-boot" class="nav-link" data-scroll-target="#spring-boot"><span class="header-section-number">5</span> Spring Boot</a>
+  <ul class="collapse">
+  <li><a href="#activité-hello-world" id="toc-activité-hello-world" class="nav-link" data-scroll-target="#activité-hello-world"><span class="header-section-number">5.1</span> Activité : Hello World</a></li>
+  <li><a href="#activité-application-customers" id="toc-activité-application-customers" class="nav-link" data-scroll-target="#activité-application-customers"><span class="header-section-number">5.2</span> Activité : application Customers</a></li>
+  <li><a href="#externalisation-de-la-configuration" id="toc-externalisation-de-la-configuration" class="nav-link" data-scroll-target="#externalisation-de-la-configuration"><span class="header-section-number">5.3</span> Externalisation de la configuration</a></li>
+  <li><a href="#spring-boot-starters" id="toc-spring-boot-starters" class="nav-link" data-scroll-target="#spring-boot-starters"><span class="header-section-number">5.4</span> Spring Boot starters</a></li>
+  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests"><span class="header-section-number">5.5</span> Tests</a></li>
+  <li><a href="#persistance" id="toc-persistance" class="nav-link" data-scroll-target="#persistance"><span class="header-section-number">5.6</span> Persistance</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">CM5 - Le Framework Spring Boot</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="références" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Références</h1>
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/reference/overview.html">Spring Framework Overview</a></li>
+<li><a href="https://docs.spring.io/spring-framework/reference/core/aop/introduction-defn.html">Spring AOP Concepts</a></li>
+<li><a href="https://medium.com/@alxkm/spring-aop-explained-how-to-implement-aspect-oriented-programming-in-your-spring-application-17cee1da12e8">Spring AOP Explained - Medium</a></li>
+<li><a href="https://docs.spring.io/spring-boot/index.html">Spring Boot Overview</a></li>
+<li><a href="https://docs.spring.io/spring-boot/reference/index.html">Spring Boot Reference</a></li>
+<li><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/core-concepts.html">Spring Data JPA</a></li>
+</ul>
+</section>
+<section id="inversion-of-control" class="level1 page-columns page-full" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Inversion Of Control</h1>
+<section id="quest-ce-que-lioc" class="level2 page-columns page-full" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="quest-ce-que-lioc"><span class="header-section-number">2.1</span> Qu’est-ce que l’IoC ?</h2>
+<p>Nous avions vu dans les principes SOLID le “Dependency Inversion Principle” :</p>
+<ul>
+<li>High-level modules should not depend on low-level modules.
+<ul>
+<li>both should depend on abstractions.</li>
+</ul></li>
+</ul>
+<p>L’<strong>IoC</strong> (Inversion of Control), est un “design pattern”. C’est l’un des mécanismes qui permet d’implémenter le DIP (Dependency Inversion Principle).</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>D’autres patterns permettent d’implémenter le DIP : Factory, Strategy, Plugin architecture, Service Locator.</p>
+</div></div><p>Dans Spring, l’IoC est réalisée principalement via l’injection de dépendances (DI).</p>
+<p>Avantages :</p>
+<ul>
+<li>augmenter la modularité d’un programme</li>
+<li>division claire des responsabilités</li>
+</ul>
+<p>Au lieu qu’un composant de haut niveau soit responsable de la création et de la gestion de ses dépendances, cette responsabilité est inversée et confiée à un conteneur spécialisé.</p>
+</section>
+<section id="système-ne-respectant-pas-le-dip" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="système-ne-respectant-pas-le-dip"><span class="header-section-number">2.2</span> Système ne respectant pas le DIP</h2>
+<p>Dans cet exemple, les objets créent directement leurs dépendances :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> StudentRepository <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> DatabaseConnection databaseConnection<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> CacheManager cacheManager<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">StudentRepository</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">databaseConnection</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">DatabaseConnection</span><span class="op">();</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">cacheManager</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">CacheManager</span><span class="op">();</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">saveStudent</span><span class="op">(</span><span class="bu">String</span> student<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ...</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="problèmes-de-lapproche" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="problèmes-de-lapproche"><span class="header-section-number">2.2.1</span> Problèmes de l’approche</h3>
+<ul>
+<li>certains objets doivent être partagés (singletons).
+<ul>
+<li>on ne doit pas les recréer à chaque fois</li>
+</ul></li>
+<li>certains objets doivent utiliser une configuration différente en dev / qa / prod</li>
+<li>tests difficiles
+<ul>
+<li>on ne peut pas facilement changer les dépendances</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="système-utilisant-ioc" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="système-utilisant-ioc"><span class="header-section-number">2.3</span> Système utilisant IoC</h2>
+<p>Dans un système utilisant IoC, un conteneur injecte les dépendances :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> StudentRepository <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> DatabaseConnection databaseConnection<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> CacheManager cacheManager<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">StudentRepository</span><span class="op">(</span>DatabaseConnection databaseConnection<span class="op">,</span> CacheManager cacheManager<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">databaseConnection</span> <span class="op">=</span> databaseConnection<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">cacheManager</span> <span class="op">=</span> cacheManager<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">saveStudent</span><span class="op">(</span><span class="bu">String</span> student<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Le conteneur IoC est responsable de la création et de l’injection des dépendances nécessaires.</p>
+</section>
+</section>
+<section id="introduction-à-spring" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Introduction à Spring</h1>
+<p>Le framework <a href="https://spring.io/">Spring</a> est l’une des implémentations les plus populaires de l’<strong>IoC</strong> en Java.</p>
+<p>Il fournit un conteneur léger qui facilite la gestion des objets et leurs dépendances dans une application.</p>
+<p>Grâce à Spring, les développeurs peuvent se concentrer sur la logique métier, tandis que le framework s’occupe des tâches répétitives.</p>
+<section id="avantages-de-spring" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="avantages-de-spring"><span class="header-section-number">3.1</span> Avantages de Spring</h2>
+<ul>
+<li><strong>Gestion simplifiée des dépendances</strong> : Spring gère automatiquement l’assemblage des composants de l’application.</li>
+<li><strong>Modularité et testabilité</strong> : Les composants sont faiblement couplés, ce qui facilite les tests unitaires.</li>
+<li><strong>Configurations centralisées</strong> : Les configurations sont centralisées et peuvent être définies à l’aide de fichiers XML, d’annotations ou de classes Java.</li>
+<li><strong>Large écosystème</strong> : Spring offre une large gamme de projets pour différents besoins (<a href="https://docs.spring.io/spring-boot/index.html">Spring Boot</a>, Spring Data, Spring Security, etc.).</li>
+</ul>
+</section>
+<section id="exemple-dutilisation-de-spring-ioc" class="level2 smaller" data-number="3.2">
+<h2 class="smaller anchored" data-number="3.2" data-anchor-id="exemple-dutilisation-de-spring-ioc"><span class="header-section-number">3.2</span> Exemple d’utilisation de Spring IoC</h2>
+<p>Voici un exemple simple de configuration de Spring à l’aide de l’annotation <code>@Component</code> et de l’injection de dépendance via <code>@Autowired</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Component</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> StudentService <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> StudentRepository studentRepository<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Autowired</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">StudentService</span><span class="op">(</span>StudentRepository studentRepository<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">studentRepository</span> <span class="op">=</span> studentRepository<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">registerStudent</span><span class="op">(</span><span class="bu">String</span> student<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ... business logic</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        studentRepository<span class="op">.</span><span class="fu">saveStudent</span><span class="op">(</span>student<span class="op">);</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ...</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Repository</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> StudentRepository <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> Optional<span class="op">&lt;</span>Student<span class="op">&gt;</span> <span class="fu">findById</span><span class="op">(</span><span class="dt">int</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Autres méthodes d'accès aux données</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Spring gère la création de <code>StudentService</code> et de <code>StudentRepository</code>, ainsi que l’injection de <code>StudentRepository</code> dans <code>StudentService</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>@Repository</code> est une spécialisation de l’annotation <code>@Component</code>. Elle permet d’indiquer que la classe gère l’accès aux données (DAO).</p>
+</div>
+</div>
+</section>
+<section id="classe-principale" class="level2 smaller" data-number="3.3">
+<h2 class="smaller anchored" data-number="3.3" data-anchor-id="classe-principale"><span class="header-section-number">3.3</span> Classe principale</h2>
+<ul>
+<li>l’<code>ApplicationContext</code> contient tous les objets (<strong>bean</strong>) créés</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">context</span><span class="op">.</span><span class="im">ApplicationContext</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">context</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">AnnotationConfigApplicationContext</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> MainApplication <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// AnnotationConfig =&gt; les injections se font par annotation</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        ApplicationContext context <span class="op">=</span> <span class="kw">new</span> <span class="fu">AnnotationConfigApplicationContext</span><span class="op">(</span>SpringConfig<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        StudentService studentService <span class="op">=</span> context<span class="op">.</span><span class="fu">getBean</span><span class="op">(</span>StudentService<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        studentService<span class="op">.</span><span class="fu">registerStudent</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">);</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La création du contexte référence une configuration. La configuration peut se faire :</p>
+<ul>
+<li>par “scanning” des annotations <code>@Component</code>,</li>
+<li>ou par déclaration explicite <code>@Bean</code>.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">@Configuration</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">@ComponentScan</span><span class="op">(</span>basePackages <span class="op">=</span> <span class="st">"org.efrei.altn72.cm5"</span><span class="op">)</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> AppConfig <span class="op">{</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Bean défini manuellement avec le nom "primaryDataSource"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Bean</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">DataSource</span> <span class="fu">primaryDataSource</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">var</span> dsBuilder <span class="op">=</span> DataSourceBuilder<span class="op">.</span><span class="fu">create</span><span class="op">();</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    dsBuilder<span class="op">.</span><span class="fu">driverClassName</span><span class="op">(</span><span class="st">"org.h2.Driver"</span><span class="op">);</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    dsBuilder<span class="op">.</span><span class="fu">url</span><span class="op">(</span><span class="st">"jdbc:h2:mem:test"</span><span class="op">);</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    dsBuilder<span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"SA"</span><span class="op">);</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    dsBuilder<span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">""</span><span class="op">);</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dsBuilder<span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Autre bean manuel avec dépendance sur "primaryDataSource"</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Spring va d'abord chercher un bean du type "DataSource".</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// S'il y en a plusieurs, il va ensuite chercher par le nom "primaryDataSource".</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Bean</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> GradeService <span class="fu">databaseService</span><span class="op">(</span><span class="bu">DataSource</span> primaryDataSource<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">new</span> <span class="fu">GradeService</span><span class="op">(</span>primaryDataSource<span class="op">);</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="spring-aop" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Spring AOP</h1>
+<section id="introduction" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">4.1</span> Introduction</h2>
+<p>L’<strong>Aspect Oriented Programming</strong> permet de séparer le code qui s’applique de manière transversale de la logique métier. On parle de “<strong>Cross-Cutting concerns</strong>”. Par exemple :</p>
+<ul>
+<li>logging</li>
+<li>sécurité</li>
+<li>transactions</li>
+<li>gestion des erreurs</li>
+<li>caching</li>
+</ul>
+<p>L’objectif est d’éviter de polluer le code métier avec ces préoccupations techniques, et de factoriser le code commun.</p>
+<p>Il existe plusieurs technologies permettant de l’implémenter: <strong>AspectJ</strong>, <strong>Spring AOP</strong>, JBoss AOP. Spring AOP n’a pas pour objectif d’implémenter AOP de manière exhaustive. Son but est d’avoir une bonne intégration entre Spring IoC et Spring AOP pour résoudre des problèmes récurrents dans le développement d’applications d’entreprise.</p>
+</section>
+<section id="terminologie" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="terminologie"><span class="header-section-number">4.2</span> Terminologie</h2>
+<ul>
+<li><strong>Aspect</strong> : le module contenant la préoccupation transversale</li>
+<li><strong>Join Point</strong> : point d’exécution dans l’application (appel de méthode, construction d’objet…)</li>
+<li><strong>Pointcut</strong> : expression qui sélectionne les <em>join points</em> où appliquer l’<em>aspect</em></li>
+<li><strong>Advice</strong> : l’action à exécuter (le code de l’aspect)</li>
+<li><strong>Weaving</strong> : le processus d’application des aspects au code</li>
+</ul>
+</section>
+<section id="exemple" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="exemple"><span class="header-section-number">4.3</span> Exemple</h2>
+<p>Exemple d’aspect qui va ajouter des logs pour toutes les méthodes d’un package :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Aspect</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">@Component</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> LoggingAspect <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Pointcut</span><span class="op">(</span><span class="st">"execution(public * org.efrei.altn72.cm5.service.*.*(..))"</span><span class="op">)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">allServiceMethods</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Before</span><span class="op">(</span><span class="st">"allServiceMethods()"</span><span class="op">)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">logBefore</span><span class="op">(</span>JoinPoint joinPoint<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Before method: "</span> <span class="op">+</span> joinPoint<span class="op">.</span><span class="fu">getSignature</span><span class="op">().</span><span class="fu">getName</span><span class="op">());</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Aspect : Logging</li>
+<li>Join Points : l’exécution de toutes les méthodes publiques du package <code>service</code></li>
+<li>Advice : <code>logBefore</code></li>
+<li>Weaving : Spring AOP utilise l’un de ces deux mécanismes pour injecter le code :
+<ul>
+<li>les “dynamic proxies” du JDK si les <em>join point</em> sont sur les interfaces</li>
+<li>les proxies CGLIB pour les classes</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/aop-proxy-call.png" class="img-fluid figure-img"></p>
+<figcaption>Proxy Call</figcaption>
+</figure>
+</div>
+</section>
+<section id="utilisation" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="utilisation"><span class="header-section-number">4.4</span> Utilisation</h2>
+<p>Il est rare de devoir implémenter ses propres Aspects. En général, nous allons utiliser des aspects d’une bibliothèque pour implémenter nos “cross-cutting concerns”.</p>
+<p>Afin de pouvoir identifier facilement le code modifié par AOP, les bibliothèques utilisent en géneral une <strong>annotation</strong> spécifique, qui sera utilisée dans le <em>Poincut</em>.</p>
+<p>Par exemple, l’annotation <code>@Transactional</code> permet de s’assurer pour que pour chaque méthode :</p>
+<ul>
+<li>une transaction sera présente (on peut forcer la recréation avec <code>REQUIRES_NEW</code>) avant l’exécution</li>
+<li>et qu’un commit ou un rollback (en cas d’exception) aura lieu à la fin</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Transactional</span><span class="op">(</span>readOnly <span class="op">=</span> <span class="kw">true</span><span class="op">)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DefaultUserService <span class="kw">implements</span> UserService <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> User <span class="fu">getUser</span><span class="op">(</span><span class="bu">String</span> userName<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ...</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// these settings have precedence for this method</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Transactional</span><span class="op">(</span>readOnly <span class="op">=</span> <span class="kw">false</span><span class="op">,</span> propagation <span class="op">=</span> Propagation<span class="op">.</span><span class="fu">REQUIRES_NEW</span><span class="op">)</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">updateUser</span><span class="op">(</span>User user<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ...</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="spring-boot" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Spring Boot</h1>
+<p>Spring Boot est une bibliothèque qui facilite l’utilisation de Spring et d’autres bibliothèques pour développer des applications d’entreprise. Elle propose une approche avec des choix bien définis. Elle privilégie l’approche <strong>“convention over configuration”</strong>.</p>
+<section id="activité-hello-world" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="activité-hello-world"><span class="header-section-number">5.1</span> Activité : Hello World</h2>
+<p>Nous allons créer une application Spring Boot “Hello World”. Elle possèdera un seul endpoint <code>GET /</code> qui renvoie une page “Hello World”.</p>
+<ol type="1">
+<li>Dans IntelliJ, créez un nouveau projet :</li>
+</ol>
+<ul>
+<li>File -&gt; New -&gt; Project -&gt; Spring Boot</li>
+<li>choisir Type: Maven</li>
+<li>Dependencies : cocher Web/Spring Web</li>
+</ul>
+<ol start="2" type="1">
+<li>Créez ensuite une nouvelle classe <code>HelloApplication</code> et collez le code suivant :</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">boot</span><span class="op">.</span><span class="im">SpringApplication</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">boot</span><span class="op">.</span><span class="im">autoconfigure</span><span class="op">.</span><span class="im">SpringBootApplication</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">GetMapping</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">RestController</span><span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">@RestController</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">@SpringBootApplication</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> HelloApplication <span class="op">{</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/"</span><span class="op">)</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">String</span> <span class="fu">home</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Hello World!"</span><span class="op">;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        SpringApplication<span class="op">.</span><span class="fu">run</span><span class="op">(</span>MyApplication<span class="op">.</span><span class="fu">class</span><span class="op">,</span> args<span class="op">);</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Démarrez l’application</li>
+</ol>
+<pre><code>...
+2025-11-24T20:28:45.802+01:00  INFO 26716 --- [spring_boot_demo] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2025-11-24T20:28:45.806+01:00  INFO 26716 --- [spring_boot_demo] [           main] o.e.a.spring_boot_demo.MyApplication     : Started MyApplication in 1.652 seconds (process running for 2.535)</code></pre>
+<ol start="4" type="1">
+<li>Testez l’endpoint avec <a href="http://localhost:8080">http://localhost:8080</a></li>
+</ol>
+<p>Nous observons les annotations suivantes :</p>
+<ul>
+<li><code>@RestController</code> (voir source) est une annotation composée avec :
+<ul>
+<li><code>@Controller</code>, qui est une spécialisation de <code>@Component</code>
+<ul>
+<li>Elle permet d’identifier les contrôlleurs dans le modèle MVC. Cela permet de “mapper” des URLs sur des méthodes de la classe.</li>
+<li>Nous avons vu que <code>@Component</code> était l’annotation Spring de base pour déclarer des “beans”.</li>
+</ul></li>
+<li><code>@ResponseBody</code>: indique que les types de retour de méthodes seront transformés en JSON ou XML</li>
+</ul></li>
+<li><code>@SpringBootApplication</code> (voir source) est une annotation composite qui équivaut à déclarer ces 3 annotations :
+<ul>
+<li><code>@SpringBootConfiguration</code> : spécialisation de <code>@Configuration</code>. Dans Spring Boot, on ne doit avoir qu’<strong>une</strong> seule classe annotée <code>@SpringBootConfiguration</code>.</li>
+<li><code>@EnableAutoConfiguration</code> : dit à Spring Boot de “deviner” comment vous voulez configurer Spring, en fonction des dépendances ajoutées. Comme nous avons ajouté <code>spring-boot-starter-webmvc</code> dans notre <code>pom.xml</code>, Spring sait que nous voulons développer une application web utilisant Tomcat. Si HSQLDB est dans votre classpath et que vous n’avez pas configuré de connection, Spring Boot va auto-configurer une bdd “in-memory”.</li>
+<li><code>@ComponentScan</code> : voir ci-dessus</li>
+</ul></li>
+<li><code>@GetMapping</code> sur les méthodes est un raccourci, qui équivaut à
+<ul>
+<li><code>@RequestMapping(method = RequestMethod.GET)</code>. Cela signifie que Spring va “mapper” la requête HTTP GET sur la méthode.</li>
+</ul></li>
+</ul>
+</section>
+<section id="activité-application-customers" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="activité-application-customers"><span class="header-section-number">5.2</span> Activité : application Customers</h2>
+<p>Nous allons maintenant créer une nouvelle application <code>CustomersAplication</code>. Elle possède deux endpoints REST permettant de créer (POST) et récupérer (GET) des clients.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">boot</span><span class="op">.</span><span class="im">SpringApplication</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">boot</span><span class="op">.</span><span class="im">autoconfigure</span><span class="op">.</span><span class="im">SpringBootApplication</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">http</span><span class="op">.</span><span class="im">HttpStatus</span><span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">http</span><span class="op">.</span><span class="im">ResponseEntity</span><span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.*;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">server</span><span class="op">.</span><span class="im">ResponseStatusException</span><span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Map</span><span class="op">;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">concurrent</span><span class="op">.</span><span class="im">ConcurrentHashMap</span><span class="op">;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">concurrent</span><span class="op">.</span><span class="im">atomic</span><span class="op">.</span><span class="im">AtomicInteger</span><span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="kw">record</span> <span class="fu">CustomerDto</span><span class="op">(</span><span class="dt">int</span> id<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="kw">record</span> <span class="fu">CreateCustomerDto</span><span class="op">(</span><span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="at">@RestController</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="at">@SpringBootApplication</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/customers"</span><span class="op">)</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> CustomersApplication <span class="op">{</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">Map</span><span class="op">&lt;</span><span class="bu">Integer</span><span class="op">,</span> CustomerDto<span class="op">&gt;</span> customers <span class="op">=</span> <span class="kw">new</span> <span class="bu">ConcurrentHashMap</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">AtomicInteger</span> idGenerator <span class="op">=</span> <span class="kw">new</span> <span class="bu">AtomicInteger</span><span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/{id}"</span><span class="op">)</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    CustomerDto <span class="fu">getCustomer</span><span class="op">(</span><span class="at">@PathVariable</span> <span class="dt">int</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>        <span class="dt">var</span> result <span class="op">=</span> customers<span class="op">.</span><span class="fu">get</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>result <span class="op">==</span> <span class="kw">null</span><span class="op">)</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">throw</span> <span class="kw">new</span> <span class="fu">ResponseStatusException</span><span class="op">(</span>HttpStatus<span class="op">.</span><span class="fu">NOT_FOUND</span><span class="op">,</span> <span class="st">"Customer not found with id: "</span> <span class="op">+</span> id<span class="op">);</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">@PostMapping</span><span class="op">()</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    ResponseEntity<span class="op">&lt;</span>CustomerDto<span class="op">&gt;</span> <span class="fu">createCustomer</span><span class="op">(</span><span class="at">@RequestBody</span> CreateCustomerDto customer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> newId <span class="op">=</span> idGenerator<span class="op">.</span><span class="fu">incrementAndGet</span><span class="op">();</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>        CustomerDto newCustomer <span class="op">=</span> <span class="kw">new</span> <span class="fu">CustomerDto</span><span class="op">(</span>newId<span class="op">,</span> customer<span class="op">.</span><span class="fu">name</span><span class="op">());</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>        customers<span class="op">.</span><span class="fu">put</span><span class="op">(</span>newId<span class="op">,</span> newCustomer<span class="op">);</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ResponseEntity</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>                <span class="op">.</span><span class="fu">status</span><span class="op">(</span>HttpStatus<span class="op">.</span><span class="fu">CREATED</span><span class="op">)</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>                <span class="op">.</span><span class="fu">body</span><span class="op">(</span>newCustomer<span class="op">);</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>        SpringApplication<span class="op">.</span><span class="fu">run</span><span class="op">(</span>CustomersApplication<span class="op">.</span><span class="fu">class</span><span class="op">,</span> args<span class="op">);</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Démarrez le programme, puis testez l’application avec le client HTTP d’IntelliJ. Observations :</p>
+<ul>
+<li>dans les annotations <code>@XXXMapping</code>, le chemin peut comporter des variables <code>{id}</code>. Elles sont “mappées” sur les paramètres de méthodes avec <code>@PathVariable</code>.</li>
+<li>le “body” de la requête HTTP est mappé en utilisant <code>@RequestBody</code></li>
+<li>on peut contrôler les codes retours HTTP de deux façons :
+<ul>
+<li>lancer une exception <code>ResponseStatusException</code></li>
+<li>changer le type de retour en <code>ResponseEntity&lt;?&gt;</code></li>
+</ul></li>
+<li>comparez les annotations Spring avec les annotations Jakarta EE</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Spring supporte certaines annotations Jakarta EE :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 64%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Spring</th>
+<th>Jakarta EE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="citation" data-cites="Autowired">@Autowired</span></td>
+<td><span class="citation" data-cites="Inject">@Inject</span></td>
+</tr>
+<tr class="even">
+<td><span class="citation" data-cites="Component">@Component</span> <span class="citation" data-cites="Qualifier">@Qualifier</span></td>
+<td><span class="citation" data-cites="Named">@Named</span></td>
+</tr>
+<tr class="odd">
+<td>Bean validation annotations <span class="citation" data-cites="NotNull">@NotNull</span>, <span class="citation" data-cites="Email">@Email</span>, <span class="citation" data-cites="Size">@Size</span>, …</td>
+<td>Bean validation annotations</td>
+</tr>
+<tr class="even">
+<td>JPA annotations <span class="citation" data-cites="Entity">@Entity</span> <span class="citation" data-cites="Id">@Id</span>, …</td>
+<td>JPA annotations</td>
+</tr>
+</tbody>
+</table>
+<p>Pour la validation et JPA, la pratique est d’utiliser les annotations Jakarta EE. Pour l’injection et REST, les projets utilisent en général les annotations Spring.</p>
+</div>
+</div>
+</section>
+<section id="externalisation-de-la-configuration" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="externalisation-de-la-configuration"><span class="header-section-number">5.3</span> Externalisation de la configuration</h2>
+<p>Spring Boot offre la possibilité d’externaliser la configuration de l’application. Cela permet d’utiliser le même code en DEV, QA, PROD, mais avec des fichiers de configuration différents. Voir <a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">Externalized Configuration</a></p>
+<section id="avec-value" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="avec-value"><span class="header-section-number">5.3.1</span> Avec <span class="citation" data-cites="Value">@Value</span></h3>
+<p>Par exemple, nous pouvons modifier notre application pour configurer le premier identifiant généré :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="at">@RestController</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">@SpringBootApplication</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/customers"</span><span class="op">)</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> CustomersApplication <span class="op">{</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Value</span><span class="op">(</span><span class="st">"${customers.data.initialId}"</span><span class="op">)</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> initId<span class="op">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">AtomicInteger</span> idGenerator <span class="op">=</span> <span class="kw">new</span> <span class="bu">AtomicInteger</span><span class="op">(</span>initId<span class="op">);</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La valeur peut être passée à l’application de plusieurs façons :</p>
+<ol type="1">
+<li>Dans un fichier application.properties</li>
+</ol>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>application.properties</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13" data-filename="application.properties"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>customers<span class="op">.</span><span class="fu">data</span><span class="op">.</span><span class="fu">initialId</span><span class="op">=</span><span class="dv">11</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Dans un fichier <code>application.yaml</code></li>
+<li>En ligne de commande : <code>java -jar customers.jar --customers.data.initialId=11</code></li>
+</ol>
+</section>
+<section id="avec-configurationproperties" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="avec-configurationproperties"><span class="header-section-number">5.3.2</span> Avec <span class="citation" data-cites="ConfigurationProperties">@ConfigurationProperties</span></h3>
+<p>L’utilisation de <code>@Value</code> peut parfois être fragile, car le nom de la clé n’est pas validé à la compilation. L’annotation <code>@ConfigurationProperties</code> sur une classe permet d’injecter les propriétés en utilisant des attributs. C’est particulièrement pertinent lorsque la configuration est hiérarchique.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="at">@ConfigurationProperties</span><span class="op">(</span><span class="st">"customers.data"</span><span class="op">)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> CustomersProperties <span class="op">{</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> initialId<span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getInitialId</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> initialId<span class="op">;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setInitialId</span><span class="op">(</span><span class="dt">int</span> initialId<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">initialId</span> <span class="op">=</span> initialId<span class="op">;</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span>    </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="at">@RestController</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="at">@SpringBootApplication</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/customers"</span><span class="op">)</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="at">@EnableConfigurationProperties</span><span class="op">(</span>CustomersProperties<span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> CustomersApplication <span class="op">{</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> CustomersProperties properties<span class="op">;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">CustomersApplication</span><span class="op">(</span>CustomersProperties properties<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">properties</span> <span class="op">=</span> properties<span class="op">;</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        idGenerator <span class="op">=</span> <span class="kw">new</span> <span class="bu">AtomicInteger</span><span class="op">(</span>properties<span class="op">.</span><span class="fu">getInitialId</span><span class="op">());</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">//... </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="spring-boot-starters" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="spring-boot-starters"><span class="header-section-number">5.4</span> Spring Boot starters</h2>
+<p>Les dépendances <strong>“starter”</strong> sont des regroupements de bibliothèques qui permettent facilement d’utiliser une technologie. Par exemple si vous souhaitez utiliser JPA pour accéder à une base de données, il faut ajouter la dépendance <code>spring-boot-starter-data-jpa</code> dans le <code>pom.xml</code>.</p>
+<p>Spring Boot offre une panoplie de dépendances starter : <a href="https://docs.spring.io/spring-boot/reference/using/build-systems.html#using.build-systems.starters">Spring Boot Starters</a>, mais d’autres fournisseurs en proposent également.</p>
+<p>Par exemple, pour une application REST en production, nous pourrons ajouter :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">groupId</span>&gt;org.springframework.boot&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">artifactId</span>&gt;spring-boot-starter-actuator&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">dependency</span>&gt;</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">groupId</span>&gt;org.springdoc&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">artifactId</span>&gt;springdoc-openapi-starter-webmvc-ui&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">version</span>&gt;2.8.14&lt;/<span class="kw">version</span>&gt;</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">dependency</span>&gt;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><strong>Actuator</strong> permet de surveiller l’application. La dépendance permet de collecter des métriques pour vérifier qu’elle est en bonne santé.
+<ul>
+<li>Des endpoints sont exposés pour inspecter les beans, les endpoints REST, l’espace disque, l’occupation mémoire, …</li>
+<li>Voir <a href="https://docs.spring.io/spring-boot/reference/actuator/endpoints.html">Actuator endpoints</a></li>
+<li>Pour des raisons de sécurité, la plupart sont désactivés par défaut. En production, vous devrez protéger les endpoints pour les rendre uniquement accessibles aux équipes opérationnelles.</li>
+<li>D’autres “starter” peuvent être utilisés pour offrir une interface d’administration utilisant les actuator, comme <a href="https://docs.spring-boot-admin.com/3.5.6/docs/index">Spring Boot Admin</a>.</li>
+</ul></li>
+<li><strong>Springdoc</strong> permet d’exposer l’API avec Swagger, voir <a href="http://localhost:8080/swagger-ui">http://localhost:8080/swagger-ui</a></li>
+</ul>
+<section id="décortiquons-un-starter" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="décortiquons-un-starter"><span class="header-section-number">5.4.1</span> Décortiquons un starter</h3>
+<p>🪄 Spring Boot a ce côté un peu “magique”, où des choses se mettent à fonctionner ou pas en fonction des annotations et des dépendances. La documentation est à consulter en priorité, mais il est important de savoir naviguer dans le code source pour comprendre ce qu’il se passe.</p>
+<p>Un starter est simplement un fichier <code>pom.xml</code> qui agrège plusieurs dépendances.</p>
+<ol type="1">
+<li>Ctrl-Clic sur la dépendance <code>spring-boot-starter-webmvc</code> dans votre <code>pom.xml</code></li>
+<li>Vous arrivez sur le <code>pom.xml</code> du starter. Il contient des dépendances sur tomcat, spring-boot-webmvc, …</li>
+</ol>
+<p>Observons maintenant comment Tomcat est “autoconfiguré” avec le port 8080 :</p>
+<ol type="1">
+<li>Depuis IntelliJ, aller dans la bibliothèque <code>spring-boot-tomcat-4.0.0.jar</code></li>
+<li>Ouvrez <code>META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports</code>. Ce fichier porte un nom spécial et est lu par Spring Boot.</li>
+<li>Ce fichier contient une liste de classes annotées <code>@AutoConfiguration</code></li>
+<li>Ouvrez <code>TomcatServletWebServerAutoConfiguration</code>.
+<ul>
+<li>L’annotation <code>@ConditionalOnClass</code> indique que cette auto-configuration n’est activée que si certaines classes sont présentes sur le classpath.</li>
+<li>Elle déclare un bean de type <code>TomcatServletWebServerFactory</code></li>
+<li>Ouvrons cette classe. On voit que le port est déclaré dans la super-classe <code>AbstractConfigurableWebServerFactory</code> avec <code>private int port = 8080</code></li>
+</ul></li>
+</ol>
+<p>Si on souhaite changer le port, la lecture du code source nous montre plusieurs possibilités :</p>
+<ol type="1">
+<li>Le bean <code>tomcatServletWebServerFactory</code> est <code>@ConditionalOnMissingBean(value = ServletWebServerFactory.class, ...)</code>. Cela signifie que l’on pourrait déclarer ce bean dans notre application pour le configurer différemment.</li>
+<li>On voit que <code>TomcatServletWebServerAutoConfiguration</code> importe <code>ServletWebServerConfiguration</code>
+<ul>
+<li>Dans <code>ServletWebServerConfiguration</code>, un bean <code>ServletWebServerFactoryCustomizer</code> est créé</li>
+<li>le <code>ServletWebServerFactoryCustomizer</code> a une méthode <code>customize</code>, qui récupère le port depuis <code>this.serverProperties::getPort</code></li>
+<li><code>ServerProperties</code> a une annotation <code>@ConfigurationProperties("server")</code></li>
+<li>Cela signifie que ce bean est configuré avec un fichier <code>.properties</code>. Pour changer le port, il faut donc modifier <code>application.properties</code> et ajouter <code>server.port=8081</code>.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="tests" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="tests"><span class="header-section-number">5.5</span> Tests</h2>
+<ul>
+<li>Spring fournit une annotation <code>@SpringBootTest</code>, qui permet de charger le contexte complet, en cherchant la classe annotée <code>@SpringBootApplication</code>. Mais pour la plupart des tests, c’est trop. Elle est à réserver pour les tests d’intégration qui ont besoin de tous les beans.</li>
+<li>Pour le code métier, créer les services en utilisant le constructeur, et/ou utiliser un framework de mocking.</li>
+<li>Pour tester certaines couches de l’application, il existe des annotation spéciales :
+<ul>
+<li><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html#testing.spring-boot-applications.spring-mvc-tests"><code>@WebMvcTest</code></a> pour les contrôlleurs REST</li>
+<li><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html#testing.spring-boot-applications.autoconfigured-spring-data-jpa"><code>@DataJpaTest</code></a> pour la persistance JPA</li>
+</ul></li>
+</ul>
+<p>Voir <a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">Testing Spring Boot Applications</a> pour plus de détails.</p>
+</section>
+<section id="persistance" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="persistance"><span class="header-section-number">5.6</span> Persistance</h2>
+<p>Le starter <code>spring-boot-starter-data-jpa</code> fournit :</p>
+<ul>
+<li>Hibernate</li>
+<li>Spring Data JPA : facilite l’implémentation des classes Repository</li>
+<li>Spring ORM : support pour les ORM dans Spring. Gère la création de l’<code>EntityManager</code>.</li>
+</ul>
+<section id="repository" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="repository"><span class="header-section-number">5.6.1</span> Repository</h3>
+<p>Nous pouvons créer des requêtes auto-générées grâce au nom des méthodes (<a href="https://docs.spring.io/spring-data/commons/reference/repositories/query-methods.html">Query Methods</a>). Lorsqu’une interface hérite de <code>Repository&lt;T, ID&gt;</code>, le <strong>nom</strong> des méthodes déclarées indique à Spring quelle requête il doit construire, grâce à une convention. 🧙‍♂️</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> CityRepository <span class="kw">extends</span> Repository<span class="op">&lt;</span>City<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    Page<span class="op">&lt;</span>City<span class="op">&gt;</span> <span class="fu">findAll</span><span class="op">(</span><span class="bu">Pageable</span> pageable<span class="op">);</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Spring va automagiquement générer une requête </span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// "SELECT c FROM City WHERE UPPER(c.name) = UPPER(?1) AND UPPER(c.state = ?2)"</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    City <span class="fu">findByNameAndStateAllIgnoringCase</span><span class="op">(</span><span class="bu">String</span> name<span class="op">,</span> <span class="bu">String</span> state<span class="op">);</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Voir <a href="https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html#jpa.query-methods.query-creation">Query Creation</a> pour la liste des mots-clés supportés.</p>
+<p>Des interfaces par défaut pour les cas courants sont fournies, comme <a href="https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html"><code>CrudRepository</code></a>.</p>
+</section>
+<section id="query" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="query"><span class="header-section-number">5.6.2</span> <span class="citation" data-cites="Query">@Query</span></h3>
+<p>Nous avions vu dans le TP JPA les annotations <code>@NamedQuery</code> que nous pouvions ajouter sur les <code>@Entity</code>. L’approche atteint vite ses limites lorsque le nombre et la complexité des requêtes augmente.</p>
+<p>Afin de mieux organiser notre code, il est préférable d’ajouter nos requêtes JPA dans une interface qui hérite de <code>JpaRepository</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Query</span><span class="op">(</span><span class="st">"select u from User u where u.emailAddress = ?1"</span><span class="op">)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    User <span class="fu">findByEmailAddress</span><span class="op">(</span><span class="bu">String</span> emailAddress<span class="op">);</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">@NativeQuery</span><span class="op">(</span>value <span class="op">=</span> <span class="st">"SELECT * FROM USERS WHERE EMAIL_ADDRESS = ?1"</span><span class="op">)</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    User <span class="fu">findByEmailAddressNative</span><span class="op">(</span><span class="bu">String</span> emailAddress<span class="op">);</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// on peut nommer les paramètres en utilisant @Param</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Modifying</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Query</span><span class="op">(</span><span class="st">"UPDATE User u SET u.status = :status WHERE u.id = :userId"</span><span class="op">)</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="fu">updateUserStatus</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"userId"</span><span class="op">)</span> <span class="bu">Long</span> userId<span class="op">,</span> <span class="at">@Param</span><span class="op">(</span><span class="st">"status"</span><span class="op">)</span> <span class="bu">String</span> status<span class="op">);</span>    </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<!--
+TODO lien, TODO regarder si l'IDE détecte les incohérences dans les repository
+TP : continuer billetterie en REST. Proposer une organisation en package.
+- parler des static content => projet
+-->
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

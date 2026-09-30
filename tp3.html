@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TP3 - API REST avec Jakarta EE – ALTN72 Développement Full Stack avec Java</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">TP3 - API REST avec Jakarta EE</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ALTN72 Développement Full Stack avec Java</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM1 - Histoire des méthodologies de développement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM2 - Clean Code &amp; Architecture</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TPs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tp1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP1 - Extreme Programming</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#installation" id="toc-installation" class="nav-link active" data-scroll-target="#installation"><span class="header-section-number">1</span> Installation</a></li>
+  <li><a href="#démarrage" id="toc-démarrage" class="nav-link" data-scroll-target="#démarrage"><span class="header-section-number">2</span> Démarrage</a></li>
+  <li><a href="#application-hello-world" id="toc-application-hello-world" class="nav-link" data-scroll-target="#application-hello-world"><span class="header-section-number">3</span> Application Hello World</a>
+  <ul class="collapse">
+  <li><a href="#premier-déploiement" id="toc-premier-déploiement" class="nav-link" data-scroll-target="#premier-déploiement"><span class="header-section-number">3.1</span> Premier déploiement</a></li>
+  <li><a href="#extraire-des-informations-de-la-requête" id="toc-extraire-des-informations-de-la-requête" class="nav-link" data-scroll-target="#extraire-des-informations-de-la-requête"><span class="header-section-number">3.2</span> Extraire des informations de la requête</a></li>
+  </ul></li>
+  <li><a href="#application-customer" id="toc-application-customer" class="nav-link" data-scroll-target="#application-customer"><span class="header-section-number">4</span> Application Customer</a>
+  <ul class="collapse">
+  <li><a href="#premier-déploiement-1" id="toc-premier-déploiement-1" class="nav-link" data-scroll-target="#premier-déploiement-1"><span class="header-section-number">4.1</span> Premier déploiement</a></li>
+  <li><a href="#tester-les-endpoints" id="toc-tester-les-endpoints" class="nav-link" data-scroll-target="#tester-les-endpoints"><span class="header-section-number">4.2</span> Tester les endpoints</a></li>
+  <li><a href="#read-endpoint-get-apicustomersid" id="toc-read-endpoint-get-apicustomersid" class="nav-link" data-scroll-target="#read-endpoint-get-apicustomersid"><span class="header-section-number">4.3</span> Read: Endpoint GET /api/customers/{id}</a></li>
+  <li><a href="#create-endpoint-post-apicustomers" id="toc-create-endpoint-post-apicustomers" class="nav-link" data-scroll-target="#create-endpoint-post-apicustomers"><span class="header-section-number">4.4</span> Create : Endpoint POST /api/customers</a></li>
+  <li><a href="#delete-endpoint-delete-apicustomersid" id="toc-delete-endpoint-delete-apicustomersid" class="nav-link" data-scroll-target="#delete-endpoint-delete-apicustomersid"><span class="header-section-number">4.5</span> Delete : Endpoint DELETE /api/customers/{id}</a></li>
+  <li><a href="#update-endpoint-put-apicustomersid" id="toc-update-endpoint-put-apicustomersid" class="nav-link" data-scroll-target="#update-endpoint-put-apicustomersid"><span class="header-section-number">4.6</span> Update : Endpoint PUT /api/customers/{id}</a></li>
+  <li><a href="#validation" id="toc-validation" class="nav-link" data-scroll-target="#validation"><span class="header-section-number">4.7</span> Validation</a></li>
+  <li><a href="#update-partiel-endpoint-patch-apicustomersid" id="toc-update-partiel-endpoint-patch-apicustomersid" class="nav-link" data-scroll-target="#update-partiel-endpoint-patch-apicustomersid"><span class="header-section-number">4.8</span> Update partiel : Endpoint PATCH /api/customers/{id}</a></li>
+  <li><a href="#refactoring" id="toc-refactoring" class="nav-link" data-scroll-target="#refactoring"><span class="header-section-number">4.9</span> Refactoring</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TP3 - API REST avec Jakarta EE</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="installation" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Installation</h1>
+<ol type="1">
+<li>Ajoutez la variable d’environnement JAVA_HOME, et pointez là sur un JDK &gt;= 17</li>
+<li>Installez Glassfish, server, Web Profile : <a href="https://glassfish.org/download.html" class="uri">https://glassfish.org/download.html</a>
+<ul>
+<li>Il existe plusieurs distributions, appelés “Profile”.
+<ul>
+<li>Du plus simple au plus complet : Core / Web / Platform. Voir <a href="https://jakarta.ee/learn/docs/jakartaee-tutorial/current/intro/overview/overview.html#_service_specification_profile">Jakarta EE Services</a>.</li>
+<li>Nous avons besoin des “RESTful web services” et de “Jakarta persistence”, donc nous choisirons le profile <strong>Web</strong></li>
+</ul></li>
+<li>Nous utiliserons la version standard <em>server</em>, qui permet de démarrer un serveur d’application sur lequel nous déploierons notre application.
+<ul>
+<li>Il existe également une version <em>embedded</em>, lorsque l’on souhaite utiliser glassfish comme bibliothèque à intégrer dans un serveur existant.</li>
+</ul></li>
+</ul></li>
+</ol>
+</section>
+<section id="démarrage" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Démarrage</h1>
+<ol type="1">
+<li>Lancez une invite de commandes, puis allez (<code>cd</code>) dans le répertoire <code>glassfish7/bin</code></li>
+<li>Exécutez <code>startserv.bat</code></li>
+<li>Testez l’installation : <a href="http://localhost:8080/" class="uri">http://localhost:8080/</a>
+<ul>
+<li>Vous devriez voir une page “Your server is now running”.</li>
+</ul></li>
+<li>Lancez la console d’administration : <a href="http://localhost:4848" class="uri">http://localhost:4848</a>
+<ul>
+<li>Explorez les différents menus.</li>
+<li>Pouvez-vous expliquer ce qu’est un “JDBC Connection pool” ?</li>
+<li>Pourquoi aurions-nous besoin d’un pool ?</li>
+</ul></li>
+</ol>
+</section>
+<section id="application-hello-world" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Application Hello World</h1>
+<section id="premier-déploiement" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="premier-déploiement"><span class="header-section-number">3.1</span> Premier déploiement</h2>
+<p>Nous allons créer une application simple et la déployer sur notre serveur Glassfish.</p>
+<ol type="1">
+<li>Dans IntelliJ, File -&gt; New -&gt; Project -&gt; Jakarta EE</li>
+<li>name: tp3_hello, location : &lt;à votre convenance&gt;, Template: REST service, No application server, group: org.efrei.altn72, artifact: tp3_hello</li>
+<li>Dependencies: CDI, RESTful, Servlet</li>
+</ol>
+<p>IntelliJ crée un squelette d’application, qui contient un seul <strong>endpoint</strong> <code>GET /api/hello-world</code></p>
+<ol start="4" type="1">
+<li>Naviguez dans les fichiers sources générés.</li>
+</ol>
+<ul>
+<li><strong>Question :</strong> Pourquoi est-ce que le <strong>path</strong> complet du endpoint est <code>/api/hello-world</code> ?</li>
+<li><strong>Question :</strong> Quel est le <strong>MIME type</strong> renvoyé ? (voir <a href="https://stackoverflow.com/questions/3828352/what-is-a-mime-type">What is a MIME type</a>)</li>
+</ul>
+<ol start="5" type="1">
+<li>Compilez et packagez l’application. Dans IntelliJ, icônes en haut à droite -&gt; <strong>m</strong>aven -&gt; Lifefycle -&gt; package
+<ul>
+<li>Dans la console, vous devriez voir <code>Building war: C:\...\tp3_hello-1.0-SNAPSHOT.war</code></li>
+</ul></li>
+<li>Dans l’interface d’administration de Glassfish, allez dans Applications -&gt; Deploy -&gt; Local packaged file -&gt; coller le chemin vers votre .war
+<ul>
+<li>Context root: <strong>hello</strong></li>
+<li>Laisser le reste par défaut, puis cliquez sur Save.</li>
+</ul></li>
+<li>Testez l’application : <a href="http://localhost:8080/hello/api/hello-world" class="uri">http://localhost:8080/hello/api/hello-world</a>
+<ul>
+<li>Vous devriez voir le message “Hello World!”
+<ul>
+<li><strong>Question :</strong> pourquoi est-ce qu’il faut utiliser le chemin “<strong>/hello</strong>/api/hello-world” ?</li>
+</ul></li>
+<li>Dans votre navigateur, lancez le mode développeur puis allez dans l’onglet “Network”.</li>
+<li>Rafraîchissez la page</li>
+<li>À l’aide de l’onglet “Network” répondez aux questions suivantes :
+<ul>
+<li><strong>Question :</strong> quelle est la valeur du header “Content-Type” renvoyé par notre endpoint ?</li>
+<li><strong>Question :</strong> quelle est la valeur du header “X-Powered-By” renvoyé par notre endpoint ?</li>
+</ul></li>
+</ul></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Un fichier <code>.jar</code> est une “<strong>J</strong>ava <strong>Ar</strong>chive”. C’est un fichier compressé au format .zip. Il contient des classes Java compilées. On l’utilise pour distributer des programmes ou des bibliothèques.</li>
+<li>Un fichier <code>.war</code> est une “<strong>W</strong>eb application <strong>Ar</strong>chive”. C’est un format spécifique à Jakarta EE. Il contient tout ce qui est nécéssaire pour déployer une application dans un serveur Jakarta EE. Il contient des fichiers .jar, des pages HTML et images, des fichiers de configuration, …</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="extraire-des-informations-de-la-requête" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="extraire-des-informations-de-la-requête"><span class="header-section-number">3.2</span> Extraire des informations de la requête</h2>
+<p>Nous souhaitons personnaliser la réponse. Lorsque notre endpoint reçoit la requête HTTP <code>GET /hello/api/hello-word/Ada</code>, il doit répondre avec <code>Hello, Ada</code>.</p>
+<ul>
+<li>Modifiez le code. Vous devrez ajouter les annotations <code>jakarta.ws.rs.@Path</code> et <code>jakarta.ws.rs.@PathParam</code>. Naviguez dans les sources ou la Javadoc pour comprendre où les ajouter.</li>
+<li>redéployez vos changements</li>
+<li>Testez avec <a href="http://localhost:8080/hello/api/hello-world/Ada%20Lovelace" class="uri">http://localhost:8080/hello/api/hello-world/Ada%20Lovelace</a></li>
+</ul>
+</section>
+</section>
+<section id="application-customer" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Application Customer</h1>
+<p>Nous allons créer une petite application permettant d’enregistrer des clients dans une base de données. Nous exposerons une API REST qui permettra de manipuler (CRUD) des ressources “Customer”.</p>
+<section id="premier-déploiement-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="premier-déploiement-1"><span class="header-section-number">4.1</span> Premier déploiement</h2>
+<ol type="1">
+<li>Dans Moodle, cliquez sur l’invitation Github classroom pour créer votre repository</li>
+<li>clonez le repository et explorez le code.</li>
+</ol>
+<ul>
+<li><strong>Question :</strong> quelle requête SQL sera exécutée lorsque nous accèderons à l’endpoint <code>GET /api/customers</code> ?</li>
+</ul>
+<ol start="3" type="1">
+<li>Générez le fichier .war</li>
+<li>Démarrer la base de données Derby.</li>
+</ol>
+<ul>
+<li>En ligne de commande, allez dans le répertoire <code>glassfish/bin</code></li>
+<li>lancez <code>asadmin start-database</code></li>
+</ul>
+<ol start="5" type="1">
+<li>Déployez le fichier <code>.war</code> dans votre serveur Glassfish, avec le context root <code>customer</code></li>
+<li>Testez l’endpoint avec <a href="http://localhost:8080/customer/api/customers" class="uri">http://localhost:8080/customer/api/customers</a></li>
+</ol>
+<ul>
+<li>vous devriez voir la liste des clients qui a été insérée par <code>DatabaseInitializer</code></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous souhaitez accélérer le redéploiement après un changement, vous pouvez installer le plugin IntelliJ Glassfish.</p>
+<ul>
+<li>Une fois installé, allez dans Services (Alt-8) -&gt; Edit configurations -&gt; New Glassfish Server (Local)</li>
+<li>Entrez :
+<ul>
+<li>Name: customer</li>
+<li>Application server: Configure…
+<ul>
+<li>GlassFish Home : sélectionner le dossier d’installation <code>glassfish7</code></li>
+</ul></li>
+<li>URL: http://localhost:8080/customer/api/customers</li>
+<li>Server domain: choisir <code>domain1</code></li>
+</ul></li>
+<li>Fermez le serveur glassfish que vous aviez lancé depuis l’invite de commande</li>
+<li>Cliquez sur le bouton “Run” dans la fenêtre “Services”</li>
+<li>Pour redéployer après un changement, cliquez sur “customer” puis l’icône “Update customer application” (Ctrl-F10)</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="tester-les-endpoints" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="tester-les-endpoints"><span class="header-section-number">4.2</span> Tester les endpoints</h2>
+<p>Nous allons maintenant implémenter les différents endpoints pour les opérations <strong>CRUD</strong> (Create, Read, Update, Delete). Nous testerons les endpoints manuellement pour le moment. Vous pouvez utiliser l’un de ces outils :</p>
+<ul>
+<li>utiliser la page Swagger intégrée à l’application: <a href="http://localhost:8080/customer/swagger-ui.html" class="uri">http://localhost:8080/customer/swagger-ui.html</a></li>
+<li>ou utiliser le client HTTP intégré à IntelliJ
+<ul>
+<li>ouvrez <code>CustomerResource</code> et cliquez dans la marge sur l’icône “Generate request in HTTP Client”</li>
+</ul></li>
+<li>ou utiliser le logiciel <a href="https://www.postman.com/downloads/">Postman</a></li>
+<li>ou utiliser firefox en mode développeur</li>
+<li>ou utiliser <code>curl</code> en ligne de commande</li>
+</ul>
+</section>
+<section id="read-endpoint-get-apicustomersid" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="read-endpoint-get-apicustomersid"><span class="header-section-number">4.3</span> Read: Endpoint GET /api/customers/{id}</h2>
+<p>Implémentez l’endpoint en utilisant la méthode <code>findById</code>.</p>
+<ul>
+<li>Si le client n’existe pas pour cet id, renvoyer un code HTTP 404 Not Found.</li>
+<li>amélioration : retourner un <code>Optional</code> dans <code>findById</code>, pour éviter de renvoyer <code>null</code> lorsque le client n’existe pas.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous souhaitez exécuter des requêtes dans la BDD Derby :</p>
+<ol type="1">
+<li>Dans IntelliJ, allez dans l’onglet Databases</li>
+<li>Cliquez sur New -&gt; Data Source -&gt; Apache Derby</li>
+<li>utilisez les paramètres suivants :
+<ul>
+<li>Driver: Apache Derby (Remote)</li>
+<li>User: APP</li>
+<li>Password: APP</li>
+<li>URL: <code>jdbc:derby://localhost:1527/sun-appserv-samples</code></li>
+</ul></li>
+<li>Cliquez sur “Test Connection”. Si ça ne fonctionne pas, vérifiez que la base est bien démarrée et que les paramètres sont corrects.</li>
+<li>Dans l’onglet “Schema”, cliquez sur “APP”</li>
+<li>Vous pouvez maintenant voir la structure du schéma APP</li>
+<li>Testez une requête simple <code>SELECT * FROM customer_customer</code>.</li>
+</ol>
+<p>Les paramètres ci-dessus correspondent à ceux visibles dans la console d’administration de GlassFish. Dans GlassFish, voir JDBC -&gt; JDBC Connection Pools -&gt; DerbyPool -&gt; Additional Properties</p>
+</div>
+</div>
+</section>
+<section id="create-endpoint-post-apicustomers" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="create-endpoint-post-apicustomers"><span class="header-section-number">4.4</span> Create : Endpoint POST /api/customers</h2>
+<p>Implémentez cet endpoint pour pouvoir créer un nouveau client.</p>
+<ul>
+<li>Il doit recevoir en paramètre des données Json représentant le client.</li>
+<li>Il renvoie un code HTTP 201 CREATED, avec l’URL de la ressource créée. Pensez à persister les objets <code>Adresse</code> et <code>Customer</code>. Vous devrez utiliser <code>em.persist</code>.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">@POST</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">@Consumes</span><span class="op">({</span>MediaType<span class="op">.</span><span class="fu">APPLICATION_JSON</span><span class="op">})</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">@Transactional</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="bu">Response</span> <span class="fu">createCustomer</span><span class="op">(</span>Customer customer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// </span><span class="al">TODO</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">Response</span><span class="op">.</span><span class="fu">created</span><span class="op">(</span><span class="bu">URI</span><span class="op">.</span><span class="fu">create</span><span class="op">(</span><span class="st">"/"</span> <span class="op">+</span> customerId<span class="op">)).</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>L’annotation <code>@Transactional</code> indique au conteneur qu’il faut démarrer une transaction avant la méthode, puis faire un <strong>commit</strong> ou un <strong>rollback</strong> à la fin de la méthode. Elle est nécéssaire dès que l’on souhaite effectuer des modifications dans la base de données.</p>
+</div>
+</div>
+</section>
+<section id="delete-endpoint-delete-apicustomersid" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="delete-endpoint-delete-apicustomersid"><span class="header-section-number">4.5</span> Delete : Endpoint DELETE /api/customers/{id}</h2>
+<p>Implémentez cet endpoint pour pouvoir supprimer un client avec son adresse.</p>
+<ul>
+<li>Si le client n’existe pas pour cet id, renvoyer un code HTTP 404 Not Found.</li>
+</ul>
+</section>
+<section id="update-endpoint-put-apicustomersid" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="update-endpoint-put-apicustomersid"><span class="header-section-number">4.6</span> Update : Endpoint PUT /api/customers/{id}</h2>
+<p>Implémentez cet endpoint pour pouvoir mettre à jour un client et son adresse.</p>
+<ul>
+<li>Si le client n’existe pas pour cet id, renvoyer un code HTTP 404 Not Found.</li>
+<li>Utilisez <code>em.merge</code> pour effectuer la mise à jour.</li>
+<li>Renvoyer le code HTTP 200 OK si la mise à jour a pu être effectuée.</li>
+</ul>
+</section>
+<section id="validation" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="validation"><span class="header-section-number">4.7</span> Validation</h2>
+<p>Lire cette page : <a href="https://jakarta.ee/learn/docs/jakartaee-tutorial/current/beanvalidation/bean-validation/bean-validation.html">Bean Validation</a>, puis ajouter les validations suivantes :</p>
+<ul>
+<li>l’<code>email</code> doit être valide</li>
+<li><code>phone</code> ne doit pas dépasser 30 caractères et doit être composé de chiffres, commencer par <code>+</code>, et peut contenir des espaces ou des tirets.</li>
+<li><code>name</code> et <code>firstname</code> ne doivent pas dépasser 50 caractères</li>
+</ul>
+<p>Si l’un des champs n’est pas valide, renvoyer un code HTTP 400 BadRequest.</p>
+</section>
+<section id="update-partiel-endpoint-patch-apicustomersid" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="update-partiel-endpoint-patch-apicustomersid"><span class="header-section-number">4.8</span> Update partiel : Endpoint PATCH /api/customers/{id}</h2>
+<p>Dans une API RESTful, le verbe <code>PATCH</code> permet de modifier une ressource partiellement.</p>
+<p>Si j’envoie une requête <code>PATCH /api/customers/2</code> avec ce corps :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"email"</span><span class="fu">:</span> <span class="st">"pierredupont@example.fr"</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"phone"</span><span class="fu">:</span> <span class="st">"+33-1-42-34-56-78"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Le client sera mis à jour avec ces informations, et les autres champs ne doivent pas être modifiés. A la différence de <code>PUT</code>, je n’ai pas besoin d’envoyer tous les champs, j’envoie uniquement ceux que je souhaite modifier.</p>
+</section>
+<section id="refactoring" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="refactoring"><span class="header-section-number">4.9</span> Refactoring</h2>
+<p>Ce code est simplifié et possède un couplage fort entre :</p>
+<ul>
+<li>la base de données et l’API REST : les mêmes classes sont utilisées</li>
+<li>le controlleur REST et les services métier : le controlleur accède directement à l’<code>EntityManager</code></li>
+</ul>
+<p>Modifiez le code pour découpler ces deux aspects :</p>
+<ul>
+<li>Introduire une classe <code>CustomerService</code>.
+<ul>
+<li>Elle aura l’annotation <code>@Stateless</code> et sera injectée dans <code>CustomerResource</code> avec l’annotation <code>@Inject</code>.</li>
+<li>Elle manipule uniquement des classes <code>@Entity</code></li>
+</ul></li>
+<li>Introduire des classes DTO (Data Transfer Object), qui seront utilisées dans <code>CustomerResource</code>.</li>
+<li><code>CustomerResource</code> doit convertir les classes DTO en classes Entity, et appeler <code>CustomerService</code>.</li>
+</ul>
+<!--
+
+----
+
+diagramme d'architecture
+
+in pom.xml
+        <glassfish.home>C:/Users/m_valot_adm/tools/glassfish7</glassfish.home>
+- C:/Users/m_valot_adm/tools/glassfish7/domains/password.properties AS_ADMIN_PASSWORD=  
+
+=> can deploy with mvn deploy
+
+
+
+- TODO : 
+- Créer un client VueJs ?
+-->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
