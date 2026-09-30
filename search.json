@@ -487,7 +487,11 @@
     "href": "tp2.html",
     "title": "1 TP2 - SOLID",
     "section": "",
-    "text": "1 TP2 - SOLID\nDans le code obtenu avec le lien GitHub Classroom, vous avez un package par principe SOLID. Vous devez refactorer le code pour qu’il adhère à chaque principe.\nPensez à commit + push à la fin du TP !"
+    "text": "1 TP2 - SOLID\nDans le code obtenu avec le lien GitHub Classroom, vous avez un package par principe SOLID. Vous devez refactorer le code pour qu’il adhère à chaque principe.\nPensez à commit + push à la fin du TP !",
+    "crumbs": [
+      "TPs",
+      "TP2 - SOLID"
+    ]
   },
   {
     "objectID": "cm3.html",
