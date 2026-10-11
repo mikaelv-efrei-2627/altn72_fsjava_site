@@ -125,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cm1.html">Cours</a></li><li class="breadcrumb-item"><a href="./cm3.html">CM3 - Applications distribuées</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -178,6 +178,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">CM2 - Clean Code &amp; Architecture</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">CM3 - Applications distribuées</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -199,6 +205,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./tp2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">TP2 - SOLID</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tp3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP3 - API REST avec Jakarta EE</span></a>
   </div>
 </li>
       </ul>
@@ -238,7 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cm1.html">Cours</a></li><li class="breadcrumb-item"><a href="./cm3.html">CM3 - Applications distribuées</a></li></ol></nav></header>
 
 
 
@@ -889,9 +901,9 @@ POST /execute_sql</code></pre>
 <h2 data-number="1.16" class="anchored" data-anchor-id="jakarta-ee"><span class="header-section-number">1.16</span> Jakarta EE</h2>
 <ul>
 <li>Ensemble de <strong>spécifications</strong> standard pour développer des applications d’entreprises.</li>
-<li>Différents projets open-source ou des éditeurs commerciaux implémentent tout ou partie des spécifications
+<li>Différents projets open-source ou des éditeurs commerciaux <strong>implémentent</strong> tout ou partie des spécifications.
 <ul>
-<li>Eclipse GlassFish, IBM WebSphere Liberty, RedHat Wildfly, RedHad JBoss, Apache TomEE</li>
+<li><strong>Application servers</strong> : Eclipse GlassFish, IBM WebSphere Liberty, RedHat Wildfly, RedHad JBoss, Apache TomEE</li>
 </ul></li>
 <li>Historiquement : nommé Java EE, puis en 2018 Oracle l’a cédé à la fondation Eclipse
 <ul>
@@ -905,7 +917,7 @@ POST /execute_sql</code></pre>
 <li><strong>Standardisation</strong> : Jakarta EE fournit une approche standardisée pour développer des applications d’entreprise.</li>
 <li><strong>Productivité</strong> : Grâce aux API, les développeurs peuvent se concentrer sur la logique métier.</li>
 <li><strong>Maturité</strong> : Jakarta EE est une solution mature, stable, éprouvée (depuis 1999)</li>
-<li><strong>Gestion des ressources</strong> : pools de connection, noeuds du cluster, monitoring</li>
+<li><strong>Gestion des ressources</strong> : par l’application server : pools de connection, noeuds du cluster, monitoring</li>
 <li><strong>Principe fort</strong> : 1 besoin → 1 API</li>
 </ul>
 </section>
