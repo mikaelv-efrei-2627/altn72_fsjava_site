@@ -136,140 +136,220 @@
     "href": "tp5.html",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "",
-    "text": "Ce TP vous permettra d’implémenter une fonctionnalité complète dans une application Spring Boot : la gestion des billets de concert. Vous allez parcourir toutes les couches de l’architecture :\n\nCréer un Repository Spring Data JPA avec des query methods\nImplémenter un Service avec logique métier et validation\nCréer des DTOs pour l’API REST\nDévelopper un Contrôleur REST avec plusieurs endpoints\nÉcrire des tests JUnit pour valider votre implémentation\n\n\n\n\n\nSpring Boot 3.5.8\nSpring Data JPA\nSpring Web\nBase de données H2 (en mémoire)\nJUnit 5 + Spring Boot Test + MockMvc\nMockito\nMaven"
+    "text": "Ce TP vous permettra d’implémenter une fonctionnalité complète dans une application Spring Boot : la gestion des billets de concert. Vous allez parcourir toutes les couches de l’architecture :\n\nCréer un Repository Spring Data JPA avec des query methods\nImplémenter un Service avec logique métier et validation\nCréer des DTOs pour l’API REST\nDévelopper un Contrôleur REST avec plusieurs endpoints\nÉcrire des tests JUnit pour valider votre implémentation\n\n\n\n\n\nSpring Boot 3.5.8\nSpring Data JPA\nSpring Web\nBase de données H2 (en mémoire)\nJUnit 5 + Spring Boot Test + MockMvc\nMockito\nMaven",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#objectifs-du-tp",
     "href": "tp5.html#objectifs-du-tp",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "",
-    "text": "Ce TP vous permettra d’implémenter une fonctionnalité complète dans une application Spring Boot : la gestion des billets de concert. Vous allez parcourir toutes les couches de l’architecture :\n\nCréer un Repository Spring Data JPA avec des query methods\nImplémenter un Service avec logique métier et validation\nCréer des DTOs pour l’API REST\nDévelopper un Contrôleur REST avec plusieurs endpoints\nÉcrire des tests JUnit pour valider votre implémentation"
+    "text": "Ce TP vous permettra d’implémenter une fonctionnalité complète dans une application Spring Boot : la gestion des billets de concert. Vous allez parcourir toutes les couches de l’architecture :\n\nCréer un Repository Spring Data JPA avec des query methods\nImplémenter un Service avec logique métier et validation\nCréer des DTOs pour l’API REST\nDévelopper un Contrôleur REST avec plusieurs endpoints\nÉcrire des tests JUnit pour valider votre implémentation",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#technologies-utilisées",
     "href": "tp5.html#technologies-utilisées",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "",
-    "text": "Spring Boot 3.5.8\nSpring Data JPA\nSpring Web\nBase de données H2 (en mémoire)\nJUnit 5 + Spring Boot Test + MockMvc\nMockito\nMaven"
+    "text": "Spring Boot 3.5.8\nSpring Data JPA\nSpring Web\nBase de données H2 (en mémoire)\nJUnit 5 + Spring Boot Test + MockMvc\nMockito\nMaven",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#structure-fournie",
     "href": "tp5.html#structure-fournie",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "3.1 Structure fournie",
-    "text": "3.1 Structure fournie\nLe projet contient déjà 3 fonctionnalités complètes qui serviront d’exemples de référence :\n\n3.1.1 Artistes (Artist)\n\n✅ Artist.java - Entité JPA\n✅ ArtistRepository.java - Repository avec query methods\n✅ ArtistService.java - Service avec logique CRUD\n✅ ArtistDTO.java - DTO pour l’API\n✅ ArtistController.java - Contrôleur REST\n✅ ArtistControllerTest.java - Tests du contrôleur\n✅ ArtistServiceTest.java - Tests du service\n\n\n\n3.1.2 Concerts et Clients\n\n✅ Concert.java + Repository + Service + DTO + Controller + Tests (contrôleur)\n✅ Customer.java + Repository + Service + DTO + Controller + Tests (contrôleur)\n\n\n\n3.1.3 Tickets (à implémenter)\n\n✅ Ticket.java - Entité fournie\n✅ TicketCategory.java - Énumération fournie\n❌ TicketRepository.java - À créer\n❌ TicketService.java - À créer\n❌ TicketDTO.java + autres DTOs - À créer\n❌ TicketController.java - À créer\n❌ TicketControllerTest.java - À créer\n❌ TicketServiceTest.java - À créer"
+    "text": "3.1 Structure fournie\nLe projet contient déjà 3 fonctionnalités complètes qui serviront d’exemples de référence :\n\n3.1.1 Artistes (Artist)\n\n✅ Artist.java - Entité JPA\n✅ ArtistRepository.java - Repository avec query methods\n✅ ArtistService.java - Service avec logique CRUD\n✅ ArtistDTO.java - DTO pour l’API\n✅ ArtistController.java - Contrôleur REST\n✅ ArtistControllerTest.java - Tests du contrôleur\n✅ ArtistServiceTest.java - Tests du service\n\n\n\n3.1.2 Concerts et Clients\n\n✅ Concert.java + Repository + Service + DTO + Controller + Tests (contrôleur)\n✅ Customer.java + Repository + Service + DTO + Controller + Tests (contrôleur)\n\n\n\n3.1.3 Tickets (à implémenter)\n\n✅ Ticket.java - Entité fournie\n✅ TicketCategory.java - Énumération fournie\n❌ TicketRepository.java - À créer\n❌ TicketService.java - À créer\n❌ TicketDTO.java + autres DTOs - À créer\n❌ TicketController.java - À créer\n❌ TicketControllerTest.java - À créer\n❌ TicketServiceTest.java - À créer",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#démarrer-lapplication",
     "href": "tp5.html#démarrer-lapplication",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "3.2 Démarrer l’application",
-    "text": "3.2 Démarrer l’application\nOuvrez la classe TicketingApplication et lancez le main, ou utilisez maven :\nmvn spring-boot:run\nL’application démarre sur http://localhost:8080\nTestez les endpoints existants :\n# Lister les artistes\ncurl http://localhost:8080/api/artists\n\n# Obtenir un artiste par ID\ncurl http://localhost:8080/api/artists/1\n\n# Lister les concerts\ncurl http://localhost:8080/api/concerts"
+    "text": "3.2 Démarrer l’application\nOuvrez la classe TicketingApplication et lancez le main, ou utilisez maven :\nmvn spring-boot:run\nL’application démarre sur http://localhost:8080\nTestez les endpoints existants :\n# Lister les artistes\ncurl http://localhost:8080/api/artists\n\n# Obtenir un artiste par ID\ncurl http://localhost:8080/api/artists/1\n\n# Lister les concerts\ncurl http://localhost:8080/api/concerts",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#explorer-le-code-fourni",
     "href": "tp5.html#explorer-le-code-fourni",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "3.3 Explorer le code fourni",
-    "text": "3.3 Explorer le code fourni\nPrenez 10-15 minutes pour examiner :\n\nArtistRepository.java - Observez les query methods findByGenre() et findByName()\nArtistService.java - Notez comment le service :\n\nInjecte le repository\nTransforme les entités en DTOs\nGère les Optional\n\nArtistController.java - Étudiez :\n\nLes annotations @RestController, @RequestMapping\nL’utilisation de ResponseEntity\nLa gestion des codes HTTP (200, 201, 204, 404)\n\nArtistControllerTest.java - Comprenez comment tester avec MockMvc :\n\n@WebMvcTest pour tester le contrôleur\n@MockitoBean pour mocker le service\n\nArtistServiceTest.java - Comprenez comment tester le service :\n\n@SpringBootTest pour tester le service\n@MockitoBean pour mocker le repository\n\n\nQuestions de compréhension :\n\nPourquoi utilise-t-on des DTOs au lieu de retourner directement les entités ?\nComment Spring Data JPA génère-t-il l’implémentation des repositories ?\nQuelle est la différence entre @WebMvcTest et @SpringBootTest ?\nPourquoi utilise-t-on @MockitoBean dans les deux types de tests ?"
+    "text": "3.3 Explorer le code fourni\nPrenez 10-15 minutes pour examiner :\n\nArtistRepository.java - Observez les query methods findByGenre() et findByName()\nArtistService.java - Notez comment le service :\n\nInjecte le repository\nTransforme les entités en DTOs\nGère les Optional\n\nArtistController.java - Étudiez :\n\nLes annotations @RestController, @RequestMapping\nL’utilisation de ResponseEntity\nLa gestion des codes HTTP (200, 201, 204, 404)\n\nArtistControllerTest.java - Comprenez comment tester avec MockMvc :\n\n@WebMvcTest pour tester le contrôleur\n@MockitoBean pour mocker le service\n\nArtistServiceTest.java - Comprenez comment tester le service :\n\n@SpringBootTest pour tester le service\n@MockitoBean pour mocker le repository\n\n\nQuestions de compréhension :\n\nPourquoi utilise-t-on des DTOs au lieu de retourner directement les entités ?\nComment Spring Data JPA génère-t-il l’implémentation des repositories ?\nQuelle est la différence entre @WebMvcTest et @SpringBootTest ?\nPourquoi utilise-t-on @MockitoBean dans les deux types de tests ?",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#examiner-lentité-ticket",
     "href": "tp5.html#examiner-lentité-ticket",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "4.1 Examiner l’entité Ticket",
-    "text": "4.1 Examiner l’entité Ticket\nL’entité Ticket est déjà fournie. Examinez-la pour comprendre :\n\nLes annotations JPA (@Entity, @ManyToOne, @Enumerated)\nLes relations avec Concert et Customer\nL’énumération TicketCategory"
+    "text": "4.1 Examiner l’entité Ticket\nL’entité Ticket est déjà fournie. Examinez-la pour comprendre :\n\nLes annotations JPA (@Entity, @ManyToOne, @Enumerated)\nLes relations avec Concert et Customer\nL’énumération TicketCategory",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#créer-linterface-ticketrepository",
     "href": "tp5.html#créer-linterface-ticketrepository",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "4.2 Créer l’interface TicketRepository",
-    "text": "4.2 Créer l’interface TicketRepository\nCréez TicketRepository.java dans le package org.efrei.altn72.tp5.repository :\npackage org.efrei.altn72.tp5.repository;\n\nimport org.efrei.altn72.tp5.entity.Ticket;\nimport org.efrei.altn72.tp5.entity.TicketCategory;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\nimport org.springframework.data.repository.query.Param;\nimport org.springframework.stereotype.Repository;\n\nimport java.math.BigDecimal;\nimport java.util.List;\n\n@Repository\npublic interface TicketRepository extends JpaRepository&lt;Ticket, Long&gt; {\n\n    // TODO 1: Méthode pour trouver tous les billets d'un client\n    // Retour: List&lt;Ticket&gt;\n\n    // TODO 2: Méthode pour trouver tous les billets d'un concert\n    // Retour: List&lt;Ticket&gt;\n\n    // TODO 3: Méthode pour trouver les billets par catégorie\n    // Retour: List&lt;Ticket&gt;\n\n    // TODO 4: Méthode pour compter le nombre de billets vendus pour un concert\n    // Retour: long\n\n    // TODO 5: Requête JPQL pour calculer le chiffre d'affaires d'un concert\n    // Retour: BigDecimal\n}"
+    "text": "4.2 Créer l’interface TicketRepository\nCréez TicketRepository.java dans le package org.efrei.altn72.tp5.repository :\npackage org.efrei.altn72.tp5.repository;\n\nimport org.efrei.altn72.tp5.entity.Ticket;\nimport org.efrei.altn72.tp5.entity.TicketCategory;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\nimport org.springframework.data.repository.query.Param;\nimport org.springframework.stereotype.Repository;\n\nimport java.math.BigDecimal;\nimport java.util.List;\n\n@Repository\npublic interface TicketRepository extends JpaRepository&lt;Ticket, Long&gt; {\n\n    // TODO 1: Méthode pour trouver tous les billets d'un client\n    // Retour: List&lt;Ticket&gt;\n\n    // TODO 2: Méthode pour trouver tous les billets d'un concert\n    // Retour: List&lt;Ticket&gt;\n\n    // TODO 3: Méthode pour trouver les billets par catégorie\n    // Retour: List&lt;Ticket&gt;\n\n    // TODO 4: Méthode pour compter le nombre de billets vendus pour un concert\n    // Retour: long\n\n    // TODO 5: Requête JPQL pour calculer le chiffre d'affaires d'un concert\n    // Retour: BigDecimal\n}",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#squelette-du-service",
     "href": "tp5.html#squelette-du-service",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "5.1 Squelette du service",
-    "text": "5.1 Squelette du service\n@Service\n@Transactional\npublic class TicketService {\n\n    private final TicketRepository ticketRepository;\n    private final ConcertRepository concertRepository;\n    private final CustomerRepository customerRepository;\n\n    public TicketService(TicketRepository ticketRepository,\n                         ConcertRepository concertRepository,\n                         CustomerRepository customerRepository) {\n        this.ticketRepository = ticketRepository;\n        this.concertRepository = concertRepository;\n        this.customerRepository = customerRepository;\n    }\n\n    // Méthodes à implémenter ci-dessous\n    public TicketDTO purchaseTicket(TicketPurchaseRequest request) {\n        // TODO 1: Récupérer le concert par son ID\n        // Lancer IllegalArgumentException si le concert n'existe pas\n\n        // TODO 2: Récupérer le client par son ID\n        // Lancer IllegalArgumentException si le client n'existe pas\n\n        // TODO 3: Vérifier qu'il reste des places disponibles\n        // Lancer IllegalStateException si le concert est complet\n\n        // TODO 4: Générer un numéro de billet unique\n        // Utiliser la méthode generateTicketNumber() (fournie ci-dessous)\n\n        // TODO 5: Convertir la catégorie String en TicketCategory enum\n\n        // TODO 6: Créer le billet\n\n        // TODO 7: Sauvegarder et retourner le DTO\n    }\n\n    private String generateTicketNumber() {\n        return \"TKT-\" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();\n    }\n\n    public List&lt;TicketDTO&gt; getTicketsByCustomer(Long customerId) {\n        // TODO: Utiliser ticketRepository.findByCustomerId()\n        // Transformer la liste de Ticket en liste de TicketDTO avec mapToDTO()\n        // Astuce: .stream().map(this::mapToDTO).toList()\n    }\n\n    public List&lt;TicketDTO&gt; getTicketsByConcert(Long concertId) {\n        // TODO: Similaire à getTicketsByCustomer\n    }\n\n    public Optional&lt;ConcertStatsDTO&gt; getConcertStats(Long concertId) {\n        return concertRepository.findById(concertId)\n                .map(concert -&gt; {\n                    // TODO 1: Compter les billets vendus\n\n                    // TODO 2: Calculer le chiffre d'affaires\n\n                    // TODO 3: Calculer les places disponibles\n\n                    // TODO 4: Créer et retourner le DTO\n                });\n    }\n    \n    private TicketDTO mapToDTO(Ticket ticket) {\n        // TODO\n    }\n}"
+    "text": "5.1 Squelette du service\n@Service\n@Transactional\npublic class TicketService {\n\n    private final TicketRepository ticketRepository;\n    private final ConcertRepository concertRepository;\n    private final CustomerRepository customerRepository;\n\n    public TicketService(TicketRepository ticketRepository,\n                         ConcertRepository concertRepository,\n                         CustomerRepository customerRepository) {\n        this.ticketRepository = ticketRepository;\n        this.concertRepository = concertRepository;\n        this.customerRepository = customerRepository;\n    }\n\n    // Méthodes à implémenter ci-dessous\n    public TicketDTO purchaseTicket(TicketPurchaseRequest request) {\n        // TODO 1: Récupérer le concert par son ID\n        // Lancer IllegalArgumentException si le concert n'existe pas\n\n        // TODO 2: Récupérer le client par son ID\n        // Lancer IllegalArgumentException si le client n'existe pas\n\n        // TODO 3: Vérifier qu'il reste des places disponibles\n        // Lancer IllegalStateException si le concert est complet\n\n        // TODO 4: Générer un numéro de billet unique\n        // Utiliser la méthode generateTicketNumber() (fournie ci-dessous)\n\n        // TODO 5: Convertir la catégorie String en TicketCategory enum\n\n        // TODO 6: Créer le billet\n\n        // TODO 7: Sauvegarder et retourner le DTO\n    }\n\n    private String generateTicketNumber() {\n        return \"TKT-\" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();\n    }\n\n    public List&lt;TicketDTO&gt; getTicketsByCustomer(Long customerId) {\n        // TODO: Utiliser ticketRepository.findByCustomerId()\n        // Transformer la liste de Ticket en liste de TicketDTO avec mapToDTO()\n        // Astuce: .stream().map(this::mapToDTO).toList()\n    }\n\n    public List&lt;TicketDTO&gt; getTicketsByConcert(Long concertId) {\n        // TODO: Similaire à getTicketsByCustomer\n    }\n\n    public Optional&lt;ConcertStatsDTO&gt; getConcertStats(Long concertId) {\n        return concertRepository.findById(concertId)\n                .map(concert -&gt; {\n                    // TODO 1: Compter les billets vendus\n\n                    // TODO 2: Calculer le chiffre d'affaires\n\n                    // TODO 3: Calculer les places disponibles\n\n                    // TODO 4: Créer et retourner le DTO\n                });\n    }\n    \n    private TicketDTO mapToDTO(Ticket ticket) {\n        // TODO\n    }\n}",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#ticketdto.java",
     "href": "tp5.html#ticketdto.java",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "6.1 TicketDTO.java",
-    "text": "6.1 TicketDTO.java\npackage org.efrei.altn72.tp5.dto;\n\nimport java.math.BigDecimal;\nimport java.time.LocalDateTime;\n\npublic record TicketDTO(\n        Long id,\n        String ticketNumber,\n        String category,\n        BigDecimal price,\n        LocalDateTime purchaseDate,\n        String seatNumber,\n        Long concertId,\n        String concertTitle,\n        Long customerId,\n        String customerName\n) {\n}"
+    "text": "6.1 TicketDTO.java\npackage org.efrei.altn72.tp5.dto;\n\nimport java.math.BigDecimal;\nimport java.time.LocalDateTime;\n\npublic record TicketDTO(\n        Long id,\n        String ticketNumber,\n        String category,\n        BigDecimal price,\n        LocalDateTime purchaseDate,\n        String seatNumber,\n        Long concertId,\n        String concertTitle,\n        Long customerId,\n        String customerName\n) {\n}",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#ticketpurchaserequest.java",
     "href": "tp5.html#ticketpurchaserequest.java",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "6.2 TicketPurchaseRequest.java",
-    "text": "6.2 TicketPurchaseRequest.java\npackage org.efrei.altn72.tp5.dto;\n\nimport java.math.BigDecimal;\n\npublic record TicketPurchaseRequest(\n        Long concertId,\n        Long customerId,\n        String category,\n        BigDecimal price,\n        String seatNumber\n) {\n}"
+    "text": "6.2 TicketPurchaseRequest.java\npackage org.efrei.altn72.tp5.dto;\n\nimport java.math.BigDecimal;\n\npublic record TicketPurchaseRequest(\n        Long concertId,\n        Long customerId,\n        String category,\n        BigDecimal price,\n        String seatNumber\n) {\n}",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#concertstatsdto.java",
     "href": "tp5.html#concertstatsdto.java",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "6.3 ConcertStatsDTO.java",
-    "text": "6.3 ConcertStatsDTO.java\npackage org.efrei.altn72.tp5.dto;\n\nimport java.math.BigDecimal;\n\npublic record ConcertStatsDTO(\n        Long concertId,\n        String concertTitle,\n        int totalTicketsSold,\n        int availableSeats,\n        BigDecimal totalRevenue\n) {\n}"
+    "text": "6.3 ConcertStatsDTO.java\npackage org.efrei.altn72.tp5.dto;\n\nimport java.math.BigDecimal;\n\npublic record ConcertStatsDTO(\n        Long concertId,\n        String concertTitle,\n        int totalTicketsSold,\n        int availableSeats,\n        BigDecimal totalRevenue\n) {\n}",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#tester-avec-curl",
     "href": "tp5.html#tester-avec-curl",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "7.1 Tester avec curl",
-    "text": "7.1 Tester avec curl\n# Acheter un billet\ncurl -X POST http://localhost:8080/api/tickets/purchase \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"concertId\": 1,\n    \"customerId\": 1,\n    \"category\": \"VIP\",\n    \"price\": 150.00,\n    \"seatNumber\": \"A15\"\n  }'\n\n# Billets d'un client\ncurl http://localhost:8080/api/tickets/customer/1\n\n# Billets d'un concert\ncurl http://localhost:8080/api/tickets/concert/1\n\n# Statistiques d'un concert\ncurl http://localhost:8080/api/tickets/concert/1/stats"
+    "text": "7.1 Tester avec curl\n# Acheter un billet\ncurl -X POST http://localhost:8080/api/tickets/purchase \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"concertId\": 1,\n    \"customerId\": 1,\n    \"category\": \"VIP\",\n    \"price\": 150.00,\n    \"seatNumber\": \"A15\"\n  }'\n\n# Billets d'un client\ncurl http://localhost:8080/api/tickets/customer/1\n\n# Billets d'un concert\ncurl http://localhost:8080/api/tickets/concert/1\n\n# Statistiques d'un concert\ncurl http://localhost:8080/api/tickets/concert/1/stats",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#approche-cohérente-avec-spring-boot-test",
     "href": "tp5.html#approche-cohérente-avec-spring-boot-test",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "9.1 Approche cohérente avec Spring Boot Test",
-    "text": "9.1 Approche cohérente avec Spring Boot Test\nVous avez écrit des tests de contrôleur avec @WebMvcTest + @MockitoBean. Pour les tests de service, nous utilisons la même approche Spring Boot avec @SpringBootTest + @MockitoBean.\nTests de contrôleur (@WebMvcTest) :\n\nTestent les endpoints REST avec MockMvc\nVérifient la sérialisation JSON et les codes HTTP\nMockent la couche service avec @MockitoBean\n\nTests de service (@SpringBootTest) :\n\nTestent la logique métier du service\nVérifient les validations et transformations\nMockent la couche repository avec @MockitoBean\n\n\n\n\n\n\n\nImportantApproche uniforme\n\n\n\nDans les deux cas, on utilise Spring Boot Test (@WebMvcTest ou @SpringBootTest) avec @MockitoBean pour mocker la couche en dessous. On aurait pu utiliser Mockito directement pour les services, mais c’est plus uniforme comme cela."
+    "text": "9.1 Approche cohérente avec Spring Boot Test\nVous avez écrit des tests de contrôleur avec @WebMvcTest + @MockitoBean. Pour les tests de service, nous utilisons la même approche Spring Boot avec @SpringBootTest + @MockitoBean.\nTests de contrôleur (@WebMvcTest) :\n\nTestent les endpoints REST avec MockMvc\nVérifient la sérialisation JSON et les codes HTTP\nMockent la couche service avec @MockitoBean\n\nTests de service (@SpringBootTest) :\n\nTestent la logique métier du service\nVérifient les validations et transformations\nMockent la couche repository avec @MockitoBean\n\n\n\n\n\n\n\nImportantApproche uniforme\n\n\n\nDans les deux cas, on utilise Spring Boot Test (@WebMvcTest ou @SpringBootTest) avec @MockitoBean pour mocker la couche en dessous. On aurait pu utiliser Mockito directement pour les services, mais c’est plus uniforme comme cela.",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#examiner-artistservicetest",
     "href": "tp5.html#examiner-artistservicetest",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "9.2 Examiner ArtistServiceTest",
-    "text": "9.2 Examiner ArtistServiceTest\nUn exemple complet est fourni dans ArtistServiceTest.java. Examinez ce fichier pour comprendre :\n\n@SpringBootTest - Charge le contexte Spring pour tester le service\n@MockitoBean - Crée un mock du repository (remplace le vrai bean dans le contexte)\n@Autowired - Injecte le vrai service (qui utilisera les mocks)\nwhen().thenReturn() - Définit le comportement des mocks (comme dans les tests de contrôleur)\nverify() - Vérifie que les méthodes ont été appelées\nAssertJ (assertThat()) - Assertions fluides\n\nStructure d’un test de service :\n@SpringBootTest\nclass ArtistServiceTest {\n    @MockitoBean\n    private ArtistRepository artistRepository;\n\n    @Autowired\n    private ArtistService artistService;\n\n    @Test\n    void shouldReturnAllArtists() {\n        // Given - Préparer les données et configurer les mocks\n        Artist artist = new Artist(\"The Rolling Stones\", \"Rock\", \"UK\");\n        when(artistRepository.findAll()).thenReturn(List.of(artist));\n\n        // When - Appeler la méthode à tester\n        List&lt;ArtistDTO&gt; result = artistService.getAllArtists();\n\n        // Then - Vérifier les résultats\n        assertThat(result).hasSize(1);\n        assertThat(result.get(0).name()).isEqualTo(\"The Rolling Stones\");\n        verify(artistRepository, times(1)).findAll();\n    }\n}"
+    "text": "9.2 Examiner ArtistServiceTest\nUn exemple complet est fourni dans ArtistServiceTest.java. Examinez ce fichier pour comprendre :\n\n@SpringBootTest - Charge le contexte Spring pour tester le service\n@MockitoBean - Crée un mock du repository (remplace le vrai bean dans le contexte)\n@Autowired - Injecte le vrai service (qui utilisera les mocks)\nwhen().thenReturn() - Définit le comportement des mocks (comme dans les tests de contrôleur)\nverify() - Vérifie que les méthodes ont été appelées\nAssertJ (assertThat()) - Assertions fluides\n\nStructure d’un test de service :\n@SpringBootTest\nclass ArtistServiceTest {\n    @MockitoBean\n    private ArtistRepository artistRepository;\n\n    @Autowired\n    private ArtistService artistService;\n\n    @Test\n    void shouldReturnAllArtists() {\n        // Given - Préparer les données et configurer les mocks\n        Artist artist = new Artist(\"The Rolling Stones\", \"Rock\", \"UK\");\n        when(artistRepository.findAll()).thenReturn(List.of(artist));\n\n        // When - Appeler la méthode à tester\n        List&lt;ArtistDTO&gt; result = artistService.getAllArtists();\n\n        // Then - Vérifier les résultats\n        assertThat(result).hasSize(1);\n        assertThat(result.get(0).name()).isEqualTo(\"The Rolling Stones\");\n        verify(artistRepository, times(1)).findAll();\n    }\n}",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#créer-ticketservicetest",
     "href": "tp5.html#créer-ticketservicetest",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "9.3 Créer TicketServiceTest",
-    "text": "9.3 Créer TicketServiceTest\nCréez TicketServiceTest.java dans src/test/java/org/efrei/altn72/tp5/service/.\nImplémentez les tests suivants :\n\nAchat réussi d’un billet\nAchat échoue si concert inexistant\nAchat échoue si client inexistant\nAchat échoue si concert complet\nRécupérer les billets d’un client\nRécupérer les billets d’un concert\nCalculer les statistiques d’un concert\nStatistiques retourne vide si concert inexistant\n\n\n\n\n\n\n\nTipConseils pour les tests de service\n\n\n\n\nUtilisez Spring Boot Test : Avec @SpringBootTest + @MockitoBean, c’est cohérent avec les tests de contrôleur\nIsolez avec les mocks : @MockitoBean remplace les vrais repositories par des mocks\nTestez tous les cas : Succès, erreurs, cas limites (concert complet, entités inexistantes)\nVérifiez les appels : Utilisez verify() pour confirmer que les repositories sont appelés correctement\nPensez aux exceptions : Utilisez assertThatThrownBy() pour tester les cas d’erreur\nMême syntaxe que les tests de contrôleur : when().thenReturn() et verify() fonctionnent exactement pareil !"
+    "text": "9.3 Créer TicketServiceTest\nCréez TicketServiceTest.java dans src/test/java/org/efrei/altn72/tp5/service/.\nImplémentez les tests suivants :\n\nAchat réussi d’un billet\nAchat échoue si concert inexistant\nAchat échoue si client inexistant\nAchat échoue si concert complet\nRécupérer les billets d’un client\nRécupérer les billets d’un concert\nCalculer les statistiques d’un concert\nStatistiques retourne vide si concert inexistant\n\n\n\n\n\n\n\nTipConseils pour les tests de service\n\n\n\n\nUtilisez Spring Boot Test : Avec @SpringBootTest + @MockitoBean, c’est cohérent avec les tests de contrôleur\nIsolez avec les mocks : @MockitoBean remplace les vrais repositories par des mocks\nTestez tous les cas : Succès, erreurs, cas limites (concert complet, entités inexistantes)\nVérifiez les appels : Utilisez verify() pour confirmer que les repositories sont appelés correctement\nPensez aux exceptions : Utilisez assertThatThrownBy() pour tester les cas d’erreur\nMême syntaxe que les tests de contrôleur : when().thenReturn() et verify() fonctionnent exactement pareil !",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#gestion-des-erreurs",
     "href": "tp5.html#gestion-des-erreurs",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "10.1 Gestion des erreurs",
-    "text": "10.1 Gestion des erreurs\nAméliorez la gestion d’erreurs :\n@RestControllerAdvice\npublic class GlobalExceptionHandler {\n\n    @ExceptionHandler(IllegalArgumentException.class)\n    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleIllegalArgument(\n            IllegalArgumentException ex) {\n        Map&lt;String, String&gt; error = Map.of(\n            \"error\", \"Bad Request\",\n            \"message\", ex.getMessage()\n        );\n        return ResponseEntity.badRequest().body(error);\n    }\n\n    @ExceptionHandler(IllegalStateException.class)\n    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleIllegalState(\n            IllegalStateException ex) {\n        Map&lt;String, String&gt; error = Map.of(\n            \"error\", \"Conflict\",\n            \"message\", ex.getMessage()\n        );\n        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);\n    }\n}"
+    "text": "10.1 Gestion des erreurs\nAméliorez la gestion d’erreurs :\n@RestControllerAdvice\npublic class GlobalExceptionHandler {\n\n    @ExceptionHandler(IllegalArgumentException.class)\n    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleIllegalArgument(\n            IllegalArgumentException ex) {\n        Map&lt;String, String&gt; error = Map.of(\n            \"error\", \"Bad Request\",\n            \"message\", ex.getMessage()\n        );\n        return ResponseEntity.badRequest().body(error);\n    }\n\n    @ExceptionHandler(IllegalStateException.class)\n    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleIllegalState(\n            IllegalStateException ex) {\n        Map&lt;String, String&gt; error = Map.of(\n            \"error\", \"Conflict\",\n            \"message\", ex.getMessage()\n        );\n        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);\n    }\n}",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#validation-avec-bean-validation",
     "href": "tp5.html#validation-avec-bean-validation",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "10.2 Validation avec Bean Validation",
-    "text": "10.2 Validation avec Bean Validation\nAjoutez des validations sur les DTOs :\npublic record TicketPurchaseRequest(\n        @NotNull(message = \"Concert ID is required\")\n        Long concertId,\n\n        @NotNull(message = \"Customer ID is required\")\n        Long customerId,\n\n        @NotBlank(message = \"Category is required\")\n        String category,\n\n        @NotNull(message = \"Price is required\")\n        @Positive(message = \"Price must be positive\")\n        BigDecimal price,\n\n        String seatNumber\n) {}\nDans le contrôleur, ajoutez @Valid :\n@PostMapping(\"/purchase\")\npublic ResponseEntity&lt;TicketDTO&gt; purchaseTicket(@Valid @RequestBody TicketPurchaseRequest request) {\n    // ...\n}"
+    "text": "10.2 Validation avec Bean Validation\nAjoutez des validations sur les DTOs :\npublic record TicketPurchaseRequest(\n        @NotNull(message = \"Concert ID is required\")\n        Long concertId,\n\n        @NotNull(message = \"Customer ID is required\")\n        Long customerId,\n\n        @NotBlank(message = \"Category is required\")\n        String category,\n\n        @NotNull(message = \"Price is required\")\n        @Positive(message = \"Price must be positive\")\n        BigDecimal price,\n\n        String seatNumber\n) {}\nDans le contrôleur, ajoutez @Valid :\n@PostMapping(\"/purchase\")\npublic ResponseEntity&lt;TicketDTO&gt; purchaseTicket(@Valid @RequestBody TicketPurchaseRequest request) {\n    // ...\n}",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#tests-dintégration",
     "href": "tp5.html#tests-dintégration",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "10.3 Tests d’intégration",
-    "text": "10.3 Tests d’intégration\nCréez des tests d’intégration avec @SpringBootTest :\n@SpringBootTest\n@AutoConfigureMockMvc\nclass TicketIntegrationTest {\n\n    @Autowired\n    private MockMvc mockMvc;\n\n    @Test\n    void shouldPurchaseTicketEndToEnd() throws Exception {\n        mockMvc.perform(post(\"/api/tickets/purchase\")\n                .contentType(MediaType.APPLICATION_JSON)\n                .content(\"{ ... }\"))\n            .andExpect(status().isCreated());\n    }\n}"
+    "text": "10.3 Tests d’intégration\nCréez des tests d’intégration avec @SpringBootTest :\n@SpringBootTest\n@AutoConfigureMockMvc\nclass TicketIntegrationTest {\n\n    @Autowired\n    private MockMvc mockMvc;\n\n    @Test\n    void shouldPurchaseTicketEndToEnd() throws Exception {\n        mockMvc.perform(post(\"/api/tickets/purchase\")\n                .contentType(MediaType.APPLICATION_JSON)\n                .content(\"{ ... }\"))\n            .andExpect(status().isCreated());\n    }\n}",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "tp5.html#documentation-swaggeropenapi",
     "href": "tp5.html#documentation-swaggeropenapi",
     "title": "TP5 - API REST avec Spring Boot",
     "section": "10.4 Documentation Swagger/OpenAPI",
-    "text": "10.4 Documentation Swagger/OpenAPI\nAjoutez dans pom.xml :\n&lt;dependency&gt;\n    &lt;groupId&gt;org.springdoc&lt;/groupId&gt;\n    &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;\n    &lt;version&gt;2.3.0&lt;/version&gt;\n&lt;/dependency&gt;\nDocumentation disponible sur : http://localhost:8080/swagger-ui.html"
+    "text": "10.4 Documentation Swagger/OpenAPI\nAjoutez dans pom.xml :\n&lt;dependency&gt;\n    &lt;groupId&gt;org.springdoc&lt;/groupId&gt;\n    &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;\n    &lt;version&gt;2.3.0&lt;/version&gt;\n&lt;/dependency&gt;\nDocumentation disponible sur : http://localhost:8080/swagger-ui.html",
+    "crumbs": [
+      "TPs",
+      "TP5 - API REST avec Spring Boot"
+    ]
   },
   {
     "objectID": "TODO.html",
@@ -1498,119 +1578,187 @@
     "href": "cm5.html",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "",
-    "text": "Spring Framework Overview\nSpring AOP Concepts\nSpring AOP Explained - Medium\nSpring Boot Overview\nSpring Boot Reference\nSpring Data JPA"
+    "text": "Spring Framework Overview\nSpring AOP Concepts\nSpring AOP Explained - Medium\nSpring Boot Overview\nSpring Boot Reference\nSpring Data JPA",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#quest-ce-que-lioc",
     "href": "cm5.html#quest-ce-que-lioc",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "2.1 Qu’est-ce que l’IoC ?",
-    "text": "2.1 Qu’est-ce que l’IoC ?\nNous avions vu dans les principes SOLID le “Dependency Inversion Principle” :\n\nHigh-level modules should not depend on low-level modules.\n\nboth should depend on abstractions.\n\n\nL’IoC (Inversion of Control), est un “design pattern”. C’est l’un des mécanismes qui permet d’implémenter le DIP (Dependency Inversion Principle).\n\n\nD’autres patterns permettent d’implémenter le DIP : Factory, Strategy, Plugin architecture, Service Locator.\nDans Spring, l’IoC est réalisée principalement via l’injection de dépendances (DI).\nAvantages :\n\naugmenter la modularité d’un programme\ndivision claire des responsabilités\n\nAu lieu qu’un composant de haut niveau soit responsable de la création et de la gestion de ses dépendances, cette responsabilité est inversée et confiée à un conteneur spécialisé."
+    "text": "2.1 Qu’est-ce que l’IoC ?\nNous avions vu dans les principes SOLID le “Dependency Inversion Principle” :\n\nHigh-level modules should not depend on low-level modules.\n\nboth should depend on abstractions.\n\n\nL’IoC (Inversion of Control), est un “design pattern”. C’est l’un des mécanismes qui permet d’implémenter le DIP (Dependency Inversion Principle).\n\n\nD’autres patterns permettent d’implémenter le DIP : Factory, Strategy, Plugin architecture, Service Locator.\nDans Spring, l’IoC est réalisée principalement via l’injection de dépendances (DI).\nAvantages :\n\naugmenter la modularité d’un programme\ndivision claire des responsabilités\n\nAu lieu qu’un composant de haut niveau soit responsable de la création et de la gestion de ses dépendances, cette responsabilité est inversée et confiée à un conteneur spécialisé.",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#système-ne-respectant-pas-le-dip",
     "href": "cm5.html#système-ne-respectant-pas-le-dip",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "2.2 Système ne respectant pas le DIP",
-    "text": "2.2 Système ne respectant pas le DIP\nDans cet exemple, les objets créent directement leurs dépendances :\npublic class StudentRepository {\n    private DatabaseConnection databaseConnection;\n    private CacheManager cacheManager;\n\n    public StudentRepository() {\n        this.databaseConnection = new DatabaseConnection();\n        this.cacheManager = new CacheManager();\n    }\n\n    public void saveStudent(String student) {\n        // ...\n    }\n}\n\n2.2.1 Problèmes de l’approche\n\ncertains objets doivent être partagés (singletons).\n\non ne doit pas les recréer à chaque fois\n\ncertains objets doivent utiliser une configuration différente en dev / qa / prod\ntests difficiles\n\non ne peut pas facilement changer les dépendances"
+    "text": "2.2 Système ne respectant pas le DIP\nDans cet exemple, les objets créent directement leurs dépendances :\npublic class StudentRepository {\n    private DatabaseConnection databaseConnection;\n    private CacheManager cacheManager;\n\n    public StudentRepository() {\n        this.databaseConnection = new DatabaseConnection();\n        this.cacheManager = new CacheManager();\n    }\n\n    public void saveStudent(String student) {\n        // ...\n    }\n}\n\n2.2.1 Problèmes de l’approche\n\ncertains objets doivent être partagés (singletons).\n\non ne doit pas les recréer à chaque fois\n\ncertains objets doivent utiliser une configuration différente en dev / qa / prod\ntests difficiles\n\non ne peut pas facilement changer les dépendances",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#système-utilisant-ioc",
     "href": "cm5.html#système-utilisant-ioc",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "2.3 Système utilisant IoC",
-    "text": "2.3 Système utilisant IoC\nDans un système utilisant IoC, un conteneur injecte les dépendances :\npublic class StudentRepository {\n    private final DatabaseConnection databaseConnection;\n    private final CacheManager cacheManager;\n\n    public StudentRepository(DatabaseConnection databaseConnection, CacheManager cacheManager) {\n        this.databaseConnection = databaseConnection;\n        this.cacheManager = cacheManager;\n    }\n\n    public void saveStudent(String student) {\n      // ...\n    }\n}\nLe conteneur IoC est responsable de la création et de l’injection des dépendances nécessaires."
+    "text": "2.3 Système utilisant IoC\nDans un système utilisant IoC, un conteneur injecte les dépendances :\npublic class StudentRepository {\n    private final DatabaseConnection databaseConnection;\n    private final CacheManager cacheManager;\n\n    public StudentRepository(DatabaseConnection databaseConnection, CacheManager cacheManager) {\n        this.databaseConnection = databaseConnection;\n        this.cacheManager = cacheManager;\n    }\n\n    public void saveStudent(String student) {\n      // ...\n    }\n}\nLe conteneur IoC est responsable de la création et de l’injection des dépendances nécessaires.",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#avantages-de-spring",
     "href": "cm5.html#avantages-de-spring",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "3.1 Avantages de Spring",
-    "text": "3.1 Avantages de Spring\n\nGestion simplifiée des dépendances : Spring gère automatiquement l’assemblage des composants de l’application.\nModularité et testabilité : Les composants sont faiblement couplés, ce qui facilite les tests unitaires.\nConfigurations centralisées : Les configurations sont centralisées et peuvent être définies à l’aide de fichiers XML, d’annotations ou de classes Java.\nLarge écosystème : Spring offre une large gamme de projets pour différents besoins (Spring Boot, Spring Data, Spring Security, etc.)."
+    "text": "3.1 Avantages de Spring\n\nGestion simplifiée des dépendances : Spring gère automatiquement l’assemblage des composants de l’application.\nModularité et testabilité : Les composants sont faiblement couplés, ce qui facilite les tests unitaires.\nConfigurations centralisées : Les configurations sont centralisées et peuvent être définies à l’aide de fichiers XML, d’annotations ou de classes Java.\nLarge écosystème : Spring offre une large gamme de projets pour différents besoins (Spring Boot, Spring Data, Spring Security, etc.).",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#exemple-dutilisation-de-spring-ioc",
     "href": "cm5.html#exemple-dutilisation-de-spring-ioc",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "3.2 Exemple d’utilisation de Spring IoC",
-    "text": "3.2 Exemple d’utilisation de Spring IoC\nVoici un exemple simple de configuration de Spring à l’aide de l’annotation @Component et de l’injection de dépendance via @Autowired :\n@Component\npublic class StudentService {\n    private StudentRepository studentRepository;\n\n    @Autowired\n    public StudentService(StudentRepository studentRepository) {\n        this.studentRepository = studentRepository;\n    }\n\n    public void registerStudent(String student) {\n        // ... business logic\n        studentRepository.saveStudent(student);\n        // ...\n    }\n}\n@Repository\npublic class StudentRepository {\n    public Optional&lt;Student&gt; findById(int id) {\n      // ...\n    }\n    // Autres méthodes d'accès aux données\n}\nSpring gère la création de StudentService et de StudentRepository, ainsi que l’injection de StudentRepository dans StudentService.\n\n\n\n\n\n\nNote\n\n\n\n@Repository est une spécialisation de l’annotation @Component. Elle permet d’indiquer que la classe gère l’accès aux données (DAO)."
+    "text": "3.2 Exemple d’utilisation de Spring IoC\nVoici un exemple simple de configuration de Spring à l’aide de l’annotation @Component et de l’injection de dépendance via @Autowired :\n@Component\npublic class StudentService {\n    private StudentRepository studentRepository;\n\n    @Autowired\n    public StudentService(StudentRepository studentRepository) {\n        this.studentRepository = studentRepository;\n    }\n\n    public void registerStudent(String student) {\n        // ... business logic\n        studentRepository.saveStudent(student);\n        // ...\n    }\n}\n@Repository\npublic class StudentRepository {\n    public Optional&lt;Student&gt; findById(int id) {\n      // ...\n    }\n    // Autres méthodes d'accès aux données\n}\nSpring gère la création de StudentService et de StudentRepository, ainsi que l’injection de StudentRepository dans StudentService.\n\n\n\n\n\n\nNote\n\n\n\n@Repository est une spécialisation de l’annotation @Component. Elle permet d’indiquer que la classe gère l’accès aux données (DAO).",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#classe-principale",
     "href": "cm5.html#classe-principale",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "3.3 Classe principale",
-    "text": "3.3 Classe principale\n\nl’ApplicationContext contient tous les objets (bean) créés\n\nimport org.springframework.context.ApplicationContext;\nimport org.springframework.context.annotation.AnnotationConfigApplicationContext;\n\npublic class MainApplication {\n    public static void main(String[] args) {\n        // AnnotationConfig =&gt; les injections se font par annotation\n        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);\n\n        StudentService studentService = context.getBean(StudentService.class);\n\n        studentService.registerStudent(\"John Doe\");\n    }\n}\nLa création du contexte référence une configuration. La configuration peut se faire :\n\npar “scanning” des annotations @Component,\nou par déclaration explicite @Bean.\n\n\n@Configuration\n@ComponentScan(basePackages = \"org.efrei.altn72.cm5\") \npublic class AppConfig {\n  // Bean défini manuellement avec le nom \"primaryDataSource\"\n  @Bean\n  public DataSource primaryDataSource() {\n    var dsBuilder = DataSourceBuilder.create();\n    dsBuilder.driverClassName(\"org.h2.Driver\");\n    dsBuilder.url(\"jdbc:h2:mem:test\");\n    dsBuilder.username(\"SA\");\n    dsBuilder.password(\"\");\n    return dsBuilder.build();\n  }\n\n  // Autre bean manuel avec dépendance sur \"primaryDataSource\"\n  // Spring va d'abord chercher un bean du type \"DataSource\".\n  // S'il y en a plusieurs, il va ensuite chercher par le nom \"primaryDataSource\".\n  @Bean\n  public GradeService databaseService(DataSource primaryDataSource) {\n    return new GradeService(primaryDataSource);\n  }\n}"
+    "text": "3.3 Classe principale\n\nl’ApplicationContext contient tous les objets (bean) créés\n\nimport org.springframework.context.ApplicationContext;\nimport org.springframework.context.annotation.AnnotationConfigApplicationContext;\n\npublic class MainApplication {\n    public static void main(String[] args) {\n        // AnnotationConfig =&gt; les injections se font par annotation\n        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);\n\n        StudentService studentService = context.getBean(StudentService.class);\n\n        studentService.registerStudent(\"John Doe\");\n    }\n}\nLa création du contexte référence une configuration. La configuration peut se faire :\n\npar “scanning” des annotations @Component,\nou par déclaration explicite @Bean.\n\n\n@Configuration\n@ComponentScan(basePackages = \"org.efrei.altn72.cm5\") \npublic class AppConfig {\n  // Bean défini manuellement avec le nom \"primaryDataSource\"\n  @Bean\n  public DataSource primaryDataSource() {\n    var dsBuilder = DataSourceBuilder.create();\n    dsBuilder.driverClassName(\"org.h2.Driver\");\n    dsBuilder.url(\"jdbc:h2:mem:test\");\n    dsBuilder.username(\"SA\");\n    dsBuilder.password(\"\");\n    return dsBuilder.build();\n  }\n\n  // Autre bean manuel avec dépendance sur \"primaryDataSource\"\n  // Spring va d'abord chercher un bean du type \"DataSource\".\n  // S'il y en a plusieurs, il va ensuite chercher par le nom \"primaryDataSource\".\n  @Bean\n  public GradeService databaseService(DataSource primaryDataSource) {\n    return new GradeService(primaryDataSource);\n  }\n}",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#introduction",
     "href": "cm5.html#introduction",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "4.1 Introduction",
-    "text": "4.1 Introduction\nL’Aspect Oriented Programming permet de séparer le code qui s’applique de manière transversale de la logique métier. On parle de “Cross-Cutting concerns”. Par exemple :\n\nlogging\nsécurité\ntransactions\ngestion des erreurs\ncaching\n\nL’objectif est d’éviter de polluer le code métier avec ces préoccupations techniques, et de factoriser le code commun.\nIl existe plusieurs technologies permettant de l’implémenter: AspectJ, Spring AOP, JBoss AOP. Spring AOP n’a pas pour objectif d’implémenter AOP de manière exhaustive. Son but est d’avoir une bonne intégration entre Spring IoC et Spring AOP pour résoudre des problèmes récurrents dans le développement d’applications d’entreprise."
+    "text": "4.1 Introduction\nL’Aspect Oriented Programming permet de séparer le code qui s’applique de manière transversale de la logique métier. On parle de “Cross-Cutting concerns”. Par exemple :\n\nlogging\nsécurité\ntransactions\ngestion des erreurs\ncaching\n\nL’objectif est d’éviter de polluer le code métier avec ces préoccupations techniques, et de factoriser le code commun.\nIl existe plusieurs technologies permettant de l’implémenter: AspectJ, Spring AOP, JBoss AOP. Spring AOP n’a pas pour objectif d’implémenter AOP de manière exhaustive. Son but est d’avoir une bonne intégration entre Spring IoC et Spring AOP pour résoudre des problèmes récurrents dans le développement d’applications d’entreprise.",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#terminologie",
     "href": "cm5.html#terminologie",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "4.2 Terminologie",
-    "text": "4.2 Terminologie\n\nAspect : le module contenant la préoccupation transversale\nJoin Point : point d’exécution dans l’application (appel de méthode, construction d’objet…)\nPointcut : expression qui sélectionne les join points où appliquer l’aspect\nAdvice : l’action à exécuter (le code de l’aspect)\nWeaving : le processus d’application des aspects au code"
+    "text": "4.2 Terminologie\n\nAspect : le module contenant la préoccupation transversale\nJoin Point : point d’exécution dans l’application (appel de méthode, construction d’objet…)\nPointcut : expression qui sélectionne les join points où appliquer l’aspect\nAdvice : l’action à exécuter (le code de l’aspect)\nWeaving : le processus d’application des aspects au code",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#exemple",
     "href": "cm5.html#exemple",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "4.3 Exemple",
-    "text": "4.3 Exemple\nExemple d’aspect qui va ajouter des logs pour toutes les méthodes d’un package :\n@Aspect\n@Component\npublic class LoggingAspect {\n\n  @Pointcut(\"execution(public * org.efrei.altn72.cm5.service.*.*(..))\")\n  public void allServiceMethods() {\n  }\n\n  @Before(\"allServiceMethods()\")\n  public void logBefore(JoinPoint joinPoint) {\n    System.out.println(\"Before method: \" + joinPoint.getSignature().getName());\n  }\n}\n\nAspect : Logging\nJoin Points : l’exécution de toutes les méthodes publiques du package service\nAdvice : logBefore\nWeaving : Spring AOP utilise l’un de ces deux mécanismes pour injecter le code :\n\nles “dynamic proxies” du JDK si les join point sont sur les interfaces\nles proxies CGLIB pour les classes\n\n\n\n\n\nProxy Call"
+    "text": "4.3 Exemple\nExemple d’aspect qui va ajouter des logs pour toutes les méthodes d’un package :\n@Aspect\n@Component\npublic class LoggingAspect {\n\n  @Pointcut(\"execution(public * org.efrei.altn72.cm5.service.*.*(..))\")\n  public void allServiceMethods() {\n  }\n\n  @Before(\"allServiceMethods()\")\n  public void logBefore(JoinPoint joinPoint) {\n    System.out.println(\"Before method: \" + joinPoint.getSignature().getName());\n  }\n}\n\nAspect : Logging\nJoin Points : l’exécution de toutes les méthodes publiques du package service\nAdvice : logBefore\nWeaving : Spring AOP utilise l’un de ces deux mécanismes pour injecter le code :\n\nles “dynamic proxies” du JDK si les join point sont sur les interfaces\nles proxies CGLIB pour les classes\n\n\n\n\n\nProxy Call",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#utilisation",
     "href": "cm5.html#utilisation",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "4.4 Utilisation",
-    "text": "4.4 Utilisation\nIl est rare de devoir implémenter ses propres Aspects. En général, nous allons utiliser des aspects d’une bibliothèque pour implémenter nos “cross-cutting concerns”.\nAfin de pouvoir identifier facilement le code modifié par AOP, les bibliothèques utilisent en géneral une annotation spécifique, qui sera utilisée dans le Poincut.\nPar exemple, l’annotation @Transactional permet de s’assurer pour que pour chaque méthode :\n\nune transaction sera présente (on peut forcer la recréation avec REQUIRES_NEW) avant l’exécution\net qu’un commit ou un rollback (en cas d’exception) aura lieu à la fin\n\n@Transactional(readOnly = true)\npublic class DefaultUserService implements UserService {\n\n    public User getUser(String userName) {\n        // ...\n    }\n\n    // these settings have precedence for this method\n    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)\n    public void updateUser(User user) {\n        // ...\n    }\n}"
+    "text": "4.4 Utilisation\nIl est rare de devoir implémenter ses propres Aspects. En général, nous allons utiliser des aspects d’une bibliothèque pour implémenter nos “cross-cutting concerns”.\nAfin de pouvoir identifier facilement le code modifié par AOP, les bibliothèques utilisent en géneral une annotation spécifique, qui sera utilisée dans le Poincut.\nPar exemple, l’annotation @Transactional permet de s’assurer pour que pour chaque méthode :\n\nune transaction sera présente (on peut forcer la recréation avec REQUIRES_NEW) avant l’exécution\net qu’un commit ou un rollback (en cas d’exception) aura lieu à la fin\n\n@Transactional(readOnly = true)\npublic class DefaultUserService implements UserService {\n\n    public User getUser(String userName) {\n        // ...\n    }\n\n    // these settings have precedence for this method\n    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)\n    public void updateUser(User user) {\n        // ...\n    }\n}",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#activité-hello-world",
     "href": "cm5.html#activité-hello-world",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "5.1 Activité : Hello World",
-    "text": "5.1 Activité : Hello World\nNous allons créer une application Spring Boot “Hello World”. Elle possèdera un seul endpoint GET / qui renvoie une page “Hello World”.\n\nDans IntelliJ, créez un nouveau projet :\n\n\nFile -&gt; New -&gt; Project -&gt; Spring Boot\nchoisir Type: Maven\nDependencies : cocher Web/Spring Web\n\n\nCréez ensuite une nouvelle classe HelloApplication et collez le code suivant :\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@SpringBootApplication\npublic class HelloApplication {\n\n    @GetMapping(\"/\")\n    String home() {\n        return \"Hello World!\";\n    }\n\n    public static void main(String[] args) {\n        SpringApplication.run(MyApplication.class, args);\n    }\n}\n\nDémarrez l’application\n\n...\n2025-11-24T20:28:45.802+01:00  INFO 26716 --- [spring_boot_demo] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'\n2025-11-24T20:28:45.806+01:00  INFO 26716 --- [spring_boot_demo] [           main] o.e.a.spring_boot_demo.MyApplication     : Started MyApplication in 1.652 seconds (process running for 2.535)\n\nTestez l’endpoint avec http://localhost:8080\n\nNous observons les annotations suivantes :\n\n@RestController (voir source) est une annotation composée avec :\n\n@Controller, qui est une spécialisation de @Component\n\nElle permet d’identifier les contrôlleurs dans le modèle MVC. Cela permet de “mapper” des URLs sur des méthodes de la classe.\nNous avons vu que @Component était l’annotation Spring de base pour déclarer des “beans”.\n\n@ResponseBody: indique que les types de retour de méthodes seront transformés en JSON ou XML\n\n@SpringBootApplication (voir source) est une annotation composite qui équivaut à déclarer ces 3 annotations :\n\n@SpringBootConfiguration : spécialisation de @Configuration. Dans Spring Boot, on ne doit avoir qu’une seule classe annotée @SpringBootConfiguration.\n@EnableAutoConfiguration : dit à Spring Boot de “deviner” comment vous voulez configurer Spring, en fonction des dépendances ajoutées. Comme nous avons ajouté spring-boot-starter-webmvc dans notre pom.xml, Spring sait que nous voulons développer une application web utilisant Tomcat. Si HSQLDB est dans votre classpath et que vous n’avez pas configuré de connection, Spring Boot va auto-configurer une bdd “in-memory”.\n@ComponentScan : voir ci-dessus\n\n@GetMapping sur les méthodes est un raccourci, qui équivaut à\n\n@RequestMapping(method = RequestMethod.GET). Cela signifie que Spring va “mapper” la requête HTTP GET sur la méthode."
+    "text": "5.1 Activité : Hello World\nNous allons créer une application Spring Boot “Hello World”. Elle possèdera un seul endpoint GET / qui renvoie une page “Hello World”.\n\nDans IntelliJ, créez un nouveau projet :\n\n\nFile -&gt; New -&gt; Project -&gt; Spring Boot\nchoisir Type: Maven\nDependencies : cocher Web/Spring Web\n\n\nCréez ensuite une nouvelle classe HelloApplication et collez le code suivant :\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@SpringBootApplication\npublic class HelloApplication {\n\n    @GetMapping(\"/\")\n    String home() {\n        return \"Hello World!\";\n    }\n\n    public static void main(String[] args) {\n        SpringApplication.run(MyApplication.class, args);\n    }\n}\n\nDémarrez l’application\n\n...\n2025-11-24T20:28:45.802+01:00  INFO 26716 --- [spring_boot_demo] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'\n2025-11-24T20:28:45.806+01:00  INFO 26716 --- [spring_boot_demo] [           main] o.e.a.spring_boot_demo.MyApplication     : Started MyApplication in 1.652 seconds (process running for 2.535)\n\nTestez l’endpoint avec http://localhost:8080\n\nNous observons les annotations suivantes :\n\n@RestController (voir source) est une annotation composée avec :\n\n@Controller, qui est une spécialisation de @Component\n\nElle permet d’identifier les contrôlleurs dans le modèle MVC. Cela permet de “mapper” des URLs sur des méthodes de la classe.\nNous avons vu que @Component était l’annotation Spring de base pour déclarer des “beans”.\n\n@ResponseBody: indique que les types de retour de méthodes seront transformés en JSON ou XML\n\n@SpringBootApplication (voir source) est une annotation composite qui équivaut à déclarer ces 3 annotations :\n\n@SpringBootConfiguration : spécialisation de @Configuration. Dans Spring Boot, on ne doit avoir qu’une seule classe annotée @SpringBootConfiguration.\n@EnableAutoConfiguration : dit à Spring Boot de “deviner” comment vous voulez configurer Spring, en fonction des dépendances ajoutées. Comme nous avons ajouté spring-boot-starter-webmvc dans notre pom.xml, Spring sait que nous voulons développer une application web utilisant Tomcat. Si HSQLDB est dans votre classpath et que vous n’avez pas configuré de connection, Spring Boot va auto-configurer une bdd “in-memory”.\n@ComponentScan : voir ci-dessus\n\n@GetMapping sur les méthodes est un raccourci, qui équivaut à\n\n@RequestMapping(method = RequestMethod.GET). Cela signifie que Spring va “mapper” la requête HTTP GET sur la méthode.",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#activité-application-customers",
     "href": "cm5.html#activité-application-customers",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "5.2 Activité : application Customers",
-    "text": "5.2 Activité : application Customers\nNous allons maintenant créer une nouvelle application CustomersAplication. Elle possède deux endpoints REST permettant de créer (POST) et récupérer (GET) des clients.\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.*;\nimport org.springframework.web.server.ResponseStatusException;\n\nimport java.util.Map;\nimport java.util.concurrent.ConcurrentHashMap;\nimport java.util.concurrent.atomic.AtomicInteger;\n\nrecord CustomerDto(int id, String name) {\n}\n\nrecord CreateCustomerDto(String name) {\n}\n\n@RestController\n@SpringBootApplication\n@RequestMapping(\"/customers\")\npublic class CustomersApplication {\n    private final Map&lt;Integer, CustomerDto&gt; customers = new ConcurrentHashMap&lt;&gt;();\n    private final AtomicInteger idGenerator = new AtomicInteger(0);\n\n    @GetMapping(\"/{id}\")\n    CustomerDto getCustomer(@PathVariable int id) {\n        var result = customers.get(id);\n        if (result == null)\n            throw new ResponseStatusException(HttpStatus.NOT_FOUND, \"Customer not found with id: \" + id);\n        else\n            return result;\n    }\n\n    @PostMapping()\n    ResponseEntity&lt;CustomerDto&gt; createCustomer(@RequestBody CreateCustomerDto customer) {\n        int newId = idGenerator.incrementAndGet();\n        CustomerDto newCustomer = new CustomerDto(newId, customer.name());\n        customers.put(newId, newCustomer);\n\n        return ResponseEntity\n                .status(HttpStatus.CREATED)\n                .body(newCustomer);\n    }\n\n    public static void main(String[] args) {\n        SpringApplication.run(CustomersApplication.class, args);\n    }\n}\nDémarrez le programme, puis testez l’application avec le client HTTP d’IntelliJ. Observations :\n\ndans les annotations @XXXMapping, le chemin peut comporter des variables {id}. Elles sont “mappées” sur les paramètres de méthodes avec @PathVariable.\nle “body” de la requête HTTP est mappé en utilisant @RequestBody\non peut contrôler les codes retours HTTP de deux façons :\n\nlancer une exception ResponseStatusException\nchanger le type de retour en ResponseEntity&lt;?&gt;\n\ncomparez les annotations Spring avec les annotations Jakarta EE\n\n\n\n\n\n\n\nNote\n\n\n\nSpring supporte certaines annotations Jakarta EE :\n\n\n\n\n\n\n\nSpring\nJakarta EE\n\n\n\n\n@Autowired\n@Inject\n\n\n@Component @Qualifier\n@Named\n\n\nBean validation annotations @NotNull, @Email, @Size, …\nBean validation annotations\n\n\nJPA annotations @Entity @Id, …\nJPA annotations\n\n\n\nPour la validation et JPA, la pratique est d’utiliser les annotations Jakarta EE. Pour l’injection et REST, les projets utilisent en général les annotations Spring."
+    "text": "5.2 Activité : application Customers\nNous allons maintenant créer une nouvelle application CustomersAplication. Elle possède deux endpoints REST permettant de créer (POST) et récupérer (GET) des clients.\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.*;\nimport org.springframework.web.server.ResponseStatusException;\n\nimport java.util.Map;\nimport java.util.concurrent.ConcurrentHashMap;\nimport java.util.concurrent.atomic.AtomicInteger;\n\nrecord CustomerDto(int id, String name) {\n}\n\nrecord CreateCustomerDto(String name) {\n}\n\n@RestController\n@SpringBootApplication\n@RequestMapping(\"/customers\")\npublic class CustomersApplication {\n    private final Map&lt;Integer, CustomerDto&gt; customers = new ConcurrentHashMap&lt;&gt;();\n    private final AtomicInteger idGenerator = new AtomicInteger(0);\n\n    @GetMapping(\"/{id}\")\n    CustomerDto getCustomer(@PathVariable int id) {\n        var result = customers.get(id);\n        if (result == null)\n            throw new ResponseStatusException(HttpStatus.NOT_FOUND, \"Customer not found with id: \" + id);\n        else\n            return result;\n    }\n\n    @PostMapping()\n    ResponseEntity&lt;CustomerDto&gt; createCustomer(@RequestBody CreateCustomerDto customer) {\n        int newId = idGenerator.incrementAndGet();\n        CustomerDto newCustomer = new CustomerDto(newId, customer.name());\n        customers.put(newId, newCustomer);\n\n        return ResponseEntity\n                .status(HttpStatus.CREATED)\n                .body(newCustomer);\n    }\n\n    public static void main(String[] args) {\n        SpringApplication.run(CustomersApplication.class, args);\n    }\n}\nDémarrez le programme, puis testez l’application avec le client HTTP d’IntelliJ. Observations :\n\ndans les annotations @XXXMapping, le chemin peut comporter des variables {id}. Elles sont “mappées” sur les paramètres de méthodes avec @PathVariable.\nle “body” de la requête HTTP est mappé en utilisant @RequestBody\non peut contrôler les codes retours HTTP de deux façons :\n\nlancer une exception ResponseStatusException\nchanger le type de retour en ResponseEntity&lt;?&gt;\n\ncomparez les annotations Spring avec les annotations Jakarta EE\n\n\n\n\n\n\n\nNote\n\n\n\nSpring supporte certaines annotations Jakarta EE :\n\n\n\n\n\n\n\nSpring\nJakarta EE\n\n\n\n\n@Autowired\n@Inject\n\n\n@Component @Qualifier\n@Named\n\n\nBean validation annotations @NotNull, @Email, @Size, …\nBean validation annotations\n\n\nJPA annotations @Entity @Id, …\nJPA annotations\n\n\n\nPour la validation et JPA, la pratique est d’utiliser les annotations Jakarta EE. Pour l’injection et REST, les projets utilisent en général les annotations Spring.",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#externalisation-de-la-configuration",
     "href": "cm5.html#externalisation-de-la-configuration",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "5.3 Externalisation de la configuration",
-    "text": "5.3 Externalisation de la configuration\nSpring Boot offre la possibilité d’externaliser la configuration de l’application. Cela permet d’utiliser le même code en DEV, QA, PROD, mais avec des fichiers de configuration différents. Voir Externalized Configuration\n\n5.3.1 Avec @Value\nPar exemple, nous pouvons modifier notre application pour configurer le premier identifiant généré :\n@RestController\n@SpringBootApplication\n@RequestMapping(\"/customers\")\npublic class CustomersApplication {\n    @Value(\"${customers.data.initialId}\")\n    private int initId;\n\n    private final AtomicInteger idGenerator = new AtomicInteger(initId);\n    // ...\nLa valeur peut être passée à l’application de plusieurs façons :\n\nDans un fichier application.properties\n\n\n\napplication.properties\n\ncustomers.data.initialId=11\n\n\nDans un fichier application.yaml\nEn ligne de commande : java -jar customers.jar --customers.data.initialId=11\n\n\n\n5.3.2 Avec @ConfigurationProperties\nL’utilisation de @Value peut parfois être fragile, car le nom de la clé n’est pas validé à la compilation. L’annotation @ConfigurationProperties sur une classe permet d’injecter les propriétés en utilisant des attributs. C’est particulièrement pertinent lorsque la configuration est hiérarchique.\n@ConfigurationProperties(\"customers.data\")\npublic class CustomersProperties {\n    private int initialId;\n\n    public int getInitialId() {\n        return initialId;\n    }\n    \n    public void setInitialId(int initialId) {\n        this.initialId = initialId;\n    }    \n}\n@RestController\n@SpringBootApplication\n@RequestMapping(\"/customers\")\n@EnableConfigurationProperties(CustomersProperties.class)\npublic class CustomersApplication {\n\n    private final CustomersProperties properties;\n\n    public CustomersApplication(CustomersProperties properties) {\n        this.properties = properties;\n        idGenerator = new AtomicInteger(properties.getInitialId());\n    }\n    //..."
+    "text": "5.3 Externalisation de la configuration\nSpring Boot offre la possibilité d’externaliser la configuration de l’application. Cela permet d’utiliser le même code en DEV, QA, PROD, mais avec des fichiers de configuration différents. Voir Externalized Configuration\n\n5.3.1 Avec @Value\nPar exemple, nous pouvons modifier notre application pour configurer le premier identifiant généré :\n@RestController\n@SpringBootApplication\n@RequestMapping(\"/customers\")\npublic class CustomersApplication {\n    @Value(\"${customers.data.initialId}\")\n    private int initId;\n\n    private final AtomicInteger idGenerator = new AtomicInteger(initId);\n    // ...\nLa valeur peut être passée à l’application de plusieurs façons :\n\nDans un fichier application.properties\n\n\n\napplication.properties\n\ncustomers.data.initialId=11\n\n\nDans un fichier application.yaml\nEn ligne de commande : java -jar customers.jar --customers.data.initialId=11\n\n\n\n5.3.2 Avec @ConfigurationProperties\nL’utilisation de @Value peut parfois être fragile, car le nom de la clé n’est pas validé à la compilation. L’annotation @ConfigurationProperties sur une classe permet d’injecter les propriétés en utilisant des attributs. C’est particulièrement pertinent lorsque la configuration est hiérarchique.\n@ConfigurationProperties(\"customers.data\")\npublic class CustomersProperties {\n    private int initialId;\n\n    public int getInitialId() {\n        return initialId;\n    }\n    \n    public void setInitialId(int initialId) {\n        this.initialId = initialId;\n    }    \n}\n@RestController\n@SpringBootApplication\n@RequestMapping(\"/customers\")\n@EnableConfigurationProperties(CustomersProperties.class)\npublic class CustomersApplication {\n\n    private final CustomersProperties properties;\n\n    public CustomersApplication(CustomersProperties properties) {\n        this.properties = properties;\n        idGenerator = new AtomicInteger(properties.getInitialId());\n    }\n    //...",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#spring-boot-starters",
     "href": "cm5.html#spring-boot-starters",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "5.4 Spring Boot starters",
-    "text": "5.4 Spring Boot starters\nLes dépendances “starter” sont des regroupements de bibliothèques qui permettent facilement d’utiliser une technologie. Par exemple si vous souhaitez utiliser JPA pour accéder à une base de données, il faut ajouter la dépendance spring-boot-starter-data-jpa dans le pom.xml.\nSpring Boot offre une panoplie de dépendances starter : Spring Boot Starters, mais d’autres fournisseurs en proposent également.\nPar exemple, pour une application REST en production, nous pourrons ajouter :\n        &lt;dependency&gt;\n            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;\n            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;\n        &lt;/dependency&gt;\n        &lt;dependency&gt;\n            &lt;groupId&gt;org.springdoc&lt;/groupId&gt;\n            &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;\n            &lt;version&gt;2.8.14&lt;/version&gt;\n        &lt;/dependency&gt;\n\nActuator permet de surveiller l’application. La dépendance permet de collecter des métriques pour vérifier qu’elle est en bonne santé.\n\nDes endpoints sont exposés pour inspecter les beans, les endpoints REST, l’espace disque, l’occupation mémoire, …\nVoir Actuator endpoints\nPour des raisons de sécurité, la plupart sont désactivés par défaut. En production, vous devrez protéger les endpoints pour les rendre uniquement accessibles aux équipes opérationnelles.\nD’autres “starter” peuvent être utilisés pour offrir une interface d’administration utilisant les actuator, comme Spring Boot Admin.\n\nSpringdoc permet d’exposer l’API avec Swagger, voir http://localhost:8080/swagger-ui\n\n\n5.4.1 Décortiquons un starter\n🪄 Spring Boot a ce côté un peu “magique”, où des choses se mettent à fonctionner ou pas en fonction des annotations et des dépendances. La documentation est à consulter en priorité, mais il est important de savoir naviguer dans le code source pour comprendre ce qu’il se passe.\nUn starter est simplement un fichier pom.xml qui agrège plusieurs dépendances.\n\nCtrl-Clic sur la dépendance spring-boot-starter-webmvc dans votre pom.xml\nVous arrivez sur le pom.xml du starter. Il contient des dépendances sur tomcat, spring-boot-webmvc, …\n\nObservons maintenant comment Tomcat est “autoconfiguré” avec le port 8080 :\n\nDepuis IntelliJ, aller dans la bibliothèque spring-boot-tomcat-4.0.0.jar\nOuvrez META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports. Ce fichier porte un nom spécial et est lu par Spring Boot.\nCe fichier contient une liste de classes annotées @AutoConfiguration\nOuvrez TomcatServletWebServerAutoConfiguration.\n\nL’annotation @ConditionalOnClass indique que cette auto-configuration n’est activée que si certaines classes sont présentes sur le classpath.\nElle déclare un bean de type TomcatServletWebServerFactory\nOuvrons cette classe. On voit que le port est déclaré dans la super-classe AbstractConfigurableWebServerFactory avec private int port = 8080\n\n\nSi on souhaite changer le port, la lecture du code source nous montre plusieurs possibilités :\n\nLe bean tomcatServletWebServerFactory est @ConditionalOnMissingBean(value = ServletWebServerFactory.class, ...). Cela signifie que l’on pourrait déclarer ce bean dans notre application pour le configurer différemment.\nOn voit que TomcatServletWebServerAutoConfiguration importe ServletWebServerConfiguration\n\nDans ServletWebServerConfiguration, un bean ServletWebServerFactoryCustomizer est créé\nle ServletWebServerFactoryCustomizer a une méthode customize, qui récupère le port depuis this.serverProperties::getPort\nServerProperties a une annotation @ConfigurationProperties(\"server\")\nCela signifie que ce bean est configuré avec un fichier .properties. Pour changer le port, il faut donc modifier application.properties et ajouter server.port=8081."
+    "text": "5.4 Spring Boot starters\nLes dépendances “starter” sont des regroupements de bibliothèques qui permettent facilement d’utiliser une technologie. Par exemple si vous souhaitez utiliser JPA pour accéder à une base de données, il faut ajouter la dépendance spring-boot-starter-data-jpa dans le pom.xml.\nSpring Boot offre une panoplie de dépendances starter : Spring Boot Starters, mais d’autres fournisseurs en proposent également.\nPar exemple, pour une application REST en production, nous pourrons ajouter :\n        &lt;dependency&gt;\n            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;\n            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;\n        &lt;/dependency&gt;\n        &lt;dependency&gt;\n            &lt;groupId&gt;org.springdoc&lt;/groupId&gt;\n            &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;\n            &lt;version&gt;2.8.14&lt;/version&gt;\n        &lt;/dependency&gt;\n\nActuator permet de surveiller l’application. La dépendance permet de collecter des métriques pour vérifier qu’elle est en bonne santé.\n\nDes endpoints sont exposés pour inspecter les beans, les endpoints REST, l’espace disque, l’occupation mémoire, …\nVoir Actuator endpoints\nPour des raisons de sécurité, la plupart sont désactivés par défaut. En production, vous devrez protéger les endpoints pour les rendre uniquement accessibles aux équipes opérationnelles.\nD’autres “starter” peuvent être utilisés pour offrir une interface d’administration utilisant les actuator, comme Spring Boot Admin.\n\nSpringdoc permet d’exposer l’API avec Swagger, voir http://localhost:8080/swagger-ui\n\n\n5.4.1 Décortiquons un starter\n🪄 Spring Boot a ce côté un peu “magique”, où des choses se mettent à fonctionner ou pas en fonction des annotations et des dépendances. La documentation est à consulter en priorité, mais il est important de savoir naviguer dans le code source pour comprendre ce qu’il se passe.\nUn starter est simplement un fichier pom.xml qui agrège plusieurs dépendances.\n\nCtrl-Clic sur la dépendance spring-boot-starter-webmvc dans votre pom.xml\nVous arrivez sur le pom.xml du starter. Il contient des dépendances sur tomcat, spring-boot-webmvc, …\n\nObservons maintenant comment Tomcat est “autoconfiguré” avec le port 8080 :\n\nDepuis IntelliJ, aller dans la bibliothèque spring-boot-tomcat-4.0.0.jar\nOuvrez META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports. Ce fichier porte un nom spécial et est lu par Spring Boot.\nCe fichier contient une liste de classes annotées @AutoConfiguration\nOuvrez TomcatServletWebServerAutoConfiguration.\n\nL’annotation @ConditionalOnClass indique que cette auto-configuration n’est activée que si certaines classes sont présentes sur le classpath.\nElle déclare un bean de type TomcatServletWebServerFactory\nOuvrons cette classe. On voit que le port est déclaré dans la super-classe AbstractConfigurableWebServerFactory avec private int port = 8080\n\n\nSi on souhaite changer le port, la lecture du code source nous montre plusieurs possibilités :\n\nLe bean tomcatServletWebServerFactory est @ConditionalOnMissingBean(value = ServletWebServerFactory.class, ...). Cela signifie que l’on pourrait déclarer ce bean dans notre application pour le configurer différemment.\nOn voit que TomcatServletWebServerAutoConfiguration importe ServletWebServerConfiguration\n\nDans ServletWebServerConfiguration, un bean ServletWebServerFactoryCustomizer est créé\nle ServletWebServerFactoryCustomizer a une méthode customize, qui récupère le port depuis this.serverProperties::getPort\nServerProperties a une annotation @ConfigurationProperties(\"server\")\nCela signifie que ce bean est configuré avec un fichier .properties. Pour changer le port, il faut donc modifier application.properties et ajouter server.port=8081.",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#tests",
     "href": "cm5.html#tests",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "5.5 Tests",
-    "text": "5.5 Tests\n\nSpring fournit une annotation @SpringBootTest, qui permet de charger le contexte complet, en cherchant la classe annotée @SpringBootApplication. Mais pour la plupart des tests, c’est trop. Elle est à réserver pour les tests d’intégration qui ont besoin de tous les beans.\nPour le code métier, créer les services en utilisant le constructeur, et/ou utiliser un framework de mocking.\nPour tester certaines couches de l’application, il existe des annotation spéciales :\n\n@WebMvcTest pour les contrôlleurs REST\n@DataJpaTest pour la persistance JPA\n\n\nVoir Testing Spring Boot Applications pour plus de détails."
+    "text": "5.5 Tests\n\nSpring fournit une annotation @SpringBootTest, qui permet de charger le contexte complet, en cherchant la classe annotée @SpringBootApplication. Mais pour la plupart des tests, c’est trop. Elle est à réserver pour les tests d’intégration qui ont besoin de tous les beans.\nPour le code métier, créer les services en utilisant le constructeur, et/ou utiliser un framework de mocking.\nPour tester certaines couches de l’application, il existe des annotation spéciales :\n\n@WebMvcTest pour les contrôlleurs REST\n@DataJpaTest pour la persistance JPA\n\n\nVoir Testing Spring Boot Applications pour plus de détails.",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm5.html#persistance",
     "href": "cm5.html#persistance",
     "title": "CM5 - Le Framework Spring Boot",
     "section": "5.6 Persistance",
-    "text": "5.6 Persistance\nLe starter spring-boot-starter-data-jpa fournit :\n\nHibernate\nSpring Data JPA : facilite l’implémentation des classes Repository\nSpring ORM : support pour les ORM dans Spring. Gère la création de l’EntityManager.\n\n\n5.6.1 Repository\nNous pouvons créer des requêtes auto-générées grâce au nom des méthodes (Query Methods). Lorsqu’une interface hérite de Repository&lt;T, ID&gt;, le nom des méthodes déclarées indique à Spring quelle requête il doit construire, grâce à une convention. 🧙‍♂️\npublic interface CityRepository extends Repository&lt;City, Long&gt; {\n\n    Page&lt;City&gt; findAll(Pageable pageable);\n\n    // Spring va automagiquement générer une requête \n    // \"SELECT c FROM City WHERE UPPER(c.name) = UPPER(?1) AND UPPER(c.state = ?2)\"\n    City findByNameAndStateAllIgnoringCase(String name, String state);\n\n}\nVoir Query Creation pour la liste des mots-clés supportés.\nDes interfaces par défaut pour les cas courants sont fournies, comme CrudRepository.\n\n\n5.6.2 @Query\nNous avions vu dans le TP JPA les annotations @NamedQuery que nous pouvions ajouter sur les @Entity. L’approche atteint vite ses limites lorsque le nombre et la complexité des requêtes augmente.\nAfin de mieux organiser notre code, il est préférable d’ajouter nos requêtes JPA dans une interface qui hérite de JpaRepository :\npublic interface UserRepository extends JpaRepository&lt;User, Long&gt; {\n\n    @Query(\"select u from User u where u.emailAddress = ?1\")\n    User findByEmailAddress(String emailAddress);\n\n    @NativeQuery(value = \"SELECT * FROM USERS WHERE EMAIL_ADDRESS = ?1\")\n    User findByEmailAddressNative(String emailAddress);\n    \n    // on peut nommer les paramètres en utilisant @Param\n    @Modifying\n    @Query(\"UPDATE User u SET u.status = :status WHERE u.id = :userId\")\n    int updateUserStatus(@Param(\"userId\") Long userId, @Param(\"status\") String status);    \n}"
+    "text": "5.6 Persistance\nLe starter spring-boot-starter-data-jpa fournit :\n\nHibernate\nSpring Data JPA : facilite l’implémentation des classes Repository\nSpring ORM : support pour les ORM dans Spring. Gère la création de l’EntityManager.\n\n\n5.6.1 Repository\nNous pouvons créer des requêtes auto-générées grâce au nom des méthodes (Query Methods). Lorsqu’une interface hérite de Repository&lt;T, ID&gt;, le nom des méthodes déclarées indique à Spring quelle requête il doit construire, grâce à une convention. 🧙‍♂️\npublic interface CityRepository extends Repository&lt;City, Long&gt; {\n\n    Page&lt;City&gt; findAll(Pageable pageable);\n\n    // Spring va automagiquement générer une requête \n    // \"SELECT c FROM City WHERE UPPER(c.name) = UPPER(?1) AND UPPER(c.state = ?2)\"\n    City findByNameAndStateAllIgnoringCase(String name, String state);\n\n}\nVoir Query Creation pour la liste des mots-clés supportés.\nDes interfaces par défaut pour les cas courants sont fournies, comme CrudRepository.\n\n\n5.6.2 @Query\nNous avions vu dans le TP JPA les annotations @NamedQuery que nous pouvions ajouter sur les @Entity. L’approche atteint vite ses limites lorsque le nombre et la complexité des requêtes augmente.\nAfin de mieux organiser notre code, il est préférable d’ajouter nos requêtes JPA dans une interface qui hérite de JpaRepository :\npublic interface UserRepository extends JpaRepository&lt;User, Long&gt; {\n\n    @Query(\"select u from User u where u.emailAddress = ?1\")\n    User findByEmailAddress(String emailAddress);\n\n    @NativeQuery(value = \"SELECT * FROM USERS WHERE EMAIL_ADDRESS = ?1\")\n    User findByEmailAddressNative(String emailAddress);\n    \n    // on peut nommer les paramètres en utilisant @Param\n    @Modifying\n    @Query(\"UPDATE User u SET u.status = :status WHERE u.id = :userId\")\n    int updateUserStatus(@Param(\"userId\") Long userId, @Param(\"status\") String status);    \n}",
+    "crumbs": [
+      "Cours",
+      "CM5 - Le Framework Spring Boot"
+    ]
   },
   {
     "objectID": "cm1.html",
