@@ -707,14 +707,122 @@
     "text": "8.1 Utilisation de l’IA\nVous pouvez utiliser l’IA pour :\n\nposer des questions sur une API\nvous aider à résoudre des erreurs de compilation\nde la complétion de code simple (inline completion OK, github copilot NON)\ngénérer du code Vue.Js\n\nVous ne devez pas utiliser une IA pour générer le code Java du projet."
   },
   {
-    "objectID": "tp2.html",
-    "href": "tp2.html",
-    "title": "1 TP2 - SOLID",
+    "objectID": "projet_2627.html",
+    "href": "projet_2627.html",
+    "title": "Projet Conduit",
     "section": "",
-    "text": "1 TP2 - SOLID\nDans le code obtenu avec le lien GitHub Classroom, vous avez un package par principe SOLID. Vous devez refactorer le code pour qu’il adhère à chaque principe.\nPensez à commit + push à la fin du TP !",
+    "text": "Le site RealWorld propose différentes implémentations du même logiciel de blogging, Conduit, qui est similaire à Medium. Cela permet de comparer différentes stacks technologiques sur un projet réaliste.\nVous pouvez tester le frontend ici sans installation : Demo Conduit Vue3\nNotre projet consiste à améliorer ce logiciel avec des corrections de bugs et des nouvelles fonctionnalités. Nous utiliserons :\n\nun frontend Vue.js, dérivé de Vue.js + Vite\nun backend Spring Boot, dérivé de Spring Boot backend",
     "crumbs": [
-      "TPs",
-      "TP2 - SOLID"
+      "Projet",
+      "Projet Conduit"
+    ]
+  },
+  {
+    "objectID": "projet_2627.html#bug-les-timestamps-sont-à-seoul",
+    "href": "projet_2627.html#bug-les-timestamps-sont-à-seoul",
+    "title": "Projet Conduit",
+    "section": "6.1 BUG : Les timestamps sont à Seoul",
+    "text": "6.1 BUG : Les timestamps sont à Seoul\nDans votre navigateur, passez en mode développement, onglet network.\n\nRegardez la réponse de l’endpoint http://localhost:8080/api/articles\nRemarquez que les champs createdAt et updatedAt sont dans la timezone UTC+9\nDéterminez la cause\nReproduisez le problème avec un test unitaire\nCorrigez le problème\nÉcrivez dans le README.md votre réflexion\n\npourquoi ce bug ne se voit pas dans l’interface ?\noù la timezone doit-elle être positionnée ?",
+    "crumbs": [
+      "Projet",
+      "Projet Conduit"
+    ]
+  },
+  {
+    "objectID": "projet_2627.html#bug-supprimer-ses-commentaires",
+    "href": "projet_2627.html#bug-supprimer-ses-commentaires",
+    "title": "Projet Conduit",
+    "section": "6.2 BUG : supprimer ses commentaires",
+    "text": "6.2 BUG : supprimer ses commentaires\nEn étant “logged in”, ajoutez un commentaire sur un article dont vous n’êtes pas l’auteur. Ensuite, essayez de le supprimer. Dans l’onglet Network du navigateur, vous verrez une erreur 500.\n\nCorrigez la règle métier et justifiez votre choix\nUtilisez un autre type d’exception. Pourquoi IllegalAccessError n’est-il pas un bon choix ?\nPour corriger, faites la même démarche que pour le bug des timestamps : test qui échoue, commit, correction.",
+    "crumbs": [
+      "Projet",
+      "Projet Conduit"
+    ]
+  },
+  {
+    "objectID": "projet_2627.html#bug-les-commentaires-ne-saffichent-pas",
+    "href": "projet_2627.html#bug-les-commentaires-ne-saffichent-pas",
+    "title": "Projet Conduit",
+    "section": "6.3 BUG : Les commentaires ne s’affichent pas",
+    "text": "6.3 BUG : Les commentaires ne s’affichent pas\nCliquez sur un article. Les commentaires en bas de page ne s’affichent pas.\n\nRegardez l’exception dans la console du backend\nDéterminez la cause. Si vous bloquez trop longtemps, demandez un indice à votre enseignant.\nReproduisez le problème avec un test d’intégration\nCorrigez le problème. La solution tient en une ligne de code.\nÉcrivez dans le README.md vos réflexions sur la cause de ce bug. Est-ce qu’on aurait pu l’éviter avec un autre design dans les services ?",
+    "crumbs": [
+      "Projet",
+      "Projet Conduit"
+    ]
+  },
+  {
+    "objectID": "projet_2627.html#bug-le-feed-affiche-les-mauvais-articles",
+    "href": "projet_2627.html#bug-le-feed-affiche-les-mauvais-articles",
+    "title": "Projet Conduit",
+    "section": "6.4 BUG : Le feed affiche les mauvais articles",
+    "text": "6.4 BUG : Le feed affiche les mauvais articles\nCliquez sur “Your Feed”. Il affiche les articles mis en favori par l’utilisateur. C’est un bug fonctionnel. Il devrait afficher les articles des auteurs que l’utilisateur suit. (follow) Corrigez la fonctionnalité, en ajoutant un tri.",
+    "crumbs": [
+      "Projet",
+      "Projet Conduit"
+    ]
+  },
+  {
+    "objectID": "projet_2627.html#feature-modifier-un-commentaire",
+    "href": "projet_2627.html#feature-modifier-un-commentaire",
+    "title": "Projet Conduit",
+    "section": "6.5 FEATURE : Modifier un commentaire",
+    "text": "6.5 FEATURE : Modifier un commentaire\nOn peut créer ou supprimer ses commentaires, mais on ne peut pas les éditer. Modifiez le frontend et le backend pour le permettre.\n\n⚠️ Attention aux droits : seul l’auteur d’un commentaire peut le modifier\najoutez les tests correspondants.\n\nBONUS\nL’utilisateur essaie de modifier le même commentaire en ayant deux navigateurs ouverts.\n\nDécrivez dans le README.md le problème que cela peut poser\nCorrigez le problème",
+    "crumbs": [
+      "Projet",
+      "Projet Conduit"
+    ]
+  },
+  {
+    "objectID": "projet_2627.html#feature-rôles",
+    "href": "projet_2627.html#feature-rôles",
+    "title": "Projet Conduit",
+    "section": "6.6 FEATURE : Rôles",
+    "text": "6.6 FEATURE : Rôles\n\nAjoutez un rôle aux utilisateurs. Ils peuvent avoir l’un de ces rôles :\n\nwriter : rôle par défaut, même droits que maintenant.\nmoderator : writer + peut modifier/supprimer les articles et commentaires de tout le monde.\nadmin : moderator + peut changer les rôles des utilisateurs\n\nModifiez data.sql pour mettre des rôles aux utilisateurs\nAffichez le rôle dans l’écran Settings\nAjoutez un écran de gestion des utilisateurs pour l’admin\n\n\nl’écran liste tous les utilisateurs\non peut cliquer sur un utilisateur pour aller sur l’écran des settings\ndans Settings, l’admin peut modifier le rôle\n\n\nDécidez où stocker le rôle pour autoriser/interdire certaines opérations. Écrivez vos réflexions dans README.md.\nModifiez l’UI et les controllers pour autoriser/interdire les opérations correspondant à chaque rôle",
+    "crumbs": [
+      "Projet",
+      "Projet Conduit"
+    ]
+  },
+  {
+    "objectID": "projet_2627.html#performance-favoritescount",
+    "href": "projet_2627.html#performance-favoritescount",
+    "title": "Projet Conduit",
+    "section": "6.7 PERFORMANCE : favoritesCount",
+    "text": "6.7 PERFORMANCE : favoritesCount\n\nConnectez-vous en tant que lambda_lucy, et affichez la page d’accueil\nDans la console du backend, effacez la sortie\nCliquez sur le cœur à droite d’un article pour le mettre en favori\ncomptez le nombre de requêtes contenant ... from article_favorites ... where article_id=?\nRépondez dans le README.md :\n\nque se passerait-il si un utilisateur avait 1000 articles en favori ? Pourquoi ?\nSupposons que l’article mis en favori soit très populaire. Il a été mis en favori par 100000 autres utilisateurs. Quel est l’impact et pourquoi ?\nSur la page d’accueil, on affiche 10 articles par page. Que se passe-t-il si chacun de ces articles est populaire ?\n\n\nOptimisation :\n\nSupprimez Article#userFavorited et User#articleFavorited\nCréez deux nouvelles classes ArticleFavoriteId et ArticleFavorite :\n\npackage io.github.raeperd.realworld.domain.article;\n\nimport jakarta.persistence.Column;\nimport jakarta.persistence.Embeddable;\n\n@Embeddable\npublic record ArticleFavoriteId(\n        @Column(name = \"article_id\") Long articleId,\n        @Column(name = \"user_id\") Long userId) {\n}\npackage io.github.raeperd.realworld.domain.article;\n\nimport jakarta.persistence.EmbeddedId;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.Table;\n\n@Table(name = \"article_favorites\")\n@Entity\npublic class ArticleFavorite {\n\n    @EmbeddedId\n    private ArticleFavoriteId id;\n\n    public ArticleFavorite(long articleId, long userId) {\n        this.id = new ArticleFavoriteId(articleId, userId);\n    }\n\n    protected ArticleFavorite() {\n    }\n\n    public ArticleFavoriteId getId() {\n        return id;\n    }\n}\n\nCréez deux nouvelles interfaces pour récupérer les données :\n\npublic interface FavoriteCount {\n    Long getArticleId();\n    Long getCount();\n}\n\npublic interface ArticleFavoriteRepository extends Repository&lt;ArticleFavorite, ArticleFavoriteId&gt; {\n\n    /** favoritesCount for a whole page: one query instead of one per article */\n    @Query(\"TODO\")\n    List&lt;FavoriteCount&gt; countByArticleIds(Collection&lt;Long&gt; articleIds);\n\n    /** \"favorited\" flag for the current viewer, for a whole page */\n    @Query(\"TODO\")\n    Set&lt;Long&gt; findFavoritedArticleIds(long userId, Collection&lt;Long&gt; articleIds);\n}\n\nModifiez les appels qui utilisaient Article.userFavorited et User.articleFavorited. Il faudra toucher :\n\nArticleService (favorite / unfavorite)\nArticleRepository#findAllByUserFavoritedContains\nArticle#favorited et Article#updateFavoriteByUser\nArticleDTO#favoritesCount devra être peuplé avec autre chose que les attributs de Article\nles tests\n\nRecomptez le nombre de requêtes après optimisation",
+    "crumbs": [
+      "Projet",
+      "Projet Conduit"
+    ]
+  },
+  {
+    "objectID": "projet_2627.html#faq",
+    "href": "projet_2627.html#faq",
+    "title": "Projet Conduit",
+    "section": "7.1 FAQ",
+    "text": "7.1 FAQ",
+    "crumbs": [
+      "Projet",
+      "Projet Conduit"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ALTN72 Développement Full Stack avec Java",
+    "section": "",
+    "text": "Syllabus",
+    "crumbs": [
+      "ALTN72 Développement Full Stack avec Java"
+    ]
+  },
+  {
+    "objectID": "index.html#désactiver-lia-dans-intellij",
+    "href": "index.html#désactiver-lia-dans-intellij",
+    "title": "ALTN72 Développement Full Stack avec Java",
+    "section": "5.1 Désactiver l’IA dans IntelliJ",
+    "text": "5.1 Désactiver l’IA dans IntelliJ\nPour bien apprendre la programmation en Java dans IntelliJ, il est fortement conseillé de désactiver l’IA ainsi que l’inline code completion. Vous pouvez conserver la complétion simple pour gagner du temps.\nEtape 1 : désactiver l’IA \nEtape 2 : désactiver l’inline completion :\n\nAllez dans File &gt; Settings &gt; Editor &gt; General &gt; Inline completion\nDécochez “Enable Local Full Line completion suggestions”\ncliquez sur OK",
+    "crumbs": [
+      "ALTN72 Développement Full Stack avec Java"
     ]
   },
   {
@@ -916,23 +1024,14 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ALTN72 Développement Full Stack avec Java",
+    "objectID": "tp2.html",
+    "href": "tp2.html",
+    "title": "1 TP2 - SOLID",
     "section": "",
-    "text": "Syllabus",
+    "text": "1 TP2 - SOLID\nDans le code obtenu avec le lien GitHub Classroom, vous avez un package par principe SOLID. Vous devez refactorer le code pour qu’il adhère à chaque principe.\nPensez à commit + push à la fin du TP !",
     "crumbs": [
-      "ALTN72 Développement Full Stack avec Java"
-    ]
-  },
-  {
-    "objectID": "index.html#désactiver-lia-dans-intellij",
-    "href": "index.html#désactiver-lia-dans-intellij",
-    "title": "ALTN72 Développement Full Stack avec Java",
-    "section": "5.1 Désactiver l’IA dans IntelliJ",
-    "text": "5.1 Désactiver l’IA dans IntelliJ\nPour bien apprendre la programmation en Java dans IntelliJ, il est fortement conseillé de désactiver l’IA ainsi que l’inline code completion. Vous pouvez conserver la complétion simple pour gagner du temps.\nEtape 1 : désactiver l’IA \nEtape 2 : désactiver l’inline completion :\n\nAllez dans File &gt; Settings &gt; Editor &gt; General &gt; Inline completion\nDécochez “Enable Local Full Line completion suggestions”\ncliquez sur OK",
-    "crumbs": [
-      "ALTN72 Développement Full Stack avec Java"
+      "TPs",
+      "TP2 - SOLID"
     ]
   },
   {
